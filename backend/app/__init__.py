@@ -5,4 +5,4 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return "Testing GCP deployment"
+    return "Testing cloud build trigger"
