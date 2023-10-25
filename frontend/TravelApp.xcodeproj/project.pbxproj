@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		457EA0412AE9CD370043518C /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457EA0402AE9CD370043518C /* HomeScreen.swift */; };
+		457EA0432AE9CF980043518C /* ExperienceRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457EA0422AE9CF980043518C /* ExperienceRowView.swift */; };
+		457EA0452AE9CFAB0043518C /* ExperienceDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457EA0442AE9CFAB0043518C /* ExperienceDetailView.swift */; };
+		457EA0472AE9D1AA0043518C /* experienceData.json in Resources */ = {isa = PBXBuildFile; fileRef = 457EA0462AE9D1AA0043518C /* experienceData.json */; };
+		457EA0492AE9D5F00043518C /* ExperienceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457EA0482AE9D5F00043518C /* ExperienceModel.swift */; };
+		457EA04B2AE9D7B90043518C /* ExperienceData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457EA04A2AE9D7B90043518C /* ExperienceData.swift */; };
+		45A13C0F2AE93ADC005B58FD /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A13C0E2AE93ADC005B58FD /* LoginScreen.swift */; };
+		45A13C112AE93B00005B58FD /* ExperienceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A13C102AE93B00005B58FD /* ExperienceScreen.swift */; };
+		45A13C132AE940CF005B58FD /* AppleLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A13C122AE940CF005B58FD /* AppleLoginButton.swift */; };
+		45A13C152AE9411A005B58FD /* GoogleLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A13C142AE9411A005B58FD /* GoogleLoginButton.swift */; };
+		45A13C172AE94150005B58FD /* EmailLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A13C162AE94150005B58FD /* EmailLoginButton.swift */; };
 		45B6A8E72AE886290040158F /* TravelAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6A8E62AE886290040158F /* TravelAppApp.swift */; };
 		45B6A8E92AE886290040158F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6A8E82AE886290040158F /* ContentView.swift */; };
 		45B6A8EB2AE8862B0040158F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45B6A8EA2AE8862B0040158F /* Assets.xcassets */; };
@@ -37,6 +48,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		457EA0402AE9CD370043518C /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
+		457EA0422AE9CF980043518C /* ExperienceRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceRowView.swift; sourceTree = "<group>"; };
+		457EA0442AE9CFAB0043518C /* ExperienceDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceDetailView.swift; sourceTree = "<group>"; };
+		457EA0462AE9D1AA0043518C /* experienceData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = experienceData.json; sourceTree = "<group>"; };
+		457EA0482AE9D5F00043518C /* ExperienceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceModel.swift; sourceTree = "<group>"; };
+		457EA04A2AE9D7B90043518C /* ExperienceData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceData.swift; sourceTree = "<group>"; };
+		45A13C0E2AE93ADC005B58FD /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
+		45A13C102AE93B00005B58FD /* ExperienceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceScreen.swift; sourceTree = "<group>"; };
+		45A13C122AE940CF005B58FD /* AppleLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginButton.swift; sourceTree = "<group>"; };
+		45A13C142AE9411A005B58FD /* GoogleLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleLoginButton.swift; sourceTree = "<group>"; };
+		45A13C162AE94150005B58FD /* EmailLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailLoginButton.swift; sourceTree = "<group>"; };
 		45B6A8E32AE886290040158F /* TravelApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravelApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45B6A8E62AE886290040158F /* TravelAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelAppApp.swift; sourceTree = "<group>"; };
 		45B6A8E82AE886290040158F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -77,6 +99,118 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		45A13C012AE9380E005B58FD /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				45A13C032AE93831005B58FD /* Experiences */,
+				45A13C022AE93829005B58FD /* Login */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		45A13C022AE93829005B58FD /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				45A13C0E2AE93ADC005B58FD /* LoginScreen.swift */,
+				45A13C092AE9397D005B58FD /* Actions */,
+				45A13C0D2AE93A77005B58FD /* Models */,
+				45A13C0C2AE9399F005B58FD /* Screens */,
+				45A13C0B2AE93997005B58FD /* ViewModels */,
+				45A13C0A2AE93990005B58FD /* Views */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		45A13C032AE93831005B58FD /* Experiences */ = {
+			isa = PBXGroup;
+			children = (
+				45A13C042AE93859005B58FD /* Actions */,
+				45A13C052AE93861005B58FD /* Models */,
+				45A13C062AE93871005B58FD /* Screens */,
+				45A13C082AE9388E005B58FD /* Views */,
+				45A13C072AE93884005B58FD /* ViewModels */,
+				45A13C102AE93B00005B58FD /* ExperienceScreen.swift */,
+			);
+			path = Experiences;
+			sourceTree = "<group>";
+		};
+		45A13C042AE93859005B58FD /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		45A13C052AE93861005B58FD /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				457EA0482AE9D5F00043518C /* ExperienceModel.swift */,
+				457EA04A2AE9D7B90043518C /* ExperienceData.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		45A13C062AE93871005B58FD /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		45A13C072AE93884005B58FD /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		45A13C082AE9388E005B58FD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				457EA0422AE9CF980043518C /* ExperienceRowView.swift */,
+				457EA0442AE9CFAB0043518C /* ExperienceDetailView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		45A13C092AE9397D005B58FD /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		45A13C0A2AE93990005B58FD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				45A13C122AE940CF005B58FD /* AppleLoginButton.swift */,
+				45A13C142AE9411A005B58FD /* GoogleLoginButton.swift */,
+				45A13C162AE94150005B58FD /* EmailLoginButton.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		45A13C0B2AE93997005B58FD /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		45A13C0C2AE9399F005B58FD /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		45A13C0D2AE93A77005B58FD /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		45B6A8DA2AE886290040158F = {
 			isa = PBXGroup;
 			children = (
@@ -104,6 +238,9 @@
 				EF725F0C2AE9A33C00B12643 /* DataModels */,
 				45B6A8E62AE886290040158F /* TravelAppApp.swift */,
 				45B6A8E82AE886290040158F /* ContentView.swift */,
+				457EA0402AE9CD370043518C /* HomeScreen.swift */,
+				457EA0462AE9D1AA0043518C /* experienceData.json */,
+				45A13C012AE9380E005B58FD /* Features */,
 				45B6A8EA2AE8862B0040158F /* Assets.xcassets */,
 				45B6A8EC2AE8862B0040158F /* Preview Content */,
 				EF725F0A2AE9A18E00B12643 /* UserProfileView.swift */,
@@ -258,6 +395,7 @@
 			files = (
 				45B6A8EE2AE8862B0040158F /* Preview Assets.xcassets in Resources */,
 				45B6A8EB2AE8862B0040158F /* Assets.xcassets in Resources */,
+				457EA0472AE9D1AA0043518C /* experienceData.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,11 +420,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45A13C152AE9411A005B58FD /* GoogleLoginButton.swift in Sources */,
+				457EA0492AE9D5F00043518C /* ExperienceModel.swift in Sources */,
+				457EA0452AE9CFAB0043518C /* ExperienceDetailView.swift in Sources */,
 				45B6A8E92AE886290040158F /* ContentView.swift in Sources */,
+<<<<<<< Updated upstream
 				EF725F0B2AE9A18E00B12643 /* UserProfileView.swift in Sources */,
 				EF725F0F2AE9A37000B12643 /* API.swift in Sources */,
 				EF725F132AE9A3E600B12643 /* User.swift in Sources */,
+=======
+				45A13C132AE940CF005B58FD /* AppleLoginButton.swift in Sources */,
+				45A13C112AE93B00005B58FD /* ExperienceScreen.swift in Sources */,
+				457EA0412AE9CD370043518C /* HomeScreen.swift in Sources */,
+				457EA0432AE9CF980043518C /* ExperienceRowView.swift in Sources */,
+				45A13C172AE94150005B58FD /* EmailLoginButton.swift in Sources */,
+				457EA04B2AE9D7B90043518C /* ExperienceData.swift in Sources */,
+>>>>>>> Stashed changes
 				45B6A8E72AE886290040158F /* TravelAppApp.swift in Sources */,
+				45A13C0F2AE93ADC005B58FD /* LoginScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
