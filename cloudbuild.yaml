@@ -5,7 +5,6 @@ steps:
       - '-c'
       - |
         gcloud secrets versions access latest --secret=firestore_sa_json > backend/app/firestore_sa.json
-        ls -l backend/app
 
 - name: 'gcr.io/cloud-builders/gcloud'
   args: ['app', 'deploy', 'backend/app.yaml']
