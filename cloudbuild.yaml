@@ -4,7 +4,7 @@ steps:
   args:
       - '-c'
       - |
-        gcloud secrets versions access latest --secret=firestore_sa_json > backend/firestore_sa.json
+        gcloud secrets versions access latest --secret=firestore_sa_json > backend/app/firestore_sa.json
 
 - name: 'gcr.io/cloud-builders/gcloud'
   args: ['app', 'deploy', 'backend/app.yaml']
