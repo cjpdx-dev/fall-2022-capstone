@@ -13,7 +13,7 @@ db = firestore.client()
 
 @app.route('/')
 def index():
-    # Testing database with dummy data
+    # Testing database
     user_ref = db.collection('Users').document('chozen1')
     user_ref.set({
         'first_name': 'Harry',
