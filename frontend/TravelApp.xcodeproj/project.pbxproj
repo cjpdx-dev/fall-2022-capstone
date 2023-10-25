@@ -14,6 +14,9 @@
 		45B6A8F82AE8862C0040158F /* TravelAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6A8F72AE8862C0040158F /* TravelAppTests.swift */; };
 		45B6A9022AE8862C0040158F /* TravelAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6A9012AE8862C0040158F /* TravelAppUITests.swift */; };
 		45B6A9042AE8862C0040158F /* TravelAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6A9032AE8862C0040158F /* TravelAppUITestsLaunchTests.swift */; };
+		EF725F0B2AE9A18E00B12643 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF725F0A2AE9A18E00B12643 /* UserProfileView.swift */; };
+		EF725F0F2AE9A37000B12643 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF725F0E2AE9A37000B12643 /* API.swift */; };
+		EF725F132AE9A3E600B12643 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF725F122AE9A3E600B12643 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +47,9 @@
 		45B6A8FD2AE8862C0040158F /* TravelAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TravelAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		45B6A9012AE8862C0040158F /* TravelAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelAppUITests.swift; sourceTree = "<group>"; };
 		45B6A9032AE8862C0040158F /* TravelAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		EF725F0A2AE9A18E00B12643 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
+		EF725F0E2AE9A37000B12643 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		EF725F122AE9A3E600B12643 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,10 +100,13 @@
 		45B6A8E52AE886290040158F /* TravelApp */ = {
 			isa = PBXGroup;
 			children = (
+				EF725F0D2AE9A35000B12643 /* API */,
+				EF725F0C2AE9A33C00B12643 /* DataModels */,
 				45B6A8E62AE886290040158F /* TravelAppApp.swift */,
 				45B6A8E82AE886290040158F /* ContentView.swift */,
 				45B6A8EA2AE8862B0040158F /* Assets.xcassets */,
 				45B6A8EC2AE8862B0040158F /* Preview Content */,
+				EF725F0A2AE9A18E00B12643 /* UserProfileView.swift */,
 			);
 			path = TravelApp;
 			sourceTree = "<group>";
@@ -125,6 +134,22 @@
 				45B6A9032AE8862C0040158F /* TravelAppUITestsLaunchTests.swift */,
 			);
 			path = TravelAppUITests;
+			sourceTree = "<group>";
+		};
+		EF725F0C2AE9A33C00B12643 /* DataModels */ = {
+			isa = PBXGroup;
+			children = (
+				EF725F122AE9A3E600B12643 /* User.swift */,
+			);
+			path = DataModels;
+			sourceTree = "<group>";
+		};
+		EF725F0D2AE9A35000B12643 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				EF725F0E2AE9A37000B12643 /* API.swift */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,6 +283,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				45B6A8E92AE886290040158F /* ContentView.swift in Sources */,
+				EF725F0B2AE9A18E00B12643 /* UserProfileView.swift in Sources */,
+				EF725F0F2AE9A37000B12643 /* API.swift in Sources */,
+				EF725F132AE9A3E600B12643 /* User.swift in Sources */,
 				45B6A8E72AE886290040158F /* TravelAppApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
