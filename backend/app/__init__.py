@@ -1,29 +1,13 @@
-from flask import Flask, jsonify
-import firebase_admin
-from firebase_admin import credentials
-from firebase_admin import firestore
-import os
-
-app = Flask(__name__)
-
-abs_cred_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                             'firestore_sa.json')
-
-cred = credentials.Certificate(abs_cred_path)
-firebase_admin.initialize_app(cred)
-
-db = firestore.client()
+from flask import Flask
+from .blueprints import user_bp, trip_bp, experience_bp
 
 
-@app.route('/')
-def index():
-    # Testing database again
-    user_ref = db.collection('Users').document('chozen1')
-    user_ref.set({
-        'first_name': 'Harry',
-        'last_name': 'Potter',
-    })
+def create_app():
+    app = Flask(__name__)
 
-    user = user_ref.get().to_dict()
+    # Register blueprints
+    app.register_blueprint(user_bp, url_prefix='/users')
+    app.register_blueprint(trip_bp, url_prefix='/trips')
+    app.register_blueprint(experience_bp, url_prefix='/experiences')
 
-    return jsonify(user)
+    return app
