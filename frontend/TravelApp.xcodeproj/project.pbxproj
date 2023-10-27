@@ -13,7 +13,10 @@
 		457EA0472AE9D1AA0043518C /* experienceData.json in Resources */ = {isa = PBXBuildFile; fileRef = 457EA0462AE9D1AA0043518C /* experienceData.json */; };
 		457EA0492AE9D5F00043518C /* ExperienceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457EA0482AE9D5F00043518C /* ExperienceModel.swift */; };
 		457EA04B2AE9D7B90043518C /* ExperienceData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457EA04A2AE9D7B90043518C /* ExperienceData.swift */; };
-		45A13C0F2AE93ADC005B58FD /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A13C0E2AE93ADC005B58FD /* LoginScreen.swift */; };
+		458483012AEB4C5D006D0422 /* SignUpScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458483002AEB4C5C006D0422 /* SignUpScreen.swift */; };
+		458483032AEB4CD5006D0422 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458483022AEB4CD5006D0422 /* LoginScreen.swift */; };
+		458483052AEB4F37006D0422 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458483042AEB4F37006D0422 /* InputView.swift */; };
+		45A13C0F2AE93ADC005B58FD /* AuthScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A13C0E2AE93ADC005B58FD /* AuthScreen.swift */; };
 		45A13C112AE93B00005B58FD /* ExperienceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A13C102AE93B00005B58FD /* ExperienceScreen.swift */; };
 		45A13C132AE940CF005B58FD /* AppleLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A13C122AE940CF005B58FD /* AppleLoginButton.swift */; };
 		45A13C152AE9411A005B58FD /* GoogleLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A13C142AE9411A005B58FD /* GoogleLoginButton.swift */; };
@@ -54,7 +57,10 @@
 		457EA0462AE9D1AA0043518C /* experienceData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = experienceData.json; sourceTree = "<group>"; };
 		457EA0482AE9D5F00043518C /* ExperienceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceModel.swift; sourceTree = "<group>"; };
 		457EA04A2AE9D7B90043518C /* ExperienceData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceData.swift; sourceTree = "<group>"; };
-		45A13C0E2AE93ADC005B58FD /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
+		458483002AEB4C5C006D0422 /* SignUpScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpScreen.swift; sourceTree = "<group>"; };
+		458483022AEB4CD5006D0422 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
+		458483042AEB4F37006D0422 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
+		45A13C0E2AE93ADC005B58FD /* AuthScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthScreen.swift; sourceTree = "<group>"; };
 		45A13C102AE93B00005B58FD /* ExperienceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceScreen.swift; sourceTree = "<group>"; };
 		45A13C122AE940CF005B58FD /* AppleLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginButton.swift; sourceTree = "<group>"; };
 		45A13C142AE9411A005B58FD /* GoogleLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleLoginButton.swift; sourceTree = "<group>"; };
@@ -99,26 +105,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		458482FF2AEB4C45006D0422 /* SignIn */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SignIn;
+			sourceTree = "<group>";
+		};
 		45A13C012AE9380E005B58FD /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				45A13C022AE93829005B58FD /* Auth */,
+				458482FF2AEB4C45006D0422 /* SignIn */,
 				45A13C032AE93831005B58FD /* Experiences */,
-				45A13C022AE93829005B58FD /* Login */,
 			);
 			path = Features;
 			sourceTree = "<group>";
 		};
-		45A13C022AE93829005B58FD /* Login */ = {
+		45A13C022AE93829005B58FD /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				45A13C0E2AE93ADC005B58FD /* LoginScreen.swift */,
 				45A13C092AE9397D005B58FD /* Actions */,
 				45A13C0D2AE93A77005B58FD /* Models */,
 				45A13C0C2AE9399F005B58FD /* Screens */,
 				45A13C0B2AE93997005B58FD /* ViewModels */,
 				45A13C0A2AE93990005B58FD /* Views */,
 			);
-			path = Login;
+			path = Auth;
 			sourceTree = "<group>";
 		};
 		45A13C032AE93831005B58FD /* Experiences */ = {
@@ -186,6 +199,7 @@
 				45A13C122AE940CF005B58FD /* AppleLoginButton.swift */,
 				45A13C142AE9411A005B58FD /* GoogleLoginButton.swift */,
 				45A13C162AE94150005B58FD /* EmailLoginButton.swift */,
+				458483042AEB4F37006D0422 /* InputView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -200,6 +214,9 @@
 		45A13C0C2AE9399F005B58FD /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				45A13C0E2AE93ADC005B58FD /* AuthScreen.swift */,
+				458483022AEB4CD5006D0422 /* LoginScreen.swift */,
+				458483002AEB4C5C006D0422 /* SignUpScreen.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -424,20 +441,20 @@
 				457EA0492AE9D5F00043518C /* ExperienceModel.swift in Sources */,
 				457EA0452AE9CFAB0043518C /* ExperienceDetailView.swift in Sources */,
 				45B6A8E92AE886290040158F /* ContentView.swift in Sources */,
-<<<<<<< Updated upstream
 				EF725F0B2AE9A18E00B12643 /* UserProfileView.swift in Sources */,
+				458483012AEB4C5D006D0422 /* SignUpScreen.swift in Sources */,
+				458483032AEB4CD5006D0422 /* LoginScreen.swift in Sources */,
 				EF725F0F2AE9A37000B12643 /* API.swift in Sources */,
 				EF725F132AE9A3E600B12643 /* User.swift in Sources */,
-=======
 				45A13C132AE940CF005B58FD /* AppleLoginButton.swift in Sources */,
 				45A13C112AE93B00005B58FD /* ExperienceScreen.swift in Sources */,
 				457EA0412AE9CD370043518C /* HomeScreen.swift in Sources */,
 				457EA0432AE9CF980043518C /* ExperienceRowView.swift in Sources */,
 				45A13C172AE94150005B58FD /* EmailLoginButton.swift in Sources */,
 				457EA04B2AE9D7B90043518C /* ExperienceData.swift in Sources */,
->>>>>>> Stashed changes
+				458483052AEB4F37006D0422 /* InputView.swift in Sources */,
 				45B6A8E72AE886290040158F /* TravelAppApp.swift in Sources */,
-				45A13C0F2AE93ADC005B58FD /* LoginScreen.swift in Sources */,
+				45A13C0F2AE93ADC005B58FD /* AuthScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

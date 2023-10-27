@@ -12,7 +12,7 @@ import Foundation
  */
 class API {
     func fetchUser(completion: @escaping (User?) -> Void) {
-        
+        // CHANGE TO USE OUR ACTUAL PROJECT URL
         let url = URL(string: "https://our-gcp-project-url.com/user")!
         
         URLSession.shared.dataTask(with: url) { data, response, error in

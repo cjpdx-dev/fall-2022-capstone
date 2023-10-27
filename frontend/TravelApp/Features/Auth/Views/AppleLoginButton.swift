@@ -1,5 +1,5 @@
 //
-//  GoogleLoginButton.swift
+//  AppleLoginButton.swift
 //  TravelApp
 //
 //  Created by Bryshon Sweeney on 10/25/23.
@@ -7,19 +7,19 @@
 
 import SwiftUI
 
-struct GoogleLoginButton: View {
+struct AppleLoginButton: View {
     var body: some View {
         Button {
             
         } label: {
             HStack {
                 Image(systemName: "apple.logo")
-                Text("Sign In With Google")
-                    
+                Text("Sign In With Apple")
+                
             }
-            .frame(width: 300, height:45)
+            .frame(width: UIScreen.main.bounds.width - 50, height:48)
             .foregroundColor(.white)
-            .background(Color(.gray))
+            .background(Color(.black))
             .cornerRadius(12)
             .shadow(color: .gray, radius: 2, x: 0, y: 2)
         }
@@ -28,5 +28,5 @@ struct GoogleLoginButton: View {
 }
 
 #Preview {
-    GoogleLoginButton()
+    AppleLoginButton()
 }

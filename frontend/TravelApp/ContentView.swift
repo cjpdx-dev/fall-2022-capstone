@@ -14,7 +14,7 @@ struct ContentView: View {
                 // Destination View to navigate to
                 ExperienceScreen()
             } label: {
-                LoginScreen()
+                AuthScreen()
             }
             
         }

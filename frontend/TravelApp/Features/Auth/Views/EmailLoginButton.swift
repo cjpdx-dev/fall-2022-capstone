@@ -10,10 +10,10 @@ import SwiftUI
 struct EmailLoginButton: View {
     var body: some View {
         Button {
-            
+            LoginScreen()
         } label: {
             Text("Sign Up With Email")
-                .frame(width: 300, height:45)
+                .frame(width: UIScreen.main.bounds.width - 50, height:45)
                 .foregroundColor(.white)
                 .background(Color(.blue))
                 .cornerRadius(12)
