@@ -8,11 +8,15 @@
 import SwiftUI
 
 struct ExperienceDetailView: View {
+    var experience: Experience
     var body: some View {
-        Text("Detail View")
+        Text(experience.title)
+        Text(experience.description)
+        Text("\(experience.rating)")
     }
 }
 
 #Preview {
-    ExperienceDetailView()
+    ExperienceDetailView(experience: experiences[0])
 }
+

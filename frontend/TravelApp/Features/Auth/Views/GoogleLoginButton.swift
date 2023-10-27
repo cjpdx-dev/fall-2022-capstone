@@ -13,13 +13,16 @@ struct GoogleLoginButton: View {
             
         } label: {
             HStack {
-                Image(systemName: "apple.logo")
+                Image("google-logo")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 30, height: 30)
                 Text("Sign In With Google")
                     
             }
             .frame(width: UIScreen.main.bounds.width - 50, height:45)
-            .foregroundColor(.white)
-            .background(Color(.gray))
+            .foregroundColor(.black)
+            .background(Color(.white))
             .cornerRadius(12)
             .shadow(color: .gray, radius: 2, x: 0, y: 2)
         }

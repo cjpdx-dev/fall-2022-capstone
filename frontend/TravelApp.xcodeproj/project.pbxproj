@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		454244232AEBDD1A00339B1A /* ExperienceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454244222AEBDD1A00339B1A /* ExperienceListView.swift */; };
 		457EA0412AE9CD370043518C /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457EA0402AE9CD370043518C /* HomeScreen.swift */; };
 		457EA0432AE9CF980043518C /* ExperienceRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457EA0422AE9CF980043518C /* ExperienceRowView.swift */; };
 		457EA0452AE9CFAB0043518C /* ExperienceDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457EA0442AE9CFAB0043518C /* ExperienceDetailView.swift */; };
@@ -51,6 +52,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		454244222AEBDD1A00339B1A /* ExperienceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceListView.swift; sourceTree = "<group>"; };
 		457EA0402AE9CD370043518C /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
 		457EA0422AE9CF980043518C /* ExperienceRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceRowView.swift; sourceTree = "<group>"; };
 		457EA0442AE9CFAB0043518C /* ExperienceDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceDetailView.swift; sourceTree = "<group>"; };
@@ -105,19 +107,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		458482FF2AEB4C45006D0422 /* SignIn */ = {
+		454244242AEBEA3900339B1A /* UserProfile */ = {
 			isa = PBXGroup;
 			children = (
+				EF725F0A2AE9A18E00B12643 /* UserProfileView.swift */,
 			);
-			path = SignIn;
+			path = UserProfile;
 			sourceTree = "<group>";
 		};
 		45A13C012AE9380E005B58FD /* Features */ = {
 			isa = PBXGroup;
 			children = (
 				45A13C022AE93829005B58FD /* Auth */,
-				458482FF2AEB4C45006D0422 /* SignIn */,
 				45A13C032AE93831005B58FD /* Experiences */,
+				454244242AEBEA3900339B1A /* UserProfile */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -125,10 +128,7 @@
 		45A13C022AE93829005B58FD /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				45A13C092AE9397D005B58FD /* Actions */,
-				45A13C0D2AE93A77005B58FD /* Models */,
 				45A13C0C2AE9399F005B58FD /* Screens */,
-				45A13C0B2AE93997005B58FD /* ViewModels */,
 				45A13C0A2AE93990005B58FD /* Views */,
 			);
 			path = Auth;
@@ -137,21 +137,12 @@
 		45A13C032AE93831005B58FD /* Experiences */ = {
 			isa = PBXGroup;
 			children = (
-				45A13C042AE93859005B58FD /* Actions */,
 				45A13C052AE93861005B58FD /* Models */,
 				45A13C062AE93871005B58FD /* Screens */,
 				45A13C082AE9388E005B58FD /* Views */,
-				45A13C072AE93884005B58FD /* ViewModels */,
 				45A13C102AE93B00005B58FD /* ExperienceScreen.swift */,
 			);
 			path = Experiences;
-			sourceTree = "<group>";
-		};
-		45A13C042AE93859005B58FD /* Actions */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Actions;
 			sourceTree = "<group>";
 		};
 		45A13C052AE93861005B58FD /* Models */ = {
@@ -170,27 +161,14 @@
 			path = Screens;
 			sourceTree = "<group>";
 		};
-		45A13C072AE93884005B58FD /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
 		45A13C082AE9388E005B58FD /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				457EA0422AE9CF980043518C /* ExperienceRowView.swift */,
 				457EA0442AE9CFAB0043518C /* ExperienceDetailView.swift */,
+				454244222AEBDD1A00339B1A /* ExperienceListView.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		45A13C092AE9397D005B58FD /* Actions */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Actions;
 			sourceTree = "<group>";
 		};
 		45A13C0A2AE93990005B58FD /* Views */ = {
@@ -204,13 +182,6 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		45A13C0B2AE93997005B58FD /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
 		45A13C0C2AE9399F005B58FD /* Screens */ = {
 			isa = PBXGroup;
 			children = (
@@ -219,13 +190,6 @@
 				458483002AEB4C5C006D0422 /* SignUpScreen.swift */,
 			);
 			path = Screens;
-			sourceTree = "<group>";
-		};
-		45A13C0D2AE93A77005B58FD /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		45B6A8DA2AE886290040158F = {
@@ -260,7 +224,6 @@
 				45A13C012AE9380E005B58FD /* Features */,
 				45B6A8EA2AE8862B0040158F /* Assets.xcassets */,
 				45B6A8EC2AE8862B0040158F /* Preview Content */,
-				EF725F0A2AE9A18E00B12643 /* UserProfileView.swift */,
 			);
 			path = TravelApp;
 			sourceTree = "<group>";
@@ -453,6 +416,7 @@
 				45A13C172AE94150005B58FD /* EmailLoginButton.swift in Sources */,
 				457EA04B2AE9D7B90043518C /* ExperienceData.swift in Sources */,
 				458483052AEB4F37006D0422 /* InputView.swift in Sources */,
+				454244232AEBDD1A00339B1A /* ExperienceListView.swift in Sources */,
 				45B6A8E72AE886290040158F /* TravelAppApp.swift in Sources */,
 				45A13C0F2AE93ADC005B58FD /* AuthScreen.swift in Sources */,
 			);

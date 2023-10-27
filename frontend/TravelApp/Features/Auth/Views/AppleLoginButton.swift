@@ -14,6 +14,9 @@ struct AppleLoginButton: View {
         } label: {
             HStack {
                 Image(systemName: "apple.logo")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 30, height: 30)
                 Text("Sign In With Apple")
                 
             }

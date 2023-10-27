@@ -24,7 +24,6 @@ struct ExperienceRowView: View {
             }
             Spacer()
         }
-        .padding()
     }
 }
 

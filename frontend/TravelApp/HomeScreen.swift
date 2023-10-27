@@ -8,19 +8,20 @@
 import SwiftUI
 
 struct HomeScreen: View {
+    var experiences: [Experience]
     var body: some View {
         TabView {
-            ExperienceScreen()
+            ExperienceScreen(experiences: experiences)
                 .tabItem {
                     Label("Experiences", systemImage: "book.closed")
                 }
             
-            Text("Second Tab")
+            Text("Trips Page")
                 .tabItem {
                     Label("Trips", systemImage: "car")
                 }
             
-            Text("Third Tab")
+            UserProfileView()
                 .tabItem {
                     Label("Profile", systemImage: "person.circle")
                 }
@@ -30,5 +31,5 @@ struct HomeScreen: View {
 }
 
 #Preview {
-    HomeScreen()
+    HomeScreen(experiences: experiences)
 }

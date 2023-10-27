@@ -9,15 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        NavigationView {
-            NavigationLink {
-                // Destination View to navigate to
-                ExperienceScreen()
-            } label: {
-                AuthScreen()
-            }
-            
-        }
+        Text("Hello World!")
     }
 }
 

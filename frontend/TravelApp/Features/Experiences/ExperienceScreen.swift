@@ -8,15 +8,12 @@
 import SwiftUI
 
 struct ExperienceScreen: View {
+    var experiences: [Experience]
     var body: some View {
-        NavigationStack {
-            Text("Experience Screen")
-            
-        }
-        .navigationTitle("Experiences")
+        ExperienceListView(experiences: experiences)
     }
 }
 
 #Preview {
-    ExperienceScreen()
+    ExperienceScreen(experiences: experiences)
 }
