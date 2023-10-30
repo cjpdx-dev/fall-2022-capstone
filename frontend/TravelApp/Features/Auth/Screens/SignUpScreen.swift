@@ -24,16 +24,16 @@ struct SignUpScreen: View {
         .padding(.vertical)
         
         VStack(spacing: 24) {
-            InputView(text: $email, title: "Email Address", placeholder: "example@gmail.com")
+            LoginInputView(text: $email, title: "Email Address", placeholder: "example@gmail.com")
                 .textInputAutocapitalization(.none)
             
-            InputView(text: $firstName, title: "Enter first name", placeholder: "John")
+            LoginInputView(text: $firstName, title: "Enter first name", placeholder: "John")
             
-            InputView(text: $lastName, title: "Enter last name", placeholder: "Doe")
+            LoginInputView(text: $lastName, title: "Enter last name", placeholder: "Doe")
             
-            InputView(text: $password, title: "Password", placeholder: "Enter your password", isSecureField: true)
+            LoginInputView(text: $password, title: "Password", placeholder: "Enter your password", isSecureField: true)
             
-            InputView(text: $confirmPassword, title: "Password", placeholder: "Confirm your password", isSecureField: true)
+            LoginInputView(text: $confirmPassword, title: "Password", placeholder: "Confirm your password", isSecureField: true)
             
             // sign in button
             Button {

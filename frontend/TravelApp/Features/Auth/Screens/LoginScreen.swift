@@ -21,10 +21,10 @@ struct LoginScreen: View {
             
             // form fields
             VStack(spacing: 24) {
-                InputView(text: $email, title: "Email Address", placeholder: "example@gmail.com")
+                LoginInputView(text: $email, title: "Email Address", placeholder: "example@gmail.com")
                     .textInputAutocapitalization(.none)
                 
-                InputView(text: $password, title: "Password", placeholder: "Enter your password", isSecureField: true)
+                LoginInputView(text: $password, title: "Password", placeholder: "Enter your password", isSecureField: true)
                 
                 // sign in button
                 Button {

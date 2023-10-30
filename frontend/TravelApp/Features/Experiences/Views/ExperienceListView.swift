@@ -22,6 +22,17 @@ struct ExperienceListView: View {
                 
             }
             .navigationTitle("Experiences")
+            
+            .toolbar(content: {
+                NavigationLink {
+                    CreateExperienceScreen()
+                } label: {
+                    Image(systemName: "plus.circle.fill")
+                        .font(.system(size: 27))
+                }
+                .buttonStyle(PlainButtonStyle())
+                
+            })
             .searchable(text: $searchText)
         }
         

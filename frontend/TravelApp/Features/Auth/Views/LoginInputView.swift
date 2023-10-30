@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct InputView: View {
+struct LoginInputView: View {
     @Binding var text: String
     let title: String
     let placeholder: String
@@ -33,5 +33,5 @@ struct InputView: View {
 }
 
 #Preview {
-    InputView(text: .constant(""), title: "Email Address", placeholder: "name@example.com")
+    LoginInputView(text: .constant(""), title: "Email Address", placeholder: "name@example.com")
 }
