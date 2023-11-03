@@ -1,0 +1,35 @@
+//
+//  HomeScreen.swift
+//  TravelApp
+//
+//  Created by Bryshon Sweeney on 10/25/23.
+//
+
+import SwiftUI
+
+struct HomeScreen: View {
+    var experiences: [Experience]
+    var body: some View {
+        TabView {
+            ExperienceScreen(experiences: experiences)
+                .tabItem {
+                    Label("Experiences", systemImage: "book.closed")
+                }
+            
+            Text("Trips Page")
+                .tabItem {
+                    Label("Trips", systemImage: "car")
+                }
+            
+            UserProfileView()
+                .tabItem {
+                    Label("Profile", systemImage: "person.circle")
+                }
+        }
+        
+    }
+}
+
+#Preview {
+    HomeScreen(experiences: experiences)
+}
