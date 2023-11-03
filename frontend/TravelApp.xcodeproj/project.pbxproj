@@ -31,6 +31,16 @@
 		45B6A9042AE8862C0040158F /* TravelAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6A9032AE8862C0040158F /* TravelAppUITestsLaunchTests.swift */; };
 		45F788FA2AEFD3AC003D1A9A /* CreateExperienceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F788F92AEFD3AC003D1A9A /* CreateExperienceScreen.swift */; };
 		45F788FC2AEFD868003D1A9A /* CreationInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F788FB2AEFD868003D1A9A /* CreationInputView.swift */; };
+		A972A9AC2AF481760025B8C7 /* TripModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A972A9A02AF481760025B8C7 /* TripModel.swift */; };
+		A972A9AD2AF481760025B8C7 /* tripData.json in Resources */ = {isa = PBXBuildFile; fileRef = A972A9A12AF481760025B8C7 /* tripData.json */; };
+		A972A9AE2AF481760025B8C7 /* TripData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A972A9A22AF481760025B8C7 /* TripData.swift */; };
+		A972A9AF2AF481760025B8C7 /* TripScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A972A9A42AF481760025B8C7 /* TripScreen.swift */; };
+		A972A9B02AF481760025B8C7 /* CreateTripScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A972A9A52AF481760025B8C7 /* CreateTripScreen.swift */; };
+		A972A9B12AF481760025B8C7 /* TripEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A972A9A72AF481760025B8C7 /* TripEditView.swift */; };
+		A972A9B22AF481760025B8C7 /* TripDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A972A9A82AF481760025B8C7 /* TripDetailView.swift */; };
+		A972A9B32AF481760025B8C7 /* TripExperienceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A972A9A92AF481760025B8C7 /* TripExperienceView.swift */; };
+		A972A9B42AF481760025B8C7 /* TripRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A972A9AA2AF481760025B8C7 /* TripRowView.swift */; };
+		A972A9B52AF481760025B8C7 /* TripListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A972A9AB2AF481760025B8C7 /* TripListView.swift */; };
 		EF725F0B2AE9A18E00B12643 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF725F0A2AE9A18E00B12643 /* UserProfileView.swift */; };
 		EF725F0F2AE9A37000B12643 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF725F0E2AE9A37000B12643 /* API.swift */; };
 		EF725F132AE9A3E600B12643 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF725F122AE9A3E600B12643 /* User.swift */; };
@@ -81,6 +91,16 @@
 		45B6A9032AE8862C0040158F /* TravelAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		45F788F92AEFD3AC003D1A9A /* CreateExperienceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateExperienceScreen.swift; sourceTree = "<group>"; };
 		45F788FB2AEFD868003D1A9A /* CreationInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationInputView.swift; sourceTree = "<group>"; };
+		A972A9A02AF481760025B8C7 /* TripModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripModel.swift; sourceTree = "<group>"; };
+		A972A9A12AF481760025B8C7 /* tripData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tripData.json; sourceTree = "<group>"; };
+		A972A9A22AF481760025B8C7 /* TripData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripData.swift; sourceTree = "<group>"; };
+		A972A9A42AF481760025B8C7 /* TripScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripScreen.swift; sourceTree = "<group>"; };
+		A972A9A52AF481760025B8C7 /* CreateTripScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateTripScreen.swift; sourceTree = "<group>"; };
+		A972A9A72AF481760025B8C7 /* TripEditView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripEditView.swift; sourceTree = "<group>"; };
+		A972A9A82AF481760025B8C7 /* TripDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripDetailView.swift; sourceTree = "<group>"; };
+		A972A9A92AF481760025B8C7 /* TripExperienceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripExperienceView.swift; sourceTree = "<group>"; };
+		A972A9AA2AF481760025B8C7 /* TripRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripRowView.swift; sourceTree = "<group>"; };
+		A972A9AB2AF481760025B8C7 /* TripListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripListView.swift; sourceTree = "<group>"; };
 		EF725F0A2AE9A18E00B12643 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		EF725F0E2AE9A37000B12643 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		EF725F122AE9A3E600B12643 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -122,6 +142,7 @@
 		45A13C012AE9380E005B58FD /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				A972A99E2AF481760025B8C7 /* Trips */,
 				45A13C022AE93829005B58FD /* Auth */,
 				45A13C032AE93831005B58FD /* Experiences */,
 				454244242AEBEA3900339B1A /* UserProfile */,
@@ -259,6 +280,47 @@
 			path = TravelAppUITests;
 			sourceTree = "<group>";
 		};
+		A972A99E2AF481760025B8C7 /* Trips */ = {
+			isa = PBXGroup;
+			children = (
+				A972A99F2AF481760025B8C7 /* Models */,
+				A972A9A32AF481760025B8C7 /* Screens */,
+				A972A9A62AF481760025B8C7 /* Views */,
+			);
+			path = Trips;
+			sourceTree = "<group>";
+		};
+		A972A99F2AF481760025B8C7 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A972A9A02AF481760025B8C7 /* TripModel.swift */,
+				A972A9A12AF481760025B8C7 /* tripData.json */,
+				A972A9A22AF481760025B8C7 /* TripData.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		A972A9A32AF481760025B8C7 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				A972A9A42AF481760025B8C7 /* TripScreen.swift */,
+				A972A9A52AF481760025B8C7 /* CreateTripScreen.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		A972A9A62AF481760025B8C7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A972A9A72AF481760025B8C7 /* TripEditView.swift */,
+				A972A9A82AF481760025B8C7 /* TripDetailView.swift */,
+				A972A9A92AF481760025B8C7 /* TripExperienceView.swift */,
+				A972A9AA2AF481760025B8C7 /* TripRowView.swift */,
+				A972A9AB2AF481760025B8C7 /* TripListView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		EF725F0C2AE9A33C00B12643 /* DataModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -381,6 +443,7 @@
 			files = (
 				45B6A8EE2AE8862B0040158F /* Preview Assets.xcassets in Resources */,
 				45B6A8EB2AE8862B0040158F /* Assets.xcassets in Resources */,
+				A972A9AD2AF481760025B8C7 /* tripData.json in Resources */,
 				457EA0472AE9D1AA0043518C /* experienceData.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -408,19 +471,28 @@
 			files = (
 				45A13C152AE9411A005B58FD /* GoogleLoginButton.swift in Sources */,
 				457EA0492AE9D5F00043518C /* ExperienceModel.swift in Sources */,
+				A972A9AF2AF481760025B8C7 /* TripScreen.swift in Sources */,
 				457EA0452AE9CFAB0043518C /* ExperienceDetailView.swift in Sources */,
 				45B6A8E92AE886290040158F /* ContentView.swift in Sources */,
+				A972A9AE2AF481760025B8C7 /* TripData.swift in Sources */,
 				EF725F0B2AE9A18E00B12643 /* UserProfileView.swift in Sources */,
 				458483012AEB4C5D006D0422 /* SignUpScreen.swift in Sources */,
 				458483032AEB4CD5006D0422 /* LoginScreen.swift in Sources */,
 				EF725F0F2AE9A37000B12643 /* API.swift in Sources */,
 				EF725F132AE9A3E600B12643 /* User.swift in Sources */,
 				45A13C132AE940CF005B58FD /* AppleLoginButton.swift in Sources */,
+				A972A9AC2AF481760025B8C7 /* TripModel.swift in Sources */,
 				45A13C112AE93B00005B58FD /* ExperienceScreen.swift in Sources */,
+				A972A9B42AF481760025B8C7 /* TripRowView.swift in Sources */,
+				A972A9B52AF481760025B8C7 /* TripListView.swift in Sources */,
+				A972A9B02AF481760025B8C7 /* CreateTripScreen.swift in Sources */,
 				457EA0412AE9CD370043518C /* HomeScreen.swift in Sources */,
 				457EA0432AE9CF980043518C /* ExperienceRowView.swift in Sources */,
+				A972A9B32AF481760025B8C7 /* TripExperienceView.swift in Sources */,
+				A972A9B12AF481760025B8C7 /* TripEditView.swift in Sources */,
 				45A13C172AE94150005B58FD /* EmailLoginButton.swift in Sources */,
 				457EA04B2AE9D7B90043518C /* ExperienceData.swift in Sources */,
+				A972A9B22AF481760025B8C7 /* TripDetailView.swift in Sources */,
 				458483052AEB4F37006D0422 /* LoginInputView.swift in Sources */,
 				454244232AEBDD1A00339B1A /* ExperienceListView.swift in Sources */,
 				45B6A8E72AE886290040158F /* TravelAppApp.swift in Sources */,
