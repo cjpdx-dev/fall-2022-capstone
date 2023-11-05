@@ -30,7 +30,7 @@
 		45B6A9022AE8862C0040158F /* TravelAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6A9012AE8862C0040158F /* TravelAppUITests.swift */; };
 		45B6A9042AE8862C0040158F /* TravelAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6A9032AE8862C0040158F /* TravelAppUITestsLaunchTests.swift */; };
 		45F788FA2AEFD3AC003D1A9A /* CreateExperienceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F788F92AEFD3AC003D1A9A /* CreateExperienceScreen.swift */; };
-		45F788FC2AEFD868003D1A9A /* CreationInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F788FB2AEFD868003D1A9A /* CreationInputView.swift */; };
+		45F788FC2AEFD868003D1A9A /* CreateInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F788FB2AEFD868003D1A9A /* CreateInputView.swift */; };
 		EF725F0B2AE9A18E00B12643 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF725F0A2AE9A18E00B12643 /* UserProfileView.swift */; };
 		EF725F0F2AE9A37000B12643 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF725F0E2AE9A37000B12643 /* API.swift */; };
 		EF725F132AE9A3E600B12643 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF725F122AE9A3E600B12643 /* User.swift */; };
@@ -80,7 +80,7 @@
 		45B6A9012AE8862C0040158F /* TravelAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelAppUITests.swift; sourceTree = "<group>"; };
 		45B6A9032AE8862C0040158F /* TravelAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		45F788F92AEFD3AC003D1A9A /* CreateExperienceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateExperienceScreen.swift; sourceTree = "<group>"; };
-		45F788FB2AEFD868003D1A9A /* CreationInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationInputView.swift; sourceTree = "<group>"; };
+		45F788FB2AEFD868003D1A9A /* CreateInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateInputView.swift; sourceTree = "<group>"; };
 		EF725F0A2AE9A18E00B12643 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		EF725F0E2AE9A37000B12643 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		EF725F122AE9A3E600B12643 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -146,7 +146,7 @@
 				45A13C082AE9388E005B58FD /* Views */,
 				45A13C102AE93B00005B58FD /* ExperienceScreen.swift */,
 				45F788F92AEFD3AC003D1A9A /* CreateExperienceScreen.swift */,
-				45F788FB2AEFD868003D1A9A /* CreationInputView.swift */,
+				45F788FB2AEFD868003D1A9A /* CreateInputView.swift */,
 			);
 			path = Experiences;
 			sourceTree = "<group>";
@@ -425,7 +425,7 @@
 				454244232AEBDD1A00339B1A /* ExperienceListView.swift in Sources */,
 				45B6A8E72AE886290040158F /* TravelAppApp.swift in Sources */,
 				45A13C0F2AE93ADC005B58FD /* AuthScreen.swift in Sources */,
-				45F788FC2AEFD868003D1A9A /* CreationInputView.swift in Sources */,
+				45F788FC2AEFD868003D1A9A /* CreateInputView.swift in Sources */,
 				45F788FA2AEFD3AC003D1A9A /* CreateExperienceScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
