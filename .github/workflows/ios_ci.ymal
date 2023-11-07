@@ -1,0 +1,39 @@
+
+name: iOS CI
+
+on:
+    push:
+        branches: [main]
+        paths:
+            - 'frontend/**'
+    pull_request:
+        branches: [main]
+        paths:
+            - 'frontend/**'
+
+jobs:
+    build-and-test:
+        runs-on: macos-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+
+            - name: Install Xcode version
+              run: sudo xcode-select -switch /Application/Xcode_15.0.app
+
+
+            - name: Install dependencies
+                run: |
+                    cd frontend
+                    xcodebuild -resolvePackageDependencies
+
+            - name: Build
+              run: |
+                    cd frontend
+                    xcodebuild build -scheme TravelApp -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 11'
+
+            - name: Run tests
+              run: |
+                    cd frontend
+                    xcodebuild test -scheme TravelApp -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 11'

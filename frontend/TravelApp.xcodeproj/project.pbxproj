@@ -30,10 +30,32 @@
 		45B6A9022AE8862C0040158F /* TravelAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6A9012AE8862C0040158F /* TravelAppUITests.swift */; };
 		45B6A9042AE8862C0040158F /* TravelAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6A9032AE8862C0040158F /* TravelAppUITestsLaunchTests.swift */; };
 		45F788FA2AEFD3AC003D1A9A /* CreateExperienceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F788F92AEFD3AC003D1A9A /* CreateExperienceScreen.swift */; };
+<<<<<<< HEAD
 		45F788FC2AEFD868003D1A9A /* CreateInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F788FB2AEFD868003D1A9A /* CreateInputView.swift */; };
 		EF725F0B2AE9A18E00B12643 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF725F0A2AE9A18E00B12643 /* UserProfileView.swift */; };
 		EF725F0F2AE9A37000B12643 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF725F0E2AE9A37000B12643 /* API.swift */; };
 		EF725F132AE9A3E600B12643 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF725F122AE9A3E600B12643 /* User.swift */; };
+=======
+		45F788FC2AEFD868003D1A9A /* CreationInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F788FB2AEFD868003D1A9A /* CreationInputView.swift */; };
+		EF2225252AF31C0B00177F95 /* APIConsts.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2225242AF31C0B00177F95 /* APIConsts.swift */; };
+		EF2225272AF31FB000177F95 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2225262AF31FB000177F95 /* APIError.swift */; };
+		EF22252C2AF434A600177F95 /* PostUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF22252B2AF434A600177F95 /* PostUser.swift */; };
+		EF22252F2AF436F400177F95 /* GetUserByID.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF22252E2AF436F400177F95 /* GetUserByID.swift */; };
+		EF2225352AF437FE00177F95 /* DeleteUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2225342AF437FE00177F95 /* DeleteUser.swift */; };
+		EF2225392AF43A1000177F95 /* PatchUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2225382AF43A1000177F95 /* PatchUser.swift */; };
+		EF22253F2AF70EEF00177F95 /* AuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF22253E2AF70EEF00177F95 /* AuthController.swift */; };
+		EF23B1762AF07DC200AFC569 /* PublicProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF23B1752AF07DC200AFC569 /* PublicProfileScreen.swift */; };
+		EF23B1802AF0807A00AFC569 /* SettingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF23B17F2AF0807A00AFC569 /* SettingItem.swift */; };
+		EF23B1822AF0809200AFC569 /* ToggleSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF23B1812AF0809200AFC569 /* ToggleSettingView.swift */; };
+		EF23B1842AF080D000AFC569 /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF23B1832AF080D000AFC569 /* SectionHeaderView.swift */; };
+		EF23B1862AF080EB00AFC569 /* ButtonSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF23B1852AF080EB00AFC569 /* ButtonSettingView.swift */; };
+		EF23B1882AF0812000AFC569 /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF23B1872AF0812000AFC569 /* SettingsScreen.swift */; };
+		EFC19A8F2AF0845B007C60D0 /* UserProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC19A8E2AF0845B007C60D0 /* UserProfileModel.swift */; };
+		EFC19A912AF084FB007C60D0 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC19A902AF084FB007C60D0 /* API.swift */; };
+		EFE382462AF0772200839899 /* UserProfile_HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE382452AF0772200839899 /* UserProfile_HeaderView.swift */; };
+		EFE382482AF0777300839899 /* UserProfile_InfoFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE382472AF0777300839899 /* UserProfile_InfoFieldView.swift */; };
+		EFE382492AF07BCF00839899 /* UserProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE382412AF0763B00839899 /* UserProfileScreen.swift */; };
+>>>>>>> c3d5233b3ede3bc1639a98def50d543800666a74
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,10 +102,32 @@
 		45B6A9012AE8862C0040158F /* TravelAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelAppUITests.swift; sourceTree = "<group>"; };
 		45B6A9032AE8862C0040158F /* TravelAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		45F788F92AEFD3AC003D1A9A /* CreateExperienceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateExperienceScreen.swift; sourceTree = "<group>"; };
+<<<<<<< HEAD
 		45F788FB2AEFD868003D1A9A /* CreateInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateInputView.swift; sourceTree = "<group>"; };
 		EF725F0A2AE9A18E00B12643 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		EF725F0E2AE9A37000B12643 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		EF725F122AE9A3E600B12643 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+=======
+		45F788FB2AEFD868003D1A9A /* CreationInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationInputView.swift; sourceTree = "<group>"; };
+		EF2225242AF31C0B00177F95 /* APIConsts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConsts.swift; sourceTree = "<group>"; };
+		EF2225262AF31FB000177F95 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
+		EF22252B2AF434A600177F95 /* PostUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostUser.swift; sourceTree = "<group>"; };
+		EF22252E2AF436F400177F95 /* GetUserByID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserByID.swift; sourceTree = "<group>"; };
+		EF2225342AF437FE00177F95 /* DeleteUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteUser.swift; sourceTree = "<group>"; };
+		EF2225382AF43A1000177F95 /* PatchUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchUser.swift; sourceTree = "<group>"; };
+		EF22253E2AF70EEF00177F95 /* AuthController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthController.swift; sourceTree = "<group>"; };
+		EF23B1752AF07DC200AFC569 /* PublicProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicProfileScreen.swift; sourceTree = "<group>"; };
+		EF23B17F2AF0807A00AFC569 /* SettingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingItem.swift; sourceTree = "<group>"; };
+		EF23B1812AF0809200AFC569 /* ToggleSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleSettingView.swift; sourceTree = "<group>"; };
+		EF23B1832AF080D000AFC569 /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
+		EF23B1852AF080EB00AFC569 /* ButtonSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonSettingView.swift; sourceTree = "<group>"; };
+		EF23B1872AF0812000AFC569 /* SettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreen.swift; sourceTree = "<group>"; };
+		EFC19A8E2AF0845B007C60D0 /* UserProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileModel.swift; sourceTree = "<group>"; };
+		EFC19A902AF084FB007C60D0 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		EFE382412AF0763B00839899 /* UserProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileScreen.swift; sourceTree = "<group>"; };
+		EFE382452AF0772200839899 /* UserProfile_HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile_HeaderView.swift; sourceTree = "<group>"; };
+		EFE382472AF0777300839899 /* UserProfile_InfoFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile_InfoFieldView.swift; sourceTree = "<group>"; };
+>>>>>>> c3d5233b3ede3bc1639a98def50d543800666a74
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,20 +155,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		454244242AEBEA3900339B1A /* UserProfile */ = {
-			isa = PBXGroup;
-			children = (
-				EF725F0A2AE9A18E00B12643 /* UserProfileView.swift */,
-			);
-			path = UserProfile;
-			sourceTree = "<group>";
-		};
 		45A13C012AE9380E005B58FD /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				EF23B17B2AF0802C00AFC569 /* UserSettings */,
+				EF23B1772AF07E8500AFC569 /* PublicProfile */,
+				EFE3823B2AF074CA00839899 /* UserProfile */,
 				45A13C022AE93829005B58FD /* Auth */,
 				45A13C032AE93831005B58FD /* Experiences */,
-				454244242AEBEA3900339B1A /* UserProfile */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -134,6 +172,7 @@
 			children = (
 				45A13C0C2AE9399F005B58FD /* Screens */,
 				45A13C0A2AE93990005B58FD /* Views */,
+				EF22253E2AF70EEF00177F95 /* AuthController.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -222,7 +261,6 @@
 			isa = PBXGroup;
 			children = (
 				EF725F0D2AE9A35000B12643 /* API */,
-				EF725F0C2AE9A33C00B12643 /* DataModels */,
 				45B6A8E62AE886290040158F /* TravelAppApp.swift */,
 				45B6A8E82AE886290040158F /* ContentView.swift */,
 				457EA0402AE9CD370043518C /* HomeScreen.swift */,
@@ -259,20 +297,169 @@
 			path = TravelAppUITests;
 			sourceTree = "<group>";
 		};
-		EF725F0C2AE9A33C00B12643 /* DataModels */ = {
+		EF22252A2AF4349800177F95 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				EF725F122AE9A3E600B12643 /* User.swift */,
+				EF22253D2AF6AFF000177F95 /* UserTrip */,
+				EF22253C2AF6AFEB00177F95 /* Trips */,
+				EF22253B2AF6AFE200177F95 /* Experience */,
+				EF22253A2AF6AFD200177F95 /* UserExperience */,
+				EF22252D2AF434DE00177F95 /* User */,
 			);
-			path = DataModels;
+			path = Models;
+			sourceTree = "<group>";
+		};
+		EF22252D2AF434DE00177F95 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				EF22252E2AF436F400177F95 /* GetUserByID.swift */,
+				EF22252B2AF434A600177F95 /* PostUser.swift */,
+				EF2225342AF437FE00177F95 /* DeleteUser.swift */,
+				EF2225382AF43A1000177F95 /* PatchUser.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		EF22253A2AF6AFD200177F95 /* UserExperience */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UserExperience;
+			sourceTree = "<group>";
+		};
+		EF22253B2AF6AFE200177F95 /* Experience */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Experience;
+			sourceTree = "<group>";
+		};
+		EF22253C2AF6AFEB00177F95 /* Trips */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Trips;
+			sourceTree = "<group>";
+		};
+		EF22253D2AF6AFF000177F95 /* UserTrip */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UserTrip;
+			sourceTree = "<group>";
+		};
+		EF23B1742AF07D9100AFC569 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				EFE382412AF0763B00839899 /* UserProfileScreen.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		EF23B1772AF07E8500AFC569 /* PublicProfile */ = {
+			isa = PBXGroup;
+			children = (
+				EF23B17A2AF07E9B00AFC569 /* Models */,
+				EF23B1792AF07E9400AFC569 /* Screens */,
+				EF23B1782AF07E8F00AFC569 /* Views */,
+				EF23B1752AF07DC200AFC569 /* PublicProfileScreen.swift */,
+			);
+			path = PublicProfile;
+			sourceTree = "<group>";
+		};
+		EF23B1782AF07E8F00AFC569 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		EF23B1792AF07E9400AFC569 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		EF23B17A2AF07E9B00AFC569 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		EF23B17B2AF0802C00AFC569 /* UserSettings */ = {
+			isa = PBXGroup;
+			children = (
+				EF23B17E2AF0803F00AFC569 /* Screens */,
+				EF23B17D2AF0803B00AFC569 /* Views */,
+				EF23B17C2AF0803500AFC569 /* Models */,
+			);
+			path = UserSettings;
+			sourceTree = "<group>";
+		};
+		EF23B17C2AF0803500AFC569 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				EF23B17F2AF0807A00AFC569 /* SettingItem.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		EF23B17D2AF0803B00AFC569 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				EF23B1812AF0809200AFC569 /* ToggleSettingView.swift */,
+				EF23B1832AF080D000AFC569 /* SectionHeaderView.swift */,
+				EF23B1852AF080EB00AFC569 /* ButtonSettingView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		EF23B17E2AF0803F00AFC569 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				EF23B1872AF0812000AFC569 /* SettingsScreen.swift */,
+			);
+			path = Screens;
 			sourceTree = "<group>";
 		};
 		EF725F0D2AE9A35000B12643 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				EF725F0E2AE9A37000B12643 /* API.swift */,
+				EF22252A2AF4349800177F95 /* Models */,
+				EFC19A902AF084FB007C60D0 /* API.swift */,
+				EF2225242AF31C0B00177F95 /* APIConsts.swift */,
+				EF2225262AF31FB000177F95 /* APIError.swift */,
 			);
 			path = API;
+			sourceTree = "<group>";
+		};
+		EFE382312AF0748300839899 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				EFE382452AF0772200839899 /* UserProfile_HeaderView.swift */,
+				EFE382472AF0777300839899 /* UserProfile_InfoFieldView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		EFE3823B2AF074CA00839899 /* UserProfile */ = {
+			isa = PBXGroup;
+			children = (
+				EF23B1742AF07D9100AFC569 /* Screens */,
+				EFE382312AF0748300839899 /* Views */,
+				EFE3823C2AF074DE00839899 /* Models */,
+			);
+			path = UserProfile;
+			sourceTree = "<group>";
+		};
+		EFE3823C2AF074DE00839899 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				EFC19A8E2AF0845B007C60D0 /* UserProfileModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -409,21 +596,36 @@
 				45A13C152AE9411A005B58FD /* GoogleLoginButton.swift in Sources */,
 				457EA0492AE9D5F00043518C /* ExperienceModel.swift in Sources */,
 				457EA0452AE9CFAB0043518C /* ExperienceDetailView.swift in Sources */,
+				EFC19A8F2AF0845B007C60D0 /* UserProfileModel.swift in Sources */,
+				EF22252C2AF434A600177F95 /* PostUser.swift in Sources */,
+				EF23B1842AF080D000AFC569 /* SectionHeaderView.swift in Sources */,
+				EFE382492AF07BCF00839899 /* UserProfileScreen.swift in Sources */,
 				45B6A8E92AE886290040158F /* ContentView.swift in Sources */,
-				EF725F0B2AE9A18E00B12643 /* UserProfileView.swift in Sources */,
+				EF23B1862AF080EB00AFC569 /* ButtonSettingView.swift in Sources */,
 				458483012AEB4C5D006D0422 /* SignUpScreen.swift in Sources */,
+				EF23B1802AF0807A00AFC569 /* SettingItem.swift in Sources */,
+				EF2225272AF31FB000177F95 /* APIError.swift in Sources */,
 				458483032AEB4CD5006D0422 /* LoginScreen.swift in Sources */,
-				EF725F0F2AE9A37000B12643 /* API.swift in Sources */,
-				EF725F132AE9A3E600B12643 /* User.swift in Sources */,
+				EF22253F2AF70EEF00177F95 /* AuthController.swift in Sources */,
 				45A13C132AE940CF005B58FD /* AppleLoginButton.swift in Sources */,
+				EF2225392AF43A1000177F95 /* PatchUser.swift in Sources */,
+				EFE382482AF0777300839899 /* UserProfile_InfoFieldView.swift in Sources */,
 				45A13C112AE93B00005B58FD /* ExperienceScreen.swift in Sources */,
+				EFC19A912AF084FB007C60D0 /* API.swift in Sources */,
+				EF23B1822AF0809200AFC569 /* ToggleSettingView.swift in Sources */,
+				EF23B1762AF07DC200AFC569 /* PublicProfileScreen.swift in Sources */,
+				EF23B1882AF0812000AFC569 /* SettingsScreen.swift in Sources */,
 				457EA0412AE9CD370043518C /* HomeScreen.swift in Sources */,
 				457EA0432AE9CF980043518C /* ExperienceRowView.swift in Sources */,
 				45A13C172AE94150005B58FD /* EmailLoginButton.swift in Sources */,
+				EF2225352AF437FE00177F95 /* DeleteUser.swift in Sources */,
 				457EA04B2AE9D7B90043518C /* ExperienceData.swift in Sources */,
 				458483052AEB4F37006D0422 /* LoginInputView.swift in Sources */,
+				EF22252F2AF436F400177F95 /* GetUserByID.swift in Sources */,
 				454244232AEBDD1A00339B1A /* ExperienceListView.swift in Sources */,
 				45B6A8E72AE886290040158F /* TravelAppApp.swift in Sources */,
+				EFE382462AF0772200839899 /* UserProfile_HeaderView.swift in Sources */,
+				EF2225252AF31C0B00177F95 /* APIConsts.swift in Sources */,
 				45A13C0F2AE93ADC005B58FD /* AuthScreen.swift in Sources */,
 				45F788FC2AEFD868003D1A9A /* CreateInputView.swift in Sources */,
 				45F788FA2AEFD3AC003D1A9A /* CreateExperienceScreen.swift in Sources */,

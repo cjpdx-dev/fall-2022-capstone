@@ -21,7 +21,7 @@ struct HomeScreen: View {
                     Label("Trips", systemImage: "car")
                 }
             
-            UserProfileView()
+            UserProfileScreen()
                 .tabItem {
                     Label("Profile", systemImage: "person.circle")
                 }
