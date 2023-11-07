@@ -38,7 +38,7 @@ struct LoginScreen: View {
                     .foregroundColor(.white)
                     .frame(width: UIScreen.main.bounds.width - 50, height: 48)
                 }
-                .background(Color(.systemCyan))
+                .background(Color(.blue))
                 .cornerRadius(12)
                 .shadow(color: .gray, radius: 2, x: 0, y: 2)
             }

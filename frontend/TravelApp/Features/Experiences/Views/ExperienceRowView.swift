@@ -12,7 +12,7 @@ struct ExperienceRowView: View {
     
     var body: some View {
         HStack() {
-            Image("charleyrivers")
+            experience.image
                 .resizable()
                 .frame(width: 50, height: 50)
             VStack {
