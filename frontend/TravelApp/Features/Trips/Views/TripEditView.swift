@@ -9,9 +9,8 @@ import SwiftUI
 
 struct TripEditView: View {
     var trip: Trip
-    
     var body: some View {
-        Text("Editing Trip: \(trip.name)")
+        Text("Editing trip: \(trip.name)")
     }
 }
 
