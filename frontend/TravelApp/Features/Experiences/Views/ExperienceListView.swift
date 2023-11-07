@@ -15,17 +15,19 @@ struct ExperienceListView: View {
             List(experiences) { experience in
                 NavigationLink {
                     ExperienceDetailView(experience: experience)
+                        .navigationBarBackButtonHidden(true)
+                        
                 } label: {
                     ExperienceRowView(experience: experience)
                 }
-                
-                
             }
             .navigationTitle("Experiences")
-            
+            .listStyle(.plain)
             .toolbar(content: {
                 NavigationLink {
                     CreateExperienceScreen()
+                        .navigationTitle("Create Experience")
+                        .navigationBarBackButtonHidden()
                 } label: {
                     Image(systemName: "plus.circle.fill")
                         .font(.system(size: 27))
