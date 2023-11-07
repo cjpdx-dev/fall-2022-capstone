@@ -30,12 +30,10 @@
 		45B6A9022AE8862C0040158F /* TravelAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6A9012AE8862C0040158F /* TravelAppUITests.swift */; };
 		45B6A9042AE8862C0040158F /* TravelAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6A9032AE8862C0040158F /* TravelAppUITestsLaunchTests.swift */; };
 		45F788FA2AEFD3AC003D1A9A /* CreateExperienceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F788F92AEFD3AC003D1A9A /* CreateExperienceScreen.swift */; };
-<<<<<<< HEAD
 		45F788FC2AEFD868003D1A9A /* CreateInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F788FB2AEFD868003D1A9A /* CreateInputView.swift */; };
 		EF725F0B2AE9A18E00B12643 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF725F0A2AE9A18E00B12643 /* UserProfileView.swift */; };
 		EF725F0F2AE9A37000B12643 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF725F0E2AE9A37000B12643 /* API.swift */; };
 		EF725F132AE9A3E600B12643 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF725F122AE9A3E600B12643 /* User.swift */; };
-=======
 		45F788FC2AEFD868003D1A9A /* CreationInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F788FB2AEFD868003D1A9A /* CreationInputView.swift */; };
 		EF2225252AF31C0B00177F95 /* APIConsts.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2225242AF31C0B00177F95 /* APIConsts.swift */; };
 		EF2225272AF31FB000177F95 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2225262AF31FB000177F95 /* APIError.swift */; };
@@ -55,7 +53,6 @@
 		EFE382462AF0772200839899 /* UserProfile_HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE382452AF0772200839899 /* UserProfile_HeaderView.swift */; };
 		EFE382482AF0777300839899 /* UserProfile_InfoFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE382472AF0777300839899 /* UserProfile_InfoFieldView.swift */; };
 		EFE382492AF07BCF00839899 /* UserProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE382412AF0763B00839899 /* UserProfileScreen.swift */; };
->>>>>>> c3d5233b3ede3bc1639a98def50d543800666a74
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,12 +99,10 @@
 		45B6A9012AE8862C0040158F /* TravelAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelAppUITests.swift; sourceTree = "<group>"; };
 		45B6A9032AE8862C0040158F /* TravelAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		45F788F92AEFD3AC003D1A9A /* CreateExperienceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateExperienceScreen.swift; sourceTree = "<group>"; };
-<<<<<<< HEAD
 		45F788FB2AEFD868003D1A9A /* CreateInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateInputView.swift; sourceTree = "<group>"; };
 		EF725F0A2AE9A18E00B12643 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		EF725F0E2AE9A37000B12643 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		EF725F122AE9A3E600B12643 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-=======
 		45F788FB2AEFD868003D1A9A /* CreationInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationInputView.swift; sourceTree = "<group>"; };
 		EF2225242AF31C0B00177F95 /* APIConsts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConsts.swift; sourceTree = "<group>"; };
 		EF2225262AF31FB000177F95 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
@@ -127,7 +122,6 @@
 		EFE382412AF0763B00839899 /* UserProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileScreen.swift; sourceTree = "<group>"; };
 		EFE382452AF0772200839899 /* UserProfile_HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile_HeaderView.swift; sourceTree = "<group>"; };
 		EFE382472AF0777300839899 /* UserProfile_InfoFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile_InfoFieldView.swift; sourceTree = "<group>"; };
->>>>>>> c3d5233b3ede3bc1639a98def50d543800666a74
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
