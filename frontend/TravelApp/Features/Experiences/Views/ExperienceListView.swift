@@ -36,6 +36,7 @@ struct ExperienceListView: View {
                 
             })
             .searchable(text: $searchText)
+            
         }
         
     }

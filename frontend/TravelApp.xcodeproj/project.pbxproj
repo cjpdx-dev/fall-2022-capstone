@@ -17,6 +17,8 @@
 		458483012AEB4C5D006D0422 /* SignUpScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458483002AEB4C5C006D0422 /* SignUpScreen.swift */; };
 		458483032AEB4CD5006D0422 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458483022AEB4CD5006D0422 /* LoginScreen.swift */; };
 		458483052AEB4F37006D0422 /* LoginInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458483042AEB4F37006D0422 /* LoginInputView.swift */; };
+		45850E102AFE6FDA00276780 /* ExperienceAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45850E0F2AFE6FDA00276780 /* ExperienceAPI.swift */; };
+		45885FC02AFD9ED7004F0FFE /* NewExperience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45885FBF2AFD9ED7004F0FFE /* NewExperience.swift */; };
 		45A13C0F2AE93ADC005B58FD /* AuthScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A13C0E2AE93ADC005B58FD /* AuthScreen.swift */; };
 		45A13C112AE93B00005B58FD /* ExperienceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A13C102AE93B00005B58FD /* ExperienceScreen.swift */; };
 		45A13C132AE940CF005B58FD /* AppleLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A13C122AE940CF005B58FD /* AppleLoginButton.swift */; };
@@ -29,6 +31,7 @@
 		45B6A8F82AE8862C0040158F /* TravelAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6A8F72AE8862C0040158F /* TravelAppTests.swift */; };
 		45B6A9022AE8862C0040158F /* TravelAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6A9012AE8862C0040158F /* TravelAppUITests.swift */; };
 		45B6A9042AE8862C0040158F /* TravelAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6A9032AE8862C0040158F /* TravelAppUITestsLaunchTests.swift */; };
+		45B79CCC2AFD0557008355E5 /* Data+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B79CCB2AFD0557008355E5 /* Data+Extensions.swift */; };
 		45F788FA2AEFD3AC003D1A9A /* CreateExperienceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F788F92AEFD3AC003D1A9A /* CreateExperienceScreen.swift */; };
 		45F788FC2AEFD868003D1A9A /* CreateInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F788FB2AEFD868003D1A9A /* CreateInputView.swift */; };
 		A972A9AC2AF481760025B8C7 /* TripModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A972A9A02AF481760025B8C7 /* TripModel.swift */; };
@@ -85,6 +88,8 @@
 		458483002AEB4C5C006D0422 /* SignUpScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpScreen.swift; sourceTree = "<group>"; };
 		458483022AEB4CD5006D0422 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		458483042AEB4F37006D0422 /* LoginInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInputView.swift; sourceTree = "<group>"; };
+		45850E0F2AFE6FDA00276780 /* ExperienceAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceAPI.swift; sourceTree = "<group>"; };
+		45885FBF2AFD9ED7004F0FFE /* NewExperience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewExperience.swift; sourceTree = "<group>"; };
 		45A13C0E2AE93ADC005B58FD /* AuthScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthScreen.swift; sourceTree = "<group>"; };
 		45A13C102AE93B00005B58FD /* ExperienceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceScreen.swift; sourceTree = "<group>"; };
 		45A13C122AE940CF005B58FD /* AppleLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginButton.swift; sourceTree = "<group>"; };
@@ -100,6 +105,7 @@
 		45B6A8FD2AE8862C0040158F /* TravelAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TravelAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		45B6A9012AE8862C0040158F /* TravelAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelAppUITests.swift; sourceTree = "<group>"; };
 		45B6A9032AE8862C0040158F /* TravelAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		45B79CCB2AFD0557008355E5 /* Data+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extensions.swift"; sourceTree = "<group>"; };
 		45F788F92AEFD3AC003D1A9A /* CreateExperienceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateExperienceScreen.swift; sourceTree = "<group>"; };
 		45F788FB2AEFD868003D1A9A /* CreateInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateInputView.swift; sourceTree = "<group>"; };
 		A972A9A02AF481760025B8C7 /* TripModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripModel.swift; sourceTree = "<group>"; };
@@ -185,6 +191,7 @@
 				45A13C102AE93B00005B58FD /* ExperienceScreen.swift */,
 				45F788F92AEFD3AC003D1A9A /* CreateExperienceScreen.swift */,
 				45F788FB2AEFD868003D1A9A /* CreateInputView.swift */,
+				45850E0F2AFE6FDA00276780 /* ExperienceAPI.swift */,
 			);
 			path = Experiences;
 			sourceTree = "<group>";
@@ -194,6 +201,7 @@
 			children = (
 				457EA0482AE9D5F00043518C /* ExperienceModel.swift */,
 				457EA04A2AE9D7B90043518C /* ExperienceData.swift */,
+				45885FBF2AFD9ED7004F0FFE /* NewExperience.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -265,6 +273,7 @@
 				457EA0402AE9CD370043518C /* HomeScreen.swift */,
 				457EA0462AE9D1AA0043518C /* experienceData.json */,
 				45A13C012AE9380E005B58FD /* Features */,
+				45B79CCB2AFD0557008355E5 /* Data+Extensions.swift */,
 				45B6A8EA2AE8862B0040158F /* Assets.xcassets */,
 				45B6A8EC2AE8862B0040158F /* Preview Content */,
 			);
@@ -616,13 +625,16 @@
 				45A13C172AE94150005B58FD /* EmailLoginButton.swift in Sources */,
 				457EA04B2AE9D7B90043518C /* ExperienceData.swift in Sources */,
 				A972A9B22AF481760025B8C7 /* TripDetailView.swift in Sources */,
+				45885FC02AFD9ED7004F0FFE /* NewExperience.swift in Sources */,
 				458483052AEB4F37006D0422 /* LoginInputView.swift in Sources */,
 				454244232AEBDD1A00339B1A /* ExperienceListView.swift in Sources */,
 				45B6A8E72AE886290040158F /* TravelAppApp.swift in Sources */,
 				EFE382462AF0772200839899 /* UserProfile_HeaderView.swift in Sources */,
 				EF2225252AF31C0B00177F95 /* APIConsts.swift in Sources */,
 				45A13C0F2AE93ADC005B58FD /* AuthScreen.swift in Sources */,
+				45B79CCC2AFD0557008355E5 /* Data+Extensions.swift in Sources */,
 				45F788FC2AEFD868003D1A9A /* CreateInputView.swift in Sources */,
+				45850E102AFE6FDA00276780 /* ExperienceAPI.swift in Sources */,
 				45F788FA2AEFD3AC003D1A9A /* CreateExperienceScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

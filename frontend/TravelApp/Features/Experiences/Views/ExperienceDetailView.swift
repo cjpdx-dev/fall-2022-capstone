@@ -17,8 +17,19 @@ struct ExperienceDetailView: View {
                 //Image
                 experience.image
                     .resizable()
+//                AsyncImage(url: URL(string: "http://localhost:5000/")) { phase in
+                //        if let image = phase.image {
+                //            image
+                //                .resizable()
+                //                .scaledToFit()
+                //        } else if phase.error != nil {
+                //            Text("There was an error loading the image.")
+                //        } else {
+                //            ProgressView()
+                //        }
+                //    }
                     
-                    .frame(width: .infinity, height: 250)
+//                    .frame(width: .infinity, height: 250)
     //                .overlay(alignment: .bottomTrailing) {
     //                    Image(systemName: "pencil.circle.fill")
     //                        .symbolRenderingMode(.multicolor)
@@ -35,7 +46,7 @@ struct ExperienceDetailView: View {
                         HStack{
                             Image(systemName: "star.fill")
                                 .symbolRenderingMode(.multicolor)
-                            Text("\(experience.rating)/10")
+                            Text("\(experience.rating)/5")
                         }
                     }
                    
