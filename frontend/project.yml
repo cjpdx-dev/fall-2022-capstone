@@ -1,0 +1,26 @@
+name: TravelApp # Replace with your actual project name
+options:
+  bundleIdPrefix: edu.osu # Replace with your actual bundle ID prefix
+configs:
+  Debug: debug
+  Release: release
+settings:
+  base:
+    INFOPLIST_FILE: Info.plist
+    SWIFT_VERSION: 5.0
+  release:
+    INFOPLIST_FILE: Info.plist
+targets:
+  TravelApp: # Replace with your actual app name
+    type: application
+    platform: iOS
+    deploymentTarget: '17.0'
+    sources: [TravelApp/Sources]
+    resources: [TravelApp/Resources]
+    settings:
+      base:
+        INFOPLIST_FILE: Info.plist
+      release:
+        INFOPLIST_FILE: Info.plist
+      debug:
+        INFOPLIST_FILE: Info.plist
