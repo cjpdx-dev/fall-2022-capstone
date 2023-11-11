@@ -1,6 +1,6 @@
 from flask import Flask, jsonify
 
-from google.cloud import firestore
+from google.cloud import firestore, storage
 
 from .blueprints import user_bp, trip_bp, experience_bp, auth_bp
 
@@ -23,7 +23,9 @@ def create_app():
     initialize_app(cred)
 
     db = firestore.client()
+    storage_client = storage.Client()
     app.config['db'] = db
+    app.config['storage'] = storage_client
 
     # Register blueprints
     app.register_blueprint(user_bp, url_prefix='/users')

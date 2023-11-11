@@ -82,7 +82,6 @@ struct CreateExperienceScreen: View {
                 // Save Button
                 Button {
                     self.createKeywords()
-                    print(rating)
                     newExperience = NewExperience(title: title, description: description, state: state, city: city, rating: rating + 1, keywords: keywords, date: date)
                     self.createExperience(objectName: "experience", object: newExperience!)
                     dismiss()

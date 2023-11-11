@@ -11,7 +11,7 @@ import SwiftUI
 class ExperienceAPI {
     
     public let boundary: String = "Boundary-\(UUID().uuidString)"
-    private let createUrl: URL = URL(string: "http://127.0.0.1:5000//create")!
+    private let createUrl: URL = URL(string: "http://127.0.0.1:5000/experiences/create")!
     
     public func generateRequest(httpBody: Data) -> URLRequest {
         var request = URLRequest(url: self.createUrl)

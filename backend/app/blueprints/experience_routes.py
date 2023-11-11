@@ -6,12 +6,24 @@ experience_bp = Blueprint('experience', __name__)
 
 @experience_bp.route('/create', methods=["POST"])
 def createExperience():
-    experience = json.loads(request.form['experience'])
-    imageFile = request.files['image']
+    # Authenticate User ----- TODO --------------
 
-    print(type(experience))
-    # Add URL to the experience
+    # Store image in the cloud bucket ------TODO ---------
+    imageFile = request.files['image']
+    storage_client = current_app.config['storage']
+    bucket = storage_client.bucket('fall-2023-capstone.appspot.com')
+    name = imageFile.filename
+    blob = bucket.blob(name)
+    # uploaded_file = blob.upload_from_file(imageFile)
+    # print(uploaded_file)
+
+    # Convert string JSON to JSON
+    experience = json.loads(request.form['experience'])
+
+    # Add url for stored image --------- TODO -------------
     experience["imageUrl"] = 'randomImageURL'
+
+    # Add URL to the experience
     db = current_app.config['db']
     # Add experience to the database
     db_experiences.create_experience(db, experience)
