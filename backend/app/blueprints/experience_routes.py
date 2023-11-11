@@ -14,8 +14,8 @@ def createExperience():
     bucket = storage_client.bucket('fall-2023-capstone.appspot.com')
     name = imageFile.filename
     blob = bucket.blob(name)
-    # uploaded_file = blob.upload_from_file(imageFile)
-    # print(uploaded_file)
+    uploaded_file = blob.upload_from_file(imageFile)
+    print(uploaded_file)
 
     # Convert string JSON to JSON
     experience = json.loads(request.form['experience'])
