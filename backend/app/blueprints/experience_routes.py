@@ -17,13 +17,14 @@ def createExperience():
     name = imageFile.filename
     blob = bucket.blob(name)
     blob.upload_from_file(imageFile)
+    blob.make_public()
     
 
     # Convert string JSON to JSON
     experience = json.loads(request.form['experience'])
 
     # Add url for stored image to experience object 
-    image_url = blob.self_link
+    image_url = blob.public_url
     experience["imageUrl"] = image_url
 
     
@@ -37,28 +38,27 @@ def createExperience():
 @experience_bp.route('/')
 def get_experiences():
     # Authenticate User ----- TODO --------------
-    auth_header = request.headers.get('Authorization')
+    # auth_header = request.headers.get('Authorization')
 
-    try:
-        user_id = verify_token(auth_header)
-        if user_id is None:
-            return jsonify({"message": "User not found"}), 404 
+    # try:
+    #     user_id = verify_token(auth_header)
+    #     if user_id is None:
+    #         return jsonify({"message": "User not found"}), 404 
         
-    except ValueError as e:
-        return jsonify({"message": str(e)}), 401
+    # except ValueError as e:
+    #     return jsonify({"message": str(e)}), 401
     
-    except RevokedIdTokenError as e:
-        return jsonify({"message": str(e)}), 401
+    # except RevokedIdTokenError as e:
+    #     return jsonify({"message": str(e)}), 401
     
-    except InvalidIdTokenError as e:
-        return jsonify({"message": str(e)}), 401
+    # except InvalidIdTokenError as e:
+    #     return jsonify({"message": str(e)}), 401
 
     db = current_app.config['db']
     experiences = db_experiences.get_experiences(db)
     if experiences is None:
         return jsonify({"message": "No users found"}), 404
     else:
-        print(experiences)
         return jsonify(experiences), 200
 
     # Convert Image? 
@@ -92,6 +92,8 @@ def deleteExperience(id):
     
 
     # Verify that current owner is the owner of the experience before deleting it
+
+    # Delete image associated with Experience
 
     # If this experience is included in Trips delete it from Trips
     pass

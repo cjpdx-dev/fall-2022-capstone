@@ -21,7 +21,9 @@ struct ExperienceDetailView: View {
                         if let image = phase.image {
                             image
                                 .resizable()
-                                .scaledToFit()
+                                .scaledToFill()
+                                .frame(width: .infinity, height: 250)
+                                .clipped()
                         } else if phase.error != nil {
                             Text("There was an error loading the image.")
                         } else {
@@ -35,7 +37,7 @@ struct ExperienceDetailView: View {
                             .font(.system(size: 30))
                     }
                 
-                VStack(spacing: 20) {
+                VStack(alignment: .leading, spacing: 20) {
                     // Title
                     HStack() {
                         Text(experience.title)

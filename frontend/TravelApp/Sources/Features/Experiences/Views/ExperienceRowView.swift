@@ -18,6 +18,8 @@ struct ExperienceRowView: View {
                         image
                             .resizable()
                             .scaledToFit()
+                            .frame(width: 50, height: 50)
+                            .clipped()
                     } else if phase.error != nil {
                         Text("There was an error loading the image.")
                     } else {
@@ -25,11 +27,11 @@ struct ExperienceRowView: View {
                     }
                 }
                 .frame(width: 50, height: 50)
-            VStack {
+            VStack(alignment: .leading) {
                 Text(experience.title)
                     .font(.headline)
                 
-                Text("California")
+                Text(experience.state)
                     .font(.subheadline)
             }
             Spacer()
@@ -39,8 +41,8 @@ struct ExperienceRowView: View {
 
 #Preview {
     Group {
-//        ExperienceRowView(experience: experiences[0])
-//        ExperienceRowView(experience: experiences[1])
+        ExperienceRowView(experience: experiences[0])
+        ExperienceRowView(experience: experiences[1])
     }
    
 }
