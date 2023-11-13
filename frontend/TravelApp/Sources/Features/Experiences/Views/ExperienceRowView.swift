@@ -12,8 +12,18 @@ struct ExperienceRowView: View {
     
     var body: some View {
         HStack() {
-            experience.image
-                .resizable()
+//            experience.image
+            AsyncImage(url: URL(string: experience.imageUrl)) { phase in
+                    if let image = phase.image {
+                        image
+                            .resizable()
+                            .scaledToFit()
+                    } else if phase.error != nil {
+                        Text("There was an error loading the image.")
+                    } else {
+                        ProgressView()
+                    }
+                }
                 .frame(width: 50, height: 50)
             VStack {
                 Text(experience.title)
@@ -29,8 +39,8 @@ struct ExperienceRowView: View {
 
 #Preview {
     Group {
-        ExperienceRowView(experience: experiences[0])
-        ExperienceRowView(experience: experiences[1])
+//        ExperienceRowView(experience: experiences[0])
+//        ExperienceRowView(experience: experiences[1])
     }
    
 }

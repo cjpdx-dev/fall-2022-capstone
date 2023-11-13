@@ -3,26 +3,22 @@
         "title": "Disney Land",
         "city": "Anaheim",
         "state": "California",
-        "id": 1001,
+        "id": "1001",
         "rating": 4,
-        "coordinates": {
-            "longitude": -116.166868,
-            "latitude": 34.011286
-        },
+        "date": 720629580,
         "description": "I have always dreamed of going to Disney, and now all of my dreams came true! I have always dreamed of going to Disney, and now all of my dreams came true! I have always dreamed of going to Disney, and now all of my dreams came true! I have always dreamed of going to Disney, and now all of my dreams came true! I have always dreamed of going to Disney, and now all of my dreams came true! I have always dreamed of going to Disney, and now all of my dreams came true! I have always dreamed of going to Disney, and now all of my dreams came true! I have always dreamed of going to Disney, and now all of my dreams came true! I have always dreamed of going to Disney, and now all of my dreams came true! I have always dreamed of going to Disney, and now all of my dreams came true! I have always dreamed of going to Disney, and now all of my dreams came true! I have always dreamed of going to Disney, and now all of my dreams came true! I have always dreamed of going to Disney, and now all of my dreams came true! I have always dreamed of going to Disney, and now all of my dreams came true! I have always dreamed of going to Disney, and now all of my dreams came true! I have always dreamed of going to Disney, and now all of my dreams came true! I have always dreamed of going to Disney, and now all of my dreams came true!",
-        "imageName": "chilkoottrail"
-    }, 
+        "imageUrl": "https://www.googleapis.com/storage/v1/b/fall-2023-capstone.appspot.com/o/9261F5E7.jpg",
+        "keywords": ["Disney", "California", "Fun"]
+    },
     {
         "title": "Grand Canyon",
         "city": "Phoenix",
         "state": "Arizona",
-        "id": 1002,
+        "id": "1002",
         "rating": 5,
-        "coordinates": {
-            "longitude": 112.3535,
-            "latitude": 36.2679
-        },
+        "date": 721235640,
         "description": "I had a very fun time going to the Grand Canyon today. It is so much more beautiful in person!",
-        "imageName": "charleyrivers"
+        "imageUrl": "https://www.googleapis.com/storage/v1/b/fall-2023-capstone.appspot.com/o/B3F584F6.jpg",
+        "keywords": ["Canyon", "Arizona", "Grand"]
     },
 ]

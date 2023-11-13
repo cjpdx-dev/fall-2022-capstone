@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ExperienceListView: View {
     @State private var searchText: String = ""
+    @State private var experienceData = ExperienceData()
     var experiences: [Experience]
     var body: some View {
         NavigationStack {

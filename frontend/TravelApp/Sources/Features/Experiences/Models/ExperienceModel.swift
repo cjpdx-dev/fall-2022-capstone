@@ -12,18 +12,24 @@ import CoreLocation
 
 struct Experience: Hashable, Codable, Identifiable{
 
-    var id: Int
+    var id: String
     var title: String
     var description: String
     var rating: Int
-//    private var imageURL: String
-    
-    private var coordinates: Coordinates
-    var locationCoordinate: CLLocationCoordinate2D {
-            CLLocationCoordinate2D(
-                latitude: coordinates.latitude,
-                longitude: coordinates.longitude)
-        }
+    var keywords: [String]
+    var date: Int
+    var city: String
+    var state: String
+    var imageUrl: String
+//    var image: AsyncImage {
+//        AsyncImage(url: imageURL)
+//    }
+//    private var coordinates: Coordinates
+//    var locationCoordinate: CLLocationCoordinate2D {
+//            CLLocationCoordinate2D(
+//                latitude: coordinates.latitude,
+//                longitude: coordinates.longitude)
+//    }
     
 //    AsyncImage(url: URL(string: "http://localhost:5000/")) { phase in
 //        if let image = phase.image {
@@ -37,15 +43,11 @@ struct Experience: Hashable, Codable, Identifiable{
 //        }
 //    }
 //    .frame(width: 200, height: 200)
-    private var imageName: String
-        var image: Image {
-            Image(imageName)
-        }
+//    private var imageName: String
+        
     
-    struct Coordinates: Hashable, Codable {
-        var longitude: Double
-        var latitude: Double
-    }
-    
-    
+//    struct Coordinates: Hashable, Codable {
+//        var longitude: Double
+//        var latitude: Double
+//    }
 }

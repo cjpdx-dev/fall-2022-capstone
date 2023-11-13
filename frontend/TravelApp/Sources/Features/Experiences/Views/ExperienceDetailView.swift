@@ -15,26 +15,25 @@ struct ExperienceDetailView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 12) {
                 //Image
-                experience.image
-                    .resizable()
-//                AsyncImage(url: URL(string: "http://localhost:5000/")) { phase in
-                //        if let image = phase.image {
-                //            image
-                //                .resizable()
-                //                .scaledToFit()
-                //        } else if phase.error != nil {
-                //            Text("There was an error loading the image.")
-                //        } else {
-                //            ProgressView()
-                //        }
-                //    }
-                    
-//                    .frame(width: .infinity, height: 250)
-    //                .overlay(alignment: .bottomTrailing) {
-    //                    Image(systemName: "pencil.circle.fill")
-    //                        .symbolRenderingMode(.multicolor)
-    //                        .font(.system(size: 30))
-    //                }
+//                experience.image
+//                    .resizable()
+                AsyncImage(url: URL(string: experience.imageUrl)) { phase in
+                        if let image = phase.image {
+                            image
+                                .resizable()
+                                .scaledToFit()
+                        } else if phase.error != nil {
+                            Text("There was an error loading the image.")
+                        } else {
+                            ProgressView()
+                        }
+                    }
+                    .frame(width: .infinity, height: 250)
+                    .overlay(alignment: .bottomTrailing) {
+                        Image(systemName: "pencil.circle.fill")
+                            .symbolRenderingMode(.multicolor)
+                            .font(.system(size: 30))
+                    }
                 
                 VStack(spacing: 20) {
                     // Title
@@ -52,7 +51,7 @@ struct ExperienceDetailView: View {
                    
                     HStack {
                         // Location
-                        Text("Alexandria, Virginia")
+                        Text("\(experience.city), \(experience.state)")
                             .fontWeight(.semibold)
                         Spacer()
                         // Date
