@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct TripScreen: View {
-    var trips: [Trip]
     var body: some View {
         NavigationView{
             TripListView(trips: trips)
@@ -17,6 +16,5 @@ struct TripScreen: View {
 }
 
 #Preview {
-    TripScreen(trips: trips)
+    TripScreen()
 }
-

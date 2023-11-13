@@ -11,8 +11,11 @@ import SwiftUI
 struct TravelAppApp: App {
     var body: some Scene {
         WindowGroup {
-            var mockExperiences: [Experience] = load("experienceData.json")
-            ExperienceScreen(experiences: mockExperiences)
+            HomeScreen(experiences: experiences)
         }
     }
+}
+
+#Preview {
+    HomeScreen(experiences:experiences)
 }

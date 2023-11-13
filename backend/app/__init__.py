@@ -20,6 +20,7 @@ def create_app():
     abs_cred_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                  'firestore_sa.json')
 
+    print(abs_cred_path + "HERRRREEEE")
     cred = credentials.Certificate(abs_cred_path)
     initialize_app(cred)
 

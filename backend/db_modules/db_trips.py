@@ -18,8 +18,6 @@ def get_trip_by_id(db, id):
 
 def create_trip(db, trip_data):
     """Create a new trip with the provided trip data."""
-    if 'name' not in trip_data:
-        raise ValueError("Missing required field: 'name'")
     trip_ref = db.collection('trips').document()
     trip_ref.set(trip_data)
     return trip_ref.id
@@ -27,13 +25,9 @@ def create_trip(db, trip_data):
 
 def update_trip(db, id, trip_data):
     """Update an existing trip's information identified by its ID."""
-    if 'name' not in trip_data:
-        raise ValueError("Missing required field: 'name'")
     trip_ref = db.collection('trips').document(id)
     trip = trip_ref.get()
     if trip.exists:
-        if 'name' in trip_data and not trip_data['name'].strip():
-            raise ValueError("Trip name cannot be empty.")
         trip_ref.update(trip_data)
         return {**trip.to_dict(), "id": trip.id}
     else:

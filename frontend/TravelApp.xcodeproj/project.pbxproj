@@ -21,6 +21,7 @@
 		497BEA2C58D34F54EB9F5ECE /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A7C447EA6112D845BC3454 /* LoginScreen.swift */; };
 		498F83F7795DBEE4C06A5371 /* tripData.json in Resources */ = {isa = PBXBuildFile; fileRef = D190F65C15812A2F495B444B /* tripData.json */; };
 		5C2F63BE28CB2FD012A40A90 /* ExperienceRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0343C56107F6F6720659ED79 /* ExperienceRowView.swift */; };
+		6B46749F4103D4096FCDE6F4 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7622A71E0FB9F0E4E9E6B015 /* HomeScreen.swift */; };
 		6FCC42DA7241001F3D86AE5F /* CreateExperienceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE6700111616526A2E307C2 /* CreateExperienceScreen.swift */; };
 		7FA764590352008ED0831363 /* ExperienceData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23425608173FC1326AC2191 /* ExperienceData.swift */; };
 		81398C722F15B983E2FD5C7B /* EmailLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C222785BF56A1AB98F29DE /* EmailLoginButton.swift */; };
@@ -42,6 +43,7 @@
 		DE977DFE6C487B6422B10004 /* TripRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E821D3B1667E463D64FB427 /* TripRowView.swift */; };
 		DF4A699B1AE687D7B7F88FB2 /* ExperienceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E40298543BA64025B47813 /* ExperienceListView.swift */; };
 		E3644FE400FA1CE4624CFD4C /* AuthScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC07E368F0F867D0180F5BC /* AuthScreen.swift */; };
+		E9FA83551A5F82833739550E /* TripsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567757511A0F41581ADB0E10 /* TripsAPI.swift */; };
 		EBC8180BDCCFF809CA0EDE47 /* ExperienceDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C6C61CE52E91680DC8FD29 /* ExperienceDetailView.swift */; };
 		ED2EA6C497A15DB7E4AB0CB8 /* SettingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6CFD9A2B0B7DA2ADF04008 /* SettingItem.swift */; };
 		EEA26799CF3BECB6E842288A /* UserProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AAF7D4223CDF00004221E8 /* UserProfileModel.swift */; };
@@ -64,11 +66,13 @@
 		51C222785BF56A1AB98F29DE /* EmailLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailLoginButton.swift; sourceTree = "<group>"; };
 		52E40298543BA64025B47813 /* ExperienceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceListView.swift; sourceTree = "<group>"; };
 		55FB61922BBF7AB6A9A3C286 /* CreateInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateInputView.swift; sourceTree = "<group>"; };
+		567757511A0F41581ADB0E10 /* TripsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripsAPI.swift; sourceTree = "<group>"; };
 		568FDC78B4D15FF7C7F7FC40 /* ExperienceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceModel.swift; sourceTree = "<group>"; };
 		5EE6700111616526A2E307C2 /* CreateExperienceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateExperienceScreen.swift; sourceTree = "<group>"; };
 		5F9B01902882FCB25FC03979 /* CreateTripScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTripScreen.swift; sourceTree = "<group>"; };
 		6AF96D93D6199115B31AA788 /* TripDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailView.swift; sourceTree = "<group>"; };
 		6BEFF13BAA9545C59AF87635 /* TripExperienceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripExperienceView.swift; sourceTree = "<group>"; };
+		7622A71E0FB9F0E4E9E6B015 /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
 		76CFBFA55C726955B80ACC89 /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
 		8532B77B2E46F5542BD7CA1E /* ToggleSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleSettingView.swift; sourceTree = "<group>"; };
 		8AC07E368F0F867D0180F5BC /* AuthScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthScreen.swift; sourceTree = "<group>"; };
@@ -114,6 +118,7 @@
 		1AB2121369B4F001439D074E /* Trips */ = {
 			isa = PBXGroup;
 			children = (
+				567757511A0F41581ADB0E10 /* TripsAPI.swift */,
 				904BC473B7B57955F5FE1DF7 /* Models */,
 				3EB1AFCFB4F794FA471F31E1 /* Screens */,
 				15C8EBD954F9BB5E81BC2F2E /* Views */,
@@ -216,6 +221,7 @@
 			isa = PBXGroup;
 			children = (
 				D907B91574F62840491F783B /* Assets.xcassets */,
+				7622A71E0FB9F0E4E9E6B015 /* HomeScreen.swift */,
 				15B7C7BAE8C96ABB143BB3D9 /* TravelApp.swift */,
 				143E34DEF25C544BCFD34F18 /* Auth */,
 				A94F47FBF4E1698FEFA3EA91 /* Experiences */,
@@ -383,6 +389,7 @@
 				5C2F63BE28CB2FD012A40A90 /* ExperienceRowView.swift in Sources */,
 				05AC9AC9C0404F1A323BDED9 /* ExperienceScreen.swift in Sources */,
 				871A7D2D747F9BC47EB0A5D8 /* GoogleLoginButton.swift in Sources */,
+				6B46749F4103D4096FCDE6F4 /* HomeScreen.swift in Sources */,
 				CB06926BE948D1AB7B10759C /* LoginInputView.swift in Sources */,
 				497BEA2C58D34F54EB9F5ECE /* LoginScreen.swift in Sources */,
 				1D5201E4D33CBCCDF48404EC /* PublicProfileScreen.swift in Sources */,
@@ -400,6 +407,7 @@
 				B2486AC6B09E6AD083086D2D /* TripModel.swift in Sources */,
 				DE977DFE6C487B6422B10004 /* TripRowView.swift in Sources */,
 				9A809F9ED3335DDA3E2562FB /* TripScreen.swift in Sources */,
+				E9FA83551A5F82833739550E /* TripsAPI.swift in Sources */,
 				EEA26799CF3BECB6E842288A /* UserProfileModel.swift in Sources */,
 				231607B0B203F7CE505AF195 /* UserProfileScreen.swift in Sources */,
 				8148707FFDC7442684748261 /* UserProfile_HeaderView.swift in Sources */,

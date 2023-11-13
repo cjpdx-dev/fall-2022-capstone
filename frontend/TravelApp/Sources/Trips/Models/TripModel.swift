@@ -8,19 +8,20 @@
 import Foundation
 import SwiftUI
 
-struct DatedExperience: Hashable, Codable {
-    var experience: String
-    var date: Date
-}
+//struct DatedExperience: Hashable, Codable {
+//    var experience: String
+//    var date: Date
+//}
 
 struct Trip: Hashable, Codable, Identifiable {
     
-    var id: Int
+    var id: String
     var name: String
     var description: String
     var startDate: Date
     var endDate: Date
-    var experiences: [DatedExperience]
+    var user: String
+//    var experiences: [Experience]
     
     var formattedDateRange: String {
         let formatter = DateFormatter()
