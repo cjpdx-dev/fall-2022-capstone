@@ -67,5 +67,3 @@ func sendIdentityTokenToServer(identityToken: String) {
         }
         
     }
-    
-}

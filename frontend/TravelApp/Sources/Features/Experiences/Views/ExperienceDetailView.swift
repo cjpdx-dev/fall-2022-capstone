@@ -15,17 +15,29 @@ struct ExperienceDetailView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 12) {
                 //Image
-                experience.image
-                    .resizable()
-                    
+//                experience.image
+//                    .resizable()
+                AsyncImage(url: URL(string: experience.imageUrl)) { phase in
+                        if let image = phase.image {
+                            image
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: .infinity, height: 250)
+                                .clipped()
+                        } else if phase.error != nil {
+                            Text("There was an error loading the image.")
+                        } else {
+                            ProgressView()
+                        }
+                    }
                     .frame(width: .infinity, height: 250)
-    //                .overlay(alignment: .bottomTrailing) {
-    //                    Image(systemName: "pencil.circle.fill")
-    //                        .symbolRenderingMode(.multicolor)
-    //                        .font(.system(size: 30))
-    //                }
+                    .overlay(alignment: .bottomTrailing) {
+                        Image(systemName: "pencil.circle.fill")
+                            .symbolRenderingMode(.multicolor)
+                            .font(.system(size: 30))
+                    }
                 
-                VStack(spacing: 20) {
+                VStack(alignment: .leading, spacing: 20) {
                     // Title
                     HStack() {
                         Text(experience.title)
@@ -35,13 +47,13 @@ struct ExperienceDetailView: View {
                         HStack{
                             Image(systemName: "star.fill")
                                 .symbolRenderingMode(.multicolor)
-                            Text("\(experience.rating)/10")
+                            Text("\(experience.rating)/5")
                         }
                     }
                    
                     HStack {
                         // Location
-                        Text("Alexandria, Virginia")
+                        Text("\(experience.city), \(experience.state)")
                             .fontWeight(.semibold)
                         Spacer()
                         // Date
