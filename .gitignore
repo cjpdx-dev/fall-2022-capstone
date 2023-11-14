@@ -1,6 +1,11 @@
 # Created by https://www.toptal.com/developers/gitignore/api/xcode,swift,flask,python
 # Edit at https://www.toptal.com/developers/gitignore?templates=xcode,swift,flask,python
 
+
+TravelApp/Sources/.DS_Store
+*/.DS_Store
+*.DS_Store
+
 ### Flask ###
 instance/*
 !instance/.gitignore
@@ -347,6 +352,7 @@ iOSInjectionProject/
 ## Xcode 8 and earlier
 
 ### Xcode Patch ###
+.DS_Store
 TravelApp.xcodeproj/
 *.xcodeproj/*
 !*.xcodeproj/project.pbxproj
