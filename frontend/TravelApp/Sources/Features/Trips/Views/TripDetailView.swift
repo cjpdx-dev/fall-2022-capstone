@@ -11,15 +11,15 @@ struct TripDetailView: View {
     var trip: Trip
     
     // Map dates to experiences
-    private func experiencesByDate() -> [Date: [DatedExperience]] {
-        var experiencesByDate = [Date: [DatedExperience]]()
-        
-        for experience in trip.experiences {
-            experiencesByDate[experience.date, default: []].append(experience)
-        }
-        
-        return experiencesByDate
-    }
+//    private func experiencesByDate() -> [Date: [DatedExperience]] {
+//        var experiencesByDate = [Date: [DatedExperience]]()
+//        
+//        for experience in trip.experiences {
+//            experiencesByDate[experience.date, default: []].append(experience)
+//        }
+//        
+//        return experiencesByDate
+//    }
     
     var body: some View {
         ScrollView {
@@ -41,7 +41,7 @@ struct TripDetailView: View {
                     Image("user")
                         .resizable()
                         .frame(width: 15, height:15)
-                    Text("John Doe") //User name will go here
+                    Text(trip.user) //User name will go here
                         .font(.footnote)
                 }
 
@@ -61,19 +61,19 @@ struct TripDetailView: View {
                 Divider()
                 
                 // Iterate over the dates and display experiences for each date
-                let sortedDates = experiencesByDate().keys.sorted()
-                ForEach(sortedDates, id: \.self) { date in
-                    VStack(alignment: .leading) {
-                        Text(date, style: .date)
-                            .font(.headline)
-                            .padding(.vertical, 2)
-                        
-                        ForEach(experiencesByDate()[date] ?? [], id: \.self) { datedExperience in
-                            TripExperienceView(datedExperience: datedExperience)
-                        }
-                        Spacer(minLength: 20)
-                    }
-                }
+//                let sortedDates = experiencesByDate().keys.sorted()
+//                ForEach(sortedDates, id: \.self) { date in
+//                    VStack(alignment: .leading) {
+//                        Text(date, style: .date)
+//                            .font(.headline)
+//                            .padding(.vertical, 2)
+//                        
+//                        ForEach(experiencesByDate()[date] ?? [], id: \.self) { datedExperience in
+//                            TripExperienceView(datedExperience: datedExperience)
+//                        }
+//                        Spacer(minLength: 20)
+//                    }
+//                }
             }
             .padding()
         }
@@ -81,5 +81,5 @@ struct TripDetailView: View {
 }
 
 #Preview {
-    TripDetailView(trip: trips[0])
+    TripDetailView(trip: Trip(id: "1234", name: "Sample Trip", description: "Description", startDate: Date(), endDate: Date(), user: "Sample User"))
 }

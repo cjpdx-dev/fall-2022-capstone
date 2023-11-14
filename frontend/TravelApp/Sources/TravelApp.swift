@@ -11,8 +11,11 @@ import SwiftUI
 struct TravelAppApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
-            
+            HomeScreen(experiences: experiences)
         }
     }
+}
+
+#Preview {
+    HomeScreen(experiences:experiences)
 }
