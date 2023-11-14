@@ -16,7 +16,7 @@ struct HomeScreen: View {
                     Label("Experiences", systemImage: "book.closed")
                 }
             
-            TripScreen(trips: trips)
+            TripScreen()
                 .tabItem {
                     Label("Trips", systemImage: "car")
                 }

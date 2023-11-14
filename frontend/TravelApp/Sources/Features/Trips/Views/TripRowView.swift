@@ -19,7 +19,8 @@ struct TripRowView: View {
                 Text(trip.name)
                     .font(.headline)
                 
-                Text(trip.formattedDateRange)
+//                Text(trip.formattedDateRange)
+                Text(trip.user)
                     .font(.subheadline)
             }
             Spacer()
@@ -29,8 +30,7 @@ struct TripRowView: View {
 
 #Preview {
     Group {
-        TripRowView(trip: trips[0])
-        TripRowView(trip: trips[1])
+        TripRowView(trip: Trip(id: "1234", name: "Sample Trip", description: "Description", startDate: Date(), endDate: Date(), user: "Sample User"))
     }
    
 }
