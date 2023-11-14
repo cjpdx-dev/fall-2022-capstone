@@ -357,3 +357,6 @@ TravelApp.xcodeproj/
 **/xcshareddata/WorkspaceSettings.xcsettings
 
 # End of https://www.toptal.com/developers/gitignore/api/xcode,swift,flask,python
+
+.DS_Store
+firestore_sa.json
