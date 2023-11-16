@@ -67,34 +67,92 @@ def get_experiences():
 
 
 
-@experience_bp.route('/update/<int:id>', methods=["PATCH", "POST"])
+@experience_bp.route('/<int:id>', methods=["PATCH", "POST"])
 def updateExperience(id):
      # Authenticate User ----- TODO --------------
 
-    db = current_app.config['db']
-
-    # Verify that Experience exists
-    if not db_experiences.experience_exists(db, id):
+    # Make sure that the Experience exists
+    old_experience = db_experiences.get_experience_by_id(db, id)
+    print(old_experience)
+    if  not old_experience:
         return jsonify({"message": "Experience not found"}), 404
 
-    # Verify that current owner is the owner of the experience before updating it
+    # Make sure that the user is the owner of the experience
+
+    # Convert string JSON to JSON
+    updated_experience = json.loads(request.form['experience'])
+
+    storage_client = current_app.config['storage']
+    bucket = storage_client.bucket('fall-2023-capstone.appspot.com')
+    new_image_file = request.files['image']
+    new_image_file_name = new_image_file.filename
+    blob = bucket.get_blob(new_image_file_name)
+    # Check if image changed - if so, delete the old image and store the new one
+    if not blob:
+        # Delete the old image
+        # Optional: set a generation-match precondition to avoid potential race conditions
+        # and data corruptions. The request to delete is aborted if the object's
+        # generation number does not match your precondition.
+        
+        old_image_file_name = old_experience["imageUrl"].split('/')[-1]
+        blob = bucket.get_blob(old_image_file_name)
+        generation_match_precondition = None
+        blob.reload()  # Fetch blob metadata to use in generation_match_precondition.
+        generation_match_precondition = blob.generation
+        blob.delete(if_generation_match=generation_match_precondition)
+
+        # Create new blob
+        blob = bucket.blob(new_image_file_name)
+        blob.upload_from_file(new_image_file)
+        blob.make_public()
+        updated_experience["imageUrl"] = blob.public_url
+        pass
+
     
-    # If this experience is included in Trips, update it
+    # Update Experience in the the database
+    db = current_app.config['db']
+    updated_experience = db_experiences.update_experience(db, updated_experience.id, updated_experience)
+    if updated_experience:
+        print(updated_experience)
+        return updated_experience, 200
+    else:
+        print("Failed to update the experience")
+        return jsonify({"message": "Experience not found"})
    
 
-@experience_bp.route('/delete/<int:id>')
+@experience_bp.route('/<id>', methods=["DELETE"])
 def deleteExperience(id):
-
     db = current_app.config['db']
-    # Verify that the Experience exists
-    if not db_experiences.experience_exists(db, id):
-        return jsonify({"message": "Experience not found"}), 404
     
+    # Verify that the Experience exists
+    experience = db_experiences.get_experience_by_id(db, id)
+    print(experience)
+    if  not experience:
+        return jsonify({"message": "Experience not found"}), 404
 
+    
     # Verify that current owner is the owner of the experience before deleting it
 
     # Delete image associated with Experience
+    blob_name = experience['imageUrl'].split('/')[-1]
+    storage_client = current_app.config['storage']
+    bucket = storage_client.bucket('fall-2023-capstone.appspot.com')
+    blob = bucket.blob(blob_name)
+    generation_match_precondition = None
 
-    # If this experience is included in Trips delete it from Trips
-    pass
+    # Optional: set a generation-match precondition to avoid potential race conditions
+    # and data corruptions. The request to delete is aborted if the object's
+    # generation number does not match your precondition.
+    blob.reload()  # Fetch blob metadata to use in generation_match_precondition.
+    generation_match_precondition = blob.generation
+    blob.delete(if_generation_match=generation_match_precondition)
+
+    # Delete the Experience
+    if db_experiences.delete_experience(db, id):
+        print('Experience Deleted')
+        return jsonify({"message": "Experience deleted"}), 204
+    else:
+        print('Experience could not be deleted')
+        jsonify({"message": "Experience could not be deleted"}), 404
+   
 

@@ -8,6 +8,12 @@ def get_experiences(db):
     experiences = [{**doc.to_dict(), "id": doc.id} for doc in docs]  # returns a list of dictionaries
     return experiences
 
+def get_experience_by_id(db, id):
+    experience_ref = db.collection('experiences').document(id)
+    experience = experience_ref.get()
+    if experience.exists:
+        return {**experience.to_dict(), "id": experience.id}
+
 def experience_exists(db, id):
     experience_ref = db.collection('experiences').document(id)
     experience = experience_ref.get()
