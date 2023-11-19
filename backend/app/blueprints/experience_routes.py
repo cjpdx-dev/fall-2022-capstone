@@ -6,7 +6,7 @@ from firebase_admin.auth import RevokedIdTokenError, InvalidIdTokenError
 
 experience_bp = Blueprint('experience', __name__)
 
-@experience_bp.route('/create', methods=["POST"])
+@experience_bp.route('/', methods=["POST"])
 def createExperience():
     # Authenticate User ----- TODO --------------
 
@@ -35,7 +35,7 @@ def createExperience():
     return experience
 
 
-@experience_bp.route('/')
+@experience_bp.route('/', methods=["GET"])
 def get_experiences():
     # Authenticate User ----- TODO --------------
     # auth_header = request.headers.get('Authorization')
@@ -67,13 +67,12 @@ def get_experiences():
 
 
 
-@experience_bp.route('/<int:id>', methods=["PATCH", "POST"])
+@experience_bp.route('/<id>', methods=["POST"])
 def updateExperience(id):
      # Authenticate User ----- TODO --------------
-
+    db = current_app.config['db']
     # Make sure that the Experience exists
     old_experience = db_experiences.get_experience_by_id(db, id)
-    print(old_experience)
     if  not old_experience:
         return jsonify({"message": "Experience not found"}), 404
 
@@ -82,17 +81,19 @@ def updateExperience(id):
     # Convert string JSON to JSON
     updated_experience = json.loads(request.form['experience'])
 
-    storage_client = current_app.config['storage']
-    bucket = storage_client.bucket('fall-2023-capstone.appspot.com')
-    new_image_file = request.files['image']
-    new_image_file_name = new_image_file.filename
-    blob = bucket.get_blob(new_image_file_name)
+    # Check a file was sent, then a new image was chosen
+    new_image_file = request.files.get('image')
+    
+    
+    
     # Check if image changed - if so, delete the old image and store the new one
-    if not blob:
+    if new_image_file:
         # Delete the old image
         # Optional: set a generation-match precondition to avoid potential race conditions
         # and data corruptions. The request to delete is aborted if the object's
         # generation number does not match your precondition.
+        storage_client = current_app.config['storage']
+        bucket = storage_client.bucket('fall-2023-capstone.appspot.com')
         
         old_image_file_name = old_experience["imageUrl"].split('/')[-1]
         blob = bucket.get_blob(old_image_file_name)
@@ -102,16 +103,18 @@ def updateExperience(id):
         blob.delete(if_generation_match=generation_match_precondition)
 
         # Create new blob
+        new_image_file_name = new_image_file.filename
         blob = bucket.blob(new_image_file_name)
         blob.upload_from_file(new_image_file)
         blob.make_public()
         updated_experience["imageUrl"] = blob.public_url
-        pass
 
     
     # Update Experience in the the database
     db = current_app.config['db']
-    updated_experience = db_experiences.update_experience(db, updated_experience.id, updated_experience)
+    temp_id = updated_experience["id"]
+    del updated_experience["id"]
+    updated_experience = db_experiences.update_experience(db, temp_id, updated_experience)
     if updated_experience:
         print(updated_experience)
         return updated_experience, 200

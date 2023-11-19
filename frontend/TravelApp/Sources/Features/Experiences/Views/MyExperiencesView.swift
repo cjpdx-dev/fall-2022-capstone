@@ -38,6 +38,7 @@ struct MyExperiencesView: View {
                     }
                     .onDelete(perform: deleteExperience)
                     
+                    
                 }
                 .navigationTitle("My Experiences")
                 .listStyle(.plain)

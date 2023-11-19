@@ -27,6 +27,7 @@ def update_experience(db, id, data):
     experience = experience_ref.get()
     if experience.exists:
         experience_ref.update(data)
+        experience = experience_ref.get()
         return {**experience.to_dict(), "id": experience.id}
     else:
         return None
