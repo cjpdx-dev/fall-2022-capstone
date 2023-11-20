@@ -8,21 +8,39 @@
 import Foundation
 import SwiftUI
 
+enum HTTPMethod: String {
+    case get = "GET"
+    case post = "POST"
+    case put = "PUT"
+    case delete = "DELETE"
+}
+
 class ExperienceAPI {
     
     public let boundary: String = "Boundary-\(UUID().uuidString)"
-    private let createUrl: URL = URL(string: "http://127.0.0.1:5000/experiences/create")!
+    private let developmentUrl: URL = URL(string: "http://127.0.0.1:5000/experiences/")!
+    private var productionUrl: URL = URL(string: "https://fall-2023-capstone.wl.r.appspot.com/experiences")!
     
-    public func generateRequest(httpBody: Data) -> URLRequest {
-        var request = URLRequest(url: self.createUrl)
-        request.httpMethod = "POST"
+    public func generateCreateRequest(httpBody: Data, httpMethod: HTTPMethod) -> URLRequest {
+        var request = URLRequest(url: self.developmentUrl)
+        request.httpMethod = httpMethod.rawValue
+        request.httpBody = httpBody
+        request.setValue("multipart/form-data; boundary=" + self.boundary, forHTTPHeaderField: "Content-Type")
+        return request
+    }
+    
+    public func generateUpdateRequest(httpBody: Data, httpMethod: HTTPMethod, id: String) -> URLRequest {
+        let urlString = "http://127.0.0.1:5000/experiences/\(id)"
+        let updateUrl = URL(string: urlString)
+        var request = URLRequest(url: updateUrl!)
+        request.httpMethod = httpMethod.rawValue
         request.httpBody = httpBody
         request.setValue("multipart/form-data; boundary=" + self.boundary, forHTTPHeaderField: "Content-Type")
         return request
     }
     
     
-    public func multipartFormDataBody(_ objName: String, _ obj: NewExperience, _ image: UIImage) -> Data {
+    public func multipartFormDataBodyNewExperience(_ objName: String, _ obj: NewExperience, _ image: UIImage) -> Data {
             
         let lineBreak = "\r\n"
         var body = Data()
@@ -53,4 +71,64 @@ class ExperienceAPI {
         body.append("--\(self.boundary)--") // End multipart form and return
         return body
     }
+    
+    public func multipartFormDataBodyUpdateExperience(_ objName: String, _ obj: Experience, _ image: UIImage?) -> Data {
+            
+        let lineBreak = "\r\n"
+        var body = Data()
+        let encoder = JSONEncoder()
+        guard let bodyData = try? encoder.encode(obj) else {
+            print("Error")
+            return Data()
+        }
+        
+        // Append the NewExperience object to the form
+        body.append("--\(self.boundary + lineBreak)")
+        body.append("Content-Disposition: form-data; name=\"\(objName)\"\(lineBreak)")
+        body.append("Content-Type: application/json\(lineBreak + lineBreak)")
+        body.append(bodyData)
+        body.append("\(lineBreak)")
+        
+        if image != nil {
+            // Append the image data to the form
+            if let uuid = UUID().uuidString.components(separatedBy: "-").first {
+                body.append("--\(self.boundary + lineBreak)")
+                body.append("Content-Disposition: form-data; name=\"image\"; filename=\"\(uuid).jpg\"\(lineBreak)")
+                body.append("Content-Type: image/jpeg\(lineBreak + lineBreak)")
+                body.append(image!.jpegData(compressionQuality: 0.99)!)
+                body.append(lineBreak)
+            }
+        }
+        
+        body.append("--\(self.boundary)--") // End multipart form and return
+        return body
+    }
+    
+    func deleteExperience(id: String) {
+        guard let url = URL(string: "\(self.developmentUrl)\(id)") else {fatalError("Missing URL")}
+        
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = "DELETE"
+        let dataTask = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+            if let error = error {
+                print("Request error: ", error)
+                return
+            }
+            guard let response = response as? HTTPURLResponse else {return}
+            
+            if response.statusCode == 204 {
+                print("Experience deleted successfully")
+            }
+            else {
+                print("Couldn't delete Experience")
+            }
+        }
+        dataTask.resume()
+    }
+    
+//    func updateExperience(id: String, experience: Experience) {
+//        guard let url = URL(string: "\(self.developmentUrl)\(id)") else {fatalError("Missing URL")}
+//        
+//        var urlRequest =
+//    }
 }

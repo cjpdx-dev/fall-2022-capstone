@@ -23,7 +23,7 @@ struct CreateInputView: View {
             if (isLongText) {
                 TextEditor(text: $text)
                     .font(.system(size: 14))
-                    .frame(maxHeight: 100)
+                    .frame(height: 100)
                     .border(Color(.darkGray))
             } else {
                 TextField(placeholder, text: $text)
