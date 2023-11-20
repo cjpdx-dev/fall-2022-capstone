@@ -100,4 +100,24 @@ class TripsAPI {
             completion(false)
         }
     }
+    
+    // DELETE Trip
+    func deleteTrip(tripId: String, completion: @escaping (Bool) -> Void) {
+        let url = URL(string: "\(baseURL)/\(tripId)")!
+        var request = URLRequest(url:url)
+        request.httpMethod = "DELETE"
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Network error: \(error)")
+                completion(false)
+                return
+            }
+            if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
+                completion(true)
+            } else {
+                completion(false)
+            }
+        }.resume()
+    }
 }

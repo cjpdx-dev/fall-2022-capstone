@@ -46,7 +46,7 @@ struct TripEditView: View {
                         .padding(.horizontal, 5)
                     }
                 }
-                .navigationBarTitle("Create Trip", displayMode: .inline)
+                .navigationBarTitle("Edit Trip", displayMode: .inline)
                 
                 Spacer()
                 
@@ -89,6 +89,31 @@ struct TripEditView: View {
                     .cornerRadius(10)
                 }
                 .padding()
+                
+                Button(action: {
+                    TripsAPI().deleteTrip(tripId: trip.id ?? "") { success in
+                        DispatchQueue.main.async {
+                            if success {
+                                // Take user back to TripScreen page
+                                dismiss()
+                            } else {
+                                print("Error - Failed to delete trip")
+                            }
+                        }
+                    }
+                }) {
+                    Text("Delete Trip")
+                        .fontWeight(.semibold)
+                        .foregroundColor(.red)
+                }
+                .padding()
+                .frame(width: 120, height: 40)
+                .background(Color.white)
+                .cornerRadius(10)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color.red, lineWidth: 2)
+                )
             }
             .background(Color(UIColor.systemGroupedBackground))
         }

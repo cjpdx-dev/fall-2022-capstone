@@ -7,50 +7,13 @@
 
 import SwiftUI
 
-//struct TripListView: View {
-//    @State private var searchText: String = ""
-//    var trips: [Trip]
-//    var body: some View {
-//        NavigationStack {
-//            List(trips) { trip in
-//                NavigationLink {
-//                    TripDetailView(trip: trip)
-//                } label: {
-//                    TripRowView(trip: trip)
-//                }
-//                
-//            }
-//            .navigationTitle("Trips")
-//            
-//            .toolbar(content: {
-//                NavigationLink {
-//                    CreateTripScreen()
-//                } label: {
-//                    Image(systemName: "plus.circle.fill")
-//                        .font(.system(size: 27))
-//                }
-//                .buttonStyle(PlainButtonStyle())
-//                
-//            })
-//            .searchable(text: $searchText)
-//        }
-//        
-//    }
-//}
-
 struct TripListView: View {
+//    @Binding var selectedTrip: Trip?
     @State private var searchText: String = ""
     @State private var trips: [Trip] = []
 
     var body: some View {
         NavigationStack {
-//            List(trips) { trip in
-//                NavigationLink {
-//                    TripDetailView(trip: trip)
-//                } label: {
-//                    TripRowView(trip: trip)
-//                }
-//            }
             List {
                 ForEach($trips, id: \.id) { $trip in
                     NavigationLink {
@@ -60,6 +23,13 @@ struct TripListView: View {
                     }
                 }
             }
+//            List(trips, id: \.id) { trip in
+//                Button(action: {
+//                    selectedTrip = trip
+//                }) {
+//                    TripRowView(trip: trip)
+//                }
+//            }
             .navigationTitle("Trips")
             .toolbar(content: {
                 NavigationLink {
@@ -73,7 +43,6 @@ struct TripListView: View {
             .searchable(text: $searchText)
             .onAppear {
                 TripsAPI().getTrips { fetchedTrips in
-                    print("Fetched trips:", fetchedTrips)
                     self.trips = fetchedTrips
                 }
             }
