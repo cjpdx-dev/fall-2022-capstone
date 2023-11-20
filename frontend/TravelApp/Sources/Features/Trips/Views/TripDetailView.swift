@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct TripDetailView: View {
-    var trip: Trip
+//    @State private var editedTrip: Trip
+    @Binding var trip: Trip
     
-    // Map dates to experiences
+// Map dates to experiences
 //    private func experiencesByDate() -> [Date: [DatedExperience]] {
 //        var experiencesByDate = [Date: [DatedExperience]]()
 //        
@@ -30,7 +31,8 @@ struct TripDetailView: View {
                     Spacer()
                     // The following edit button should ONLY be visible
                     // if the viewing user is the creator of the trip
-                    NavigationLink(destination: TripEditView(trip: trip)) {
+                    NavigationLink(destination: TripEditView(trip: $trip, onTripUpdated: {
+                    })) {
                                             Image("edit")
                                                 .resizable()
                                                 .frame(width: 24, height: 24)
@@ -41,7 +43,7 @@ struct TripDetailView: View {
                     Image("user")
                         .resizable()
                         .frame(width: 15, height:15)
-                    Text(trip.user) //User name will go here
+                    Text(trip.user ?? "Unknown user")
                         .font(.footnote)
                 }
 
@@ -80,6 +82,14 @@ struct TripDetailView: View {
     }
 }
 
-#Preview {
-    TripDetailView(trip: Trip(id: "1234", name: "Sample Trip", description: "Description", startDate: Date(), endDate: Date(), user: "Sample User"))
+//#Preview {
+//    TripDetailView(trip: Trip(id: "1234", name: "Sample Trip", description: "Description", startDate: Date(), endDate: Date(), user: "Sample User"))
+//}
+
+struct TripDetailView_Previews: PreviewProvider {
+    @State static var previewTrip = Trip(id: "1234", name: "Sample Trip", description: "Description", startDate: Date(), endDate: Date(), user: "Sample User")
+
+    static var previews: some View {
+        TripDetailView(trip: $previewTrip)
+    }
 }

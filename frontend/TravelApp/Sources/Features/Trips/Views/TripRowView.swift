@@ -20,7 +20,7 @@ struct TripRowView: View {
                     .font(.headline)
                 
 //                Text(trip.formattedDateRange)
-                Text(trip.user)
+                Text(trip.user ?? "Unknown user")
                     .font(.subheadline)
             }
             Spacer()
