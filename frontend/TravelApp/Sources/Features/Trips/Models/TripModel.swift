@@ -15,12 +15,12 @@ import SwiftUI
 
 struct Trip: Hashable, Codable, Identifiable {
     
-    var id: String
+    var id: String?
     var name: String
     var description: String
     var startDate: Date
     var endDate: Date
-    var user: String
+    var user: String?
 //    var experiences: [Experience]
     
     var formattedDateRange: String {
