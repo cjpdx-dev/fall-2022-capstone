@@ -31,7 +31,7 @@ struct ExperienceRowView: View {
                 Text(experience.title)
                     .font(.headline)
                 
-                Text(experience.state)
+                Text(experience.location.state)
                     .font(.subheadline)
             }
             Spacer()
