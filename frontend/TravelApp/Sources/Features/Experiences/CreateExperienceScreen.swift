@@ -121,7 +121,9 @@ struct CreateExperienceScreen: View {
                 print(error)
                 return
             }
-            dismiss()
+            DispatchQueue.main.async {
+                dismiss()
+            }
             print(String(data: data!, encoding: .utf8 )!)
         }.resume()
             
