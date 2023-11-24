@@ -120,5 +120,5 @@ struct TripEditView: View {
 }
 
 #Preview {
-    TripEditView(trip: .constant(Trip(id: "1234", name: "Sample Trip", description: "This is a sample description", startDate: DateComponents(calendar: .current, year: 2023, month: 1, day: 15).date!, endDate: DateComponents(calendar: .current, year: 2023, month: 1, day: 22).date!, user: "Sample User")), onTripUpdated: { })
+    TripEditView(trip: .constant(Trip(id: "1234", name: "Sample Trip", description: "This is a sample description", startDate: DateComponents(calendar: .current, year: 2023, month: 1, day: 15).date!, endDate: DateComponents(calendar: .current, year: 2023, month: 1, day: 22).date!, user: "Sample User", experiences: [])), onTripUpdated: { })
 }

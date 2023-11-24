@@ -75,7 +75,8 @@ struct CreateTripScreen: View {
                             name: tripName,
                             description: tripDescription,
                             startDate: startDate,
-                            endDate: endDate
+                            endDate: endDate,
+                            experiences: []
                         )
                         
                         TripsAPI().createTrip(trip: newTrip) { success in
