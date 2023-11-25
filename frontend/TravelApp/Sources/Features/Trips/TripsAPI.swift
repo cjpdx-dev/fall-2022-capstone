@@ -148,4 +148,23 @@ class TripsAPI {
             }
         }.resume()
     }
+    
+    // GET Experiences
+    func getExperiences(completion: @escaping ([Experience]) -> Void) {
+        let url = URL(string: "https://fall-2023-capstone.wl.r.appspot.com/experiences/")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Network error: \(error)")
+                return
+            }
+            if let data = data, let experiences = try? self.decoder.decode([Experience].self, from: data) {
+                DispatchQueue.main.async {
+                    completion(experiences)
+                }
+            }
+        }.resume()
+    }
 }

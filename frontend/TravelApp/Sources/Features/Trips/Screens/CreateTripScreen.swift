@@ -15,6 +15,9 @@ struct CreateTripScreen: View {
     @State private var endDate: Date = Date()
     @Environment(\.dismiss) var dismiss
     @State private var tripCreationResult: Bool? = nil
+    @State private var allExperiences: [Experience] = []
+    @State private var selectedExperiences: Set<String> = []
+    var api = TripsAPI()
     
     var body: some View {
             VStack {
@@ -49,6 +52,9 @@ struct CreateTripScreen: View {
                         )
                         .padding(.horizontal, 5)
                     }
+                    Section(header: Text("Select Experiences")) {
+                        SelectExperiencesView(selectedExperiences: $selectedExperiences, allExperiences: allExperiences)
+                    }
                 }
                 .navigationBarTitle("Create Trip", displayMode: .inline)
                 
@@ -76,10 +82,10 @@ struct CreateTripScreen: View {
                             description: tripDescription,
                             startDate: startDate,
                             endDate: endDate,
-                            experiences: []
+                            experiences: Array(selectedExperiences)
                         )
                         
-                        TripsAPI().createTrip(trip: newTrip) { success in
+                        api.createTrip(trip: newTrip) { success in
                             DispatchQueue.main.async {
                                 tripCreationResult = success
                                 if success {
@@ -99,7 +105,16 @@ struct CreateTripScreen: View {
                 .padding()
             }
             .background(Color(UIColor.systemGroupedBackground))
+            .onAppear(perform: loadExperiences)
         }
+    private func loadExperiences() {
+        api.getExperiences { experiences in
+            DispatchQueue.main.async {
+                self.allExperiences = experiences
+                self.selectedExperiences = []
+            }
+        }
+    }
     }
 
 #Preview {

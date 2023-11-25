@@ -11,6 +11,9 @@ struct TripEditView: View {
     @Binding var trip: Trip
     @Environment(\.dismiss) var dismiss
     var onTripUpdated: () -> Void
+    @State private var allExperiences: [Experience] = []
+    @State private var selectedExperiences: Set<String> = []
+    var api = TripsAPI()
         
     var body: some View {
             VStack {
@@ -45,6 +48,10 @@ struct TripEditView: View {
                         )
                         .padding(.horizontal, 5)
                     }
+                    Section(header: Text("Select Experiences")) {
+                        // Only display experiences that are within date range
+                        SelectExperiencesView(selectedExperiences: $selectedExperiences, allExperiences: allExperiences)
+                    }
                 }
                 .navigationBarTitle("Edit Trip", displayMode: .inline)
                 
@@ -67,7 +74,8 @@ struct TripEditView: View {
                     .cornerRadius(10)
                     
                     Button(action: {
-                        TripsAPI().updateTrip(trip: trip) { success in
+                        trip.experiences = Array(selectedExperiences)
+                        api.updateTrip(trip: trip) { success in
                             DispatchQueue.main.async {
                                 if success {
                                     // Show an alert "Trip saved"
@@ -91,7 +99,7 @@ struct TripEditView: View {
                 .padding()
                 
                 Button(action: {
-                    TripsAPI().deleteTrip(tripId: trip.id ?? "") { success in
+                    api.deleteTrip(tripId: trip.id ?? "") { success in
                         DispatchQueue.main.async {
                             if success {
                                 // Take user back to TripScreen page
@@ -116,9 +124,19 @@ struct TripEditView: View {
                 )
             }
             .background(Color(UIColor.systemGroupedBackground))
+            .onAppear(perform: loadExperiences)
         }
+    private func loadExperiences() {
+        api.getExperiences { experiences in
+            DispatchQueue.main.async {
+                self.allExperiences = experiences
+                self.selectedExperiences = Set(trip.experiences)
+            }
+        }
+    }
+
 }
 
-#Preview {
-    TripEditView(trip: .constant(Trip(id: "1234", name: "Sample Trip", description: "This is a sample description", startDate: DateComponents(calendar: .current, year: 2023, month: 1, day: 15).date!, endDate: DateComponents(calendar: .current, year: 2023, month: 1, day: 22).date!, user: "Sample User", experiences: [])), onTripUpdated: { })
-}
+//#Preview {
+//    TripEditView(trip: .constant(Trip(id: "1234", name: "Sample Trip", description: "This is a sample description", startDate: DateComponents(calendar: .current, year: 2023, month: 1, day: 15).date!, endDate: DateComponents(calendar: .current, year: 2023, month: 1, day: 22).date!, user: "Sample User", experiences: [])), onTripUpdated: { })
+//}
