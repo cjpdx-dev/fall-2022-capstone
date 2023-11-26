@@ -8,28 +8,33 @@
 import SwiftUI
 
 struct TripListView: View {
-//    @Binding var selectedTrip: Trip?
     @State private var searchText: String = ""
     @State private var trips: [Trip] = []
+    
+    var filteredResults: [Trip] {
+        if searchText.isEmpty {
+            return trips
+        } else {
+            return trips.filter {
+                $0.name.lowercased().contains(searchText.lowercased())
+            }
+        }
+    }
 
     var body: some View {
         NavigationStack {
             List {
-                ForEach($trips, id: \.id) { $trip in
-                    NavigationLink {
-                        TripDetailView(trip: $trip)
-                    } label: {
-                        TripRowView(trip: $trip.wrappedValue)
+                ForEach(filteredResults, id: \.id) { filteredTrip in
+                    if let index = trips.firstIndex(where: { $0.id == filteredTrip.id }) {
+                        let bindingTrip = $trips[index]
+                        NavigationLink {
+                            TripDetailView(trip: bindingTrip)
+                        } label: {
+                            TripRowView(trip: bindingTrip.wrappedValue)
+                        }
                     }
                 }
             }
-//            List(trips, id: \.id) { trip in
-//                Button(action: {
-//                    selectedTrip = trip
-//                }) {
-//                    TripRowView(trip: trip)
-//                }
-//            }
             .navigationTitle("Trips")
             .toolbar(content: {
                 NavigationLink {

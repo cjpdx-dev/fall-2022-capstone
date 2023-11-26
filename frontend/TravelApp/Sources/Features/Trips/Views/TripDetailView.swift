@@ -10,17 +10,30 @@ import SwiftUI
 struct TripDetailView: View {
     @Binding var trip: Trip
     @State private var tripIsDeleted = false
+    @State private var sortedExperiences = [Date: [Experience]]()
     
-// Map dates to experiences
-//    private func experiencesByDate() -> [Date: [DatedExperience]] {
-//        var experiencesByDate = [Date: [DatedExperience]]()
-//        
-//        for experience in trip.experiences {
-//            experiencesByDate[experience.date, default: []].append(experience)
-//        }
-//        
-//        return experiencesByDate
-//    }
+    private func getAndSortExperiences() {
+        let api = TripsAPI()
+        var experiences = [Experience]()
+        let group = DispatchGroup()
+        for id in trip.experiences {
+            group.enter()
+            api.getExperience(experienceId: id) { experience in
+                if let experience = experience {
+                    experiences.append(experience)
+                }
+                group.leave()
+            }
+        }
+        
+        group.notify(queue: .main) {
+            sortedExperiences = [:]
+            for experience in experiences {
+                let date = Date(timeIntervalSinceReferenceDate: TimeInterval(experience.date))
+                sortedExperiences[date, default: []].append(experience)
+            }
+        }
+    }
     
     var body: some View {
         ScrollView {
@@ -53,32 +66,33 @@ struct TripDetailView: View {
                 VStack(alignment: .leading, spacing: 5) {
                     Text("Description")
                         .font(.title3).bold()
-                
+                    
                     Text(trip.description)
                 }
                 Divider()
-                // Iterate over the dates and display experiences for each date
-//                let sortedDates = experiencesByDate().keys.sorted()
-//                ForEach(sortedDates, id: \.self) { date in
-//                    VStack(alignment: .leading) {
-//                        Text(date, style: .date)
-//                            .font(.headline)
-//                            .padding(.vertical, 2)
-//                        
-//                        ForEach(experiencesByDate()[date] ?? [], id: \.self) { datedExperience in
-//                            TripExperienceView(datedExperience: datedExperience)
-//                        }
-//                        Spacer(minLength: 20)
-//                    }
-//                }
-            }
-            .padding()
+                
+                ForEach(Array(sortedExperiences.keys.sorted()), id: \.self) { date in
+                    VStack(alignment: .leading) {
+                        Text(date, style: .date)
+                            .font(.headline)
+                            .padding(.vertical, 2)
+                        ForEach(sortedExperiences[date] ?? [], id: \.id) { experience in
+                            NavigationLink(destination: ExperienceDetailView(experience: experience)) {
+                                TripExperienceView(experience: experience)
+                            }
+                        }
+                    }
+                }
+            }.padding()
+        }
+        .onAppear {
+            getAndSortExperiences()
         }
     }
 }
 
 struct TripDetailView_Previews: PreviewProvider {
-    @State static var previewTrip = Trip(id: "1234", name: "Sample Trip", description: "Description", startDate: Date(), endDate: Date(), user: "Sample User")
+    @State static var previewTrip = Trip(id: "1234", name: "Sample Trip", description: "Description", startDate: Date(), endDate: Date(), user: "Sample User", experiences: [])
 
     static var previews: some View {
         TripDetailView(trip: $previewTrip)
