@@ -15,6 +15,6 @@
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>UILaunchStoryboardName</key>
-	<string>HomeScreen</string>
+	<string>LaunchScreen.storyboard</string>
 </dict>
 </plist>

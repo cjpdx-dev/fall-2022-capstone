@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct CreateTripScreen: View {
     @State private var tripName: String = ""
@@ -13,6 +14,7 @@ struct CreateTripScreen: View {
     @State private var startDate: Date = Date()
     @State private var endDate: Date = Date()
     @Environment(\.dismiss) var dismiss
+    @State private var tripCreationResult: Bool? = nil
     
     var body: some View {
             VStack {
@@ -61,11 +63,29 @@ struct CreateTripScreen: View {
                     }
                     .foregroundColor(.black)
                     .frame(width: 100, height: 40)
-                    .border(Color.black)
                     .background(Color.white)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.black, lineWidth: 2)
+                    )
+                    .cornerRadius(10)
                     
                     Button(action: {
-                        print("Saved")
+                        let newTrip = Trip(
+                            name: tripName,
+                            description: tripDescription,
+                            startDate: startDate,
+                            endDate: endDate
+                        )
+                        
+                        TripsAPI().createTrip(trip: newTrip) { success in
+                            DispatchQueue.main.async {
+                                tripCreationResult = success
+                                if success {
+                                    dismiss()
+                                }
+                            }
+                        }
                     }) {
                         Text("Save")
                             .fontWeight(.semibold)
@@ -73,6 +93,7 @@ struct CreateTripScreen: View {
                     .foregroundColor(.white)
                     .frame(width: 100, height: 40)
                     .background(Color.black)
+                    .cornerRadius(10)
                 }
                 .padding()
             }

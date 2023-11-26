@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct TripScreen: View {
+    
     var body: some View {
         NavigationView{
-            TripListView(trips: trips)
+            TripListView()
         }
     }
 }
