@@ -1,7 +1,7 @@
 from firebase_admin import auth
 from flask import Blueprint, jsonify, request, current_app
 from db_modules import db_trips
-from ..services.security import verify_token
+from app.services import verify_token
 from datetime import datetime, timedelta, timezone
 
 

@@ -2,94 +2,99 @@ from flask              import Blueprint, jsonify, current_app, request
 
 import jwt
 from   jwt              import PyJWKClient
-from   jwt.exceptions   import InvalidTokenError
+from   jwt.exceptions   import InvalidTokenError, InvalidSignatureError, ExpiredSignatureError, DecodeError
 import requests
 
 from   datetime         import datetime, timedelta
 from   firebase_admin   import firestore, auth as firebase_auth
 
+from   db_modules       import db_users
+from   app.services     import verify_token, hash_password, check_password
+
+import os
+
 auth_bp = Blueprint('auth', __name__)
 
-@auth_bp.route('/auth/apple', methods=['POST'])
-def auth_with_apple():
+@auth_bp.route('/register', methods=['POST'])
+def register_user():
 
-    apple_ident_token   = request.json.get('appleIdToken')
-    apple_user_ident    = request.json.get('userIdentifier')
+    print(request.json)
 
-    user_birth_year     = request.json.get('birthYear')
-    user_nickname       = request.json.get('nickname')
+    required_fields = {'userEmail':     request.json.get('userEmail'), 
+                       'displayName':   request.json.get('displayName'), 
+                       'birthDate':     request.json.get('birthDate'), 
+                       'userPassword':  request.json.get('userPassword') }
 
-    decoded_token = verify_apple_identity_token(apple_ident_token)
+    for field in required_fields.keys():
+        if required_fields[field] is None:
+            return jsonify({"message": f"{field} is required"}), 400
 
-    if decoded_token is None:
-        return jsonify({'error': 'Invalid token'}), 401
+    db = current_app.config['db']
 
-    user = find_user(apple_user_ident)
-    if not user:
-        user = create_user(apple_user_ident, user_birth_year, user_nickname)
+    # Confirm user does not already exist
+    found_user = db_users.find_user_by_email(db, required_fields['userEmail'])
+    if found_user != 0:
+        return jsonify({"message": "User already exists"}), 400
 
-    user_session_token = generate_jwt(apple_user_ident)
-    return jsonify({'session_token': user_session_token}), 200
+    # Hand and salt the password
+    hashed_password = hash_password(required_fields['userPassword'])
+    required_fields['userPassword'] = hashed_password
 
-# Helper Functions
+    # Register the user
+    new_user_id = db_users.register_user(db, required_fields)
+    # Generate a JWT to establish a session for the user
+    session_token = generate_jwt(new_user_id)
+    if session_token is None:
+        return jsonify({"message": "User Session Token Could Not Be Created - Login Failed"}), 401
+    else:
+        user = db_users.get_user_by_id(db, new_user_id)
+        user['token'] = session_token
+        print(user)
+        return jsonify({user}), 201
 
-def find_user(user_identifier):
 
-    with current_app.app_context():
-        db = current_app.config['db']
+@auth_bp.route('/login', methods=["POST"])
+def login():
 
-        user_ref = db.collection('users').where('apple_user_id', '==', user_identifier).get()
-        if len(user_ref) == 0:
-            return None
-        return user_ref[0]
+    required_fields = {'userEmail':     request.json.get('userEmail'), 
+                       'userPassword':  request.json.get('userPassword') }
+
+    for field in required_fields.keys():
+        if required_fields[field] is None:
+            return jsonify({"message": f"{field} is required"}), 400
     
+    db = current_app.config['db']
+        
+    # Confirm user exists
+    found_user = db_users.find_user_by_email(db, required_fields['userEmail'])
+    if found_user == 0:
+        return jsonify({"message": "Invalid Credentials"}), 404
 
-def create_user(apple_user_ident, birth_year, nickname):
-    with current_app.app_context():
-        db = current_app.config['db']
-        user_ref = db.collection(u'users').document(apple_user_ident)
+    # Confirm password is correct
+    if not check_password(required_fields['userPassword'], found_user[0]['passwordHash']):
+        return jsonify({"message": "Invalid credentials"}), 404
 
-        user_ref.set({
-            'apple_user_id': apple_user_ident,
-            'birth_year': birth_year,
-            'nickname': nickname,
-            'created_at': firestore.SERVER_TIMESTAMP,
-            'updated_at': firestore.SERVER_TIMESTAMP
-        })
+    # Generate a JWT to establish a session for the user
+    session_token = generate_jwt(found_user['id'])
+    if session_token is None:
+        return jsonify({"message": "login failed. session token could not be generated"}), 401
+    else:
+        found_user['sessionToken'] = session_token
+        return jsonify(found_user), 200
 
-        return user_ref.get()
-    
 
-def generate_jwt(apple_user_ident):
+def generate_jwt(uid):
+
+
     payload = {
-        'sub': apple_user_ident,
+        'sub': uid,
         'iat': datetime.utcnow(),
-        'exp': datetime.utcnow() + timedelta(days=30) 
-    } 
-    user_session_token = jwt.enode(payload, current_app.config['SECRET_KEY'], algorithm='HS256')
-    return user_session_token
+        'exp': datetime.utcnow() + timedelta(days=30)
+    }
+    print("hello")
+    session_token = jwt.encode(payload, os.environ.get('PRIVATE_KEY'), algorithm='RS256')
+    print("goodbye")
+    return session_token
+    
 
-
-def verify_apple_identity_token(apple_ident_token):
-    apple_public_keys_url = 'https://appleid.apple.com/auth/keys'
-
-
-    jwks_client = PyJWKClient(apple_public_keys_url)
-
-    signing_key = jwks_client.get_signing_key_from_jwt(apple_ident_token)
-
-    try:
-        decoded_token = jwt.decode(
-            apple_ident_token,
-            signing_key.key,
-            algorithms=['RS256'],
-            audience='sweenbean333.TravelApp',
-            issuer='https://appleid.apple.com',
-        )
-        return decoded_token
-    except jwt.PyJWTError as e:
-        print(f"Error decoding token: {e}")
-        return None
-
-
-# For logout, we do this on the client side by deleting the stored session_token that 
+    

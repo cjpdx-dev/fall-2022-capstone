@@ -9,9 +9,16 @@ import SwiftUI
 
 @main
 struct TravelAppApp: App {
+    @StateObject var userViewModel = UserViewModel()
+    
     var body: some Scene {
         WindowGroup {
-            HomeScreen(experiences: experiences)
+            if SessionManager.shared.isLoggedIn {
+                HomeScreen(experiences: experiences)
+            }
+            else {
+                SignUpScreen()
+            }
         }
     }
 }

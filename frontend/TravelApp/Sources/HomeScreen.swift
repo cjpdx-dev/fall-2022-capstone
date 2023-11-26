@@ -9,7 +9,12 @@ import SwiftUI
 
 struct HomeScreen: View {
     var experiences: [Experience]
+    @State private var registrationComplete = false
+    @EnvironmentObject var userViewModel: UserViewModel
     var body: some View {
+        if registrationComplete {
+            
+        }
         TabView {
             ExperienceScreen(experiences: experiences)
                 .tabItem {
@@ -26,7 +31,6 @@ struct HomeScreen: View {
                     Label("Profile", systemImage: "person.circle")
                 }
         }
-        
     }
 }
 
