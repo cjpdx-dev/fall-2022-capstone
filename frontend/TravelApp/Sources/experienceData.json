@@ -1,8 +1,12 @@
 [
     {
         "title": "Disney Land",
-        "city": "Anaheim",
-        "state": "California",
+        "location": {
+            "city": "Anaheim",
+            "state": "California",
+            "longitude": -117.914505,
+            "latitude": 33.835293
+        },
         "id": "1001",
         "rating": 2,
         "date": 720629580,
@@ -12,13 +16,17 @@
     },
     {
         "title": "Grand Canyon",
-        "city": "Phoenix",
-        "state": "Arizona",
+        "location": {
+            "city": "Phoenix",
+            "state": "Arizona",
+            "longitude": 112.0740,
+            "latitude": 33.4484
+        },
         "id": "1002",
         "rating": 4,
         "date": 721235640,
         "description": "I had a very fun time going to the Grand Canyon today. It is so much more beautiful in person!",
         "imageUrl": "https://www.googleapis.com/storage/v1/b/fall-2023-capstone.appspot.com/o/B3F584F6.jpg",
         "keywords": ["Canyon", "Arizona", "Grand"]
-    },
+    }
 ]

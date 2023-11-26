@@ -44,16 +44,31 @@ struct EditExperienceView: View {
                         Image(systemName: "magnifyingglass")
                     }
                 }
-                Text("\(location.state)")
-                    .padding(.horizontal, 4)
-                    .padding(.vertical, 7)
-                    .font(.system(size: 14))
-                    .border(Color(.darkGray))
-                Text("\(location.city)")
-                    .padding(.horizontal, 4)
-                    .padding(.vertical, 7)
-                    .font(.system(size: 14))
-                    .border(Color(.darkGray))
+                VStack (alignment: .leading, spacing: 6) {
+                    Text("City")
+                        .foregroundStyle(Color(.black))
+                        .fontWeight(.semibold)
+                        .font(.subheadline)
+                    Text("\(location.city)")
+                        .padding(.horizontal, 4)
+                        .padding(.vertical, 7)
+                        .font(.system(size: 14))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .border(Color(.darkGray))
+                }
+                
+                VStack (alignment: .leading) {
+                    Text("State")
+                        .foregroundStyle(Color(.black))
+                        .fontWeight(.semibold)
+                        .font(.subheadline)
+                    Text("\(location.state)")
+                        .padding(.horizontal, 4)
+                        .padding(.vertical, 7)
+                        .font(.system(size: 14))
+                        .frame(maxWidth:.infinity, alignment: .leading)
+                        .border(Color(.darkGray))
+                }
                 
                 // Date
                 DatePicker("Date", selection: $date, displayedComponents: .date)

@@ -19,7 +19,7 @@ class ExperienceAPI {
     
     public let boundary: String = "Boundary-\(UUID().uuidString)"
     private let developmentUrl: URL = URL(string: "http://127.0.0.1:5000/experiences/")!
-    private var productionUrl: URL = URL(string: "https://fall-2023-capstone.wl.r.appspot.com/experiences")!
+    private var productionUrl: URL = URL(string: "https://fall-2023-capstone.wl.r.appspot.com/experiences/")!
     
     public func generateCreateRequest(httpBody: Data, httpMethod: HTTPMethod) -> URLRequest {
         var request = URLRequest(url: self.developmentUrl)

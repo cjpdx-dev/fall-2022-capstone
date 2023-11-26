@@ -40,16 +40,34 @@ struct CreateExperienceScreen: View {
                         Image(systemName: "magnifyingglass")
                     }
                 }
-                Text("\(location.state)")
-                    .padding(.horizontal, 4)
-                    .padding(.vertical, 7)
-                    .font(.system(size: 14))
-                    .border(Color(.darkGray))
-                Text("\(location.city)")
-                    .padding(.horizontal, 4)
-                    .padding(.vertical, 7)
-                    .font(.system(size: 14))
-                    .border(Color(.darkGray))
+                VStack (alignment: .leading, spacing: 6) {
+                    Text("City")
+                        .foregroundStyle(Color(.black))
+                        .fontWeight(.semibold)
+                        .font(.subheadline)
+                    Text("\(location.city)")
+                        .padding(.horizontal, 4)
+                        .padding(.vertical, 7)
+                        .font(.system(size: 14))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .border(Color(.darkGray))
+                }
+                
+                VStack (alignment: .leading) {
+                    Text("State")
+                        .foregroundStyle(Color(.black))
+                        .fontWeight(.semibold)
+                        .font(.subheadline)
+                    Text("\(location.state)")
+                        .padding(.horizontal, 4)
+                        .padding(.vertical, 7)
+                        .font(.system(size: 14))
+                        .frame(maxWidth:.infinity, alignment: .leading)
+                        .border(Color(.darkGray))
+                }
+                    
+                
+                
                 
 //                CreateInputView(text: $city, placeholder: "Enter city", label: "City")
 //                CreateInputView(text: $state, placeholder: "Enter state", label: "State")
@@ -141,8 +159,10 @@ struct CreateExperienceScreen: View {
                 print(error)
                 return
             }
-            dismiss()
-            print(String(data: data!, encoding: .utf8 )!)
+            DispatchQueue.main.async {
+                dismiss()
+                print(String(data: data!, encoding: .utf8 )!)
+            }
         }.resume()
             
     }

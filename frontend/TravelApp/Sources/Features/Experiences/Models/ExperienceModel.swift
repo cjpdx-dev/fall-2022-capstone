@@ -25,8 +25,6 @@ struct Experience: Hashable, Codable, Identifiable{
     var keywords: [String]
     var date: Int
     var location: Location
-//    var city: String
-//    var state: String
     var imageUrl: String
     
     

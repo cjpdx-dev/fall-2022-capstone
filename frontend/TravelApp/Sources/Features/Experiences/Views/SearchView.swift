@@ -36,15 +36,6 @@ struct SearchView: View {
             }
             .listStyle(.plain)
             .searchable(text: $searchText)
-            .toolbar {
-                ToolbarItem(placement: .automatic) {
-                    Button {
-                        dismiss()
-                    } label: {
-                        Text("Dismiss")
-                    }
-                }
-            }
         }
     }
     func search(text: String) {
