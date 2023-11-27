@@ -21,7 +21,7 @@ struct Trip: Hashable, Codable, Identifiable {
     var startDate: Date
     var endDate: Date
     var user: String?
-//    var experiences: [Experience]
+    var experiences: [String]
     
     var formattedDateRange: String {
         let formatter = DateFormatter()

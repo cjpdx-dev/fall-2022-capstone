@@ -157,5 +157,13 @@ def deleteExperience(id):
     else:
         print('Experience could not be deleted')
         jsonify({"message": "Experience could not be deleted"}), 404
-   
 
+
+@experience_bp.route('/<id>', methods=["GET"])
+def getExperience(id):
+    db = current_app.config['db']
+    experience = db_experiences.get_experience_by_id(db, id)
+    if experience:
+        return jsonify(experience), 200
+    else:
+        return jsonify({"message": "Experience not found"}), 404
