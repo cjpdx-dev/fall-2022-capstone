@@ -16,8 +16,8 @@ struct ExperienceListView: View {
         } else {
             return experienceData.experiences.filter {
                 $0.title.contains(searchText) ||
-                $0.state.contains(searchText) ||
-                $0.city.contains(searchText) ||
+                $0.location.state.contains(searchText) ||
+                $0.location.city.contains(searchText) ||
                 $0.keywords.contains(searchText)
             }
         }

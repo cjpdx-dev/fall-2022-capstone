@@ -65,7 +65,7 @@ struct ExperienceDetailView: View {
                         
                         HStack {
                             // Location
-                            Text("\(experience.city), \(experience.state)")
+                            Text("\(experience.location.city), \(experience.location.state)")
                                 .fontWeight(.semibold)
                             Spacer()
                             // Date

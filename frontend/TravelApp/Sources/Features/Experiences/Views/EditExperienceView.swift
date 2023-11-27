@@ -14,8 +14,9 @@ struct EditExperienceView: View {
     @Binding var experience: Experience
     @State var title = ""
     @State var description = ""
-    @State var city = ""
-    @State var state = ""
+    @State var location: Location = Location()
+//    @State var city = ""
+//    @State var state = ""
     @State var rating = 4
     @State var date: Date = Date()
     @State var keywords: [String] = []
@@ -35,8 +36,39 @@ struct EditExperienceView: View {
                 // Inputs
                 CreateInputView(text: $title, placeholder: "Enter title name", label: "Title")
                 CreateInputView(text: $description, placeholder: "Enter description", label: "Description", isLongText: true)
-                CreateInputView(text: $city, placeholder: "Enter city", label: "City")
-                CreateInputView(text: $state, placeholder: "Enter state", label: "State")
+                NavigationLink {
+                    SearchView(location: $location)
+                } label: {
+                    HStack {
+                        Text("Search Location")
+                        Image(systemName: "magnifyingglass")
+                    }
+                }
+                VStack (alignment: .leading, spacing: 6) {
+                    Text("City")
+                        .foregroundStyle(Color(.black))
+                        .fontWeight(.semibold)
+                        .font(.subheadline)
+                    Text("\(location.city)")
+                        .padding(.horizontal, 4)
+                        .padding(.vertical, 7)
+                        .font(.system(size: 14))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .border(Color(.darkGray))
+                }
+                
+                VStack (alignment: .leading) {
+                    Text("State")
+                        .foregroundStyle(Color(.black))
+                        .fontWeight(.semibold)
+                        .font(.subheadline)
+                    Text("\(location.state)")
+                        .padding(.horizontal, 4)
+                        .padding(.vertical, 7)
+                        .font(.system(size: 14))
+                        .frame(maxWidth:.infinity, alignment: .leading)
+                        .border(Color(.darkGray))
+                }
                 
                 // Date
                 DatePicker("Date", selection: $date, displayedComponents: .date)
@@ -102,7 +134,7 @@ struct EditExperienceView: View {
                     Button {
                         // id, title, description, state, city, rating, keywords, date
                         self.createKeywords()
-                        let updatedExperience = Experience(id: experience.id, title: title, description: description, rating: rating, keywords: keywords, date: Int(date.timeIntervalSinceReferenceDate), city: city, state: state,  imageUrl: experience.imageUrl)
+                        let updatedExperience = Experience(id: experience.id, title: title, description: description, rating: rating, keywords: keywords, date: Int(date.timeIntervalSinceReferenceDate), location:location,  imageUrl: experience.imageUrl)
                         self.updateExperience(objectName: "experience", object: updatedExperience)
                     } label: {
                         Text("Save")
@@ -111,9 +143,9 @@ struct EditExperienceView: View {
                     }
                     .foregroundColor(.white)
                     .frame(width: 100, height: 40)
-                    .background(title.isEmpty || description.isEmpty || city.isEmpty || state.isEmpty ? Color.gray : Color.black)
+                    .background(title.isEmpty || description.isEmpty || location.city.isEmpty || location.state.isEmpty ? Color.gray : Color.black)
                     .border(Color.white)
-                    .disabled(title.isEmpty || description.isEmpty || city.isEmpty || state.isEmpty)
+                    .disabled(title.isEmpty || description.isEmpty || location.city.isEmpty || location.state.isEmpty)
                 }
                 .padding(.vertical)
             }
@@ -131,8 +163,9 @@ struct EditExperienceView: View {
             .onAppear {
                 self.title = experience.title
                 self.description = experience.description
-                self.city = experience.city
-                self.state = experience.state
+                self.location = experience.location
+//                self.city = experience.city
+//                self.state = experience.state
                 self.rating = experience.rating
                 self.date = Date(timeIntervalSinceReferenceDate: TimeInterval(experience.date))
                 
