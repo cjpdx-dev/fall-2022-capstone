@@ -121,7 +121,9 @@ struct EditExperienceView: View {
                 HStack(spacing: 40) {
                     // Cancel Button
                     Button {
-                        dismiss()
+                        DispatchQueue.main.async {
+                            dismiss()
+                        }
                     } label: {
                         Text("Cancel")
                             .fontWeight(.semibold)
