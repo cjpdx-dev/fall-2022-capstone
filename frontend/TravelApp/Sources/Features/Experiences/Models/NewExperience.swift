@@ -9,6 +9,7 @@ import Foundation
 
 struct NewExperience: Codable {
     // DONT FORGET TO ADD RATING, KEYWORDS, AND USERID
+//    var userID: String
     var title: String
     var description: String
     var location: Location

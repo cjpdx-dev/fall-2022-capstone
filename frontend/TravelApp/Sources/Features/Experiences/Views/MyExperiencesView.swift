@@ -10,16 +10,21 @@ import SwiftUI
 struct MyExperiencesView: View {
     @State private var searchText: String = ""
     @State private var experienceData = ExperienceData()
+//    var userID: String = SessionManager.getData().id
     var experienceAPI = ExperienceAPI()
     var filteredResults: [Experience] {
         if searchText.isEmpty {
+//            return experienceData.experiences.filter {
+//                $0.userID == userID
+//            }
             return experienceData.experiences
         } else {
             return experienceData.experiences.filter {
-                $0.title.contains(searchText) ||
+                ($0.title.contains(searchText) ||
                 $0.location.state.contains(searchText) ||
                 $0.location.city.contains(searchText) ||
-                $0.keywords.contains(searchText)
+                $0.keywords.contains(searchText)) 
+//                && $0.userID == userID
             }
         }
     }

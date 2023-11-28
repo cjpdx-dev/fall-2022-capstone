@@ -10,6 +10,8 @@ import SwiftUI
 struct ExperienceDetailView: View {
     @Environment(\.dismiss) var dismiss
     @State var experience: Experience
+//    var userID: String = SessionManager.getData().id
+//    var isUserExperience: Bool = userID == experience.userID
     var isUserExperience: Bool = true
     var body: some View {
             ScrollView {

@@ -135,6 +135,7 @@ struct EditExperienceView: View {
                         // id, title, description, state, city, rating, keywords, date
                         self.createKeywords()
                         let updatedExperience = Experience(id: experience.id, title: title, description: description, rating: rating, keywords: keywords, date: Int(date.timeIntervalSinceReferenceDate), location:location,  imageUrl: experience.imageUrl)
+//                        let updatedExperience = Experience(id: experience.id, title: title, description: description, rating: rating, keywords: keywords, date: Int(date.timeIntervalSinceReferenceDate), location:location,  imageUrl: experience.imageUrl, userID: experience.userID)
                         self.updateExperience(objectName: "experience", object: updatedExperience)
                     } label: {
                         Text("Save")

@@ -22,6 +22,7 @@ struct CreateExperienceScreen: View {
     @State private var experienceImage: UIImage?
     @State private var newExperience: NewExperience?
     @State private var location: Location = Location()
+//    var userID = SessionManager.getData().id
     var api = ExperienceAPI()
     
     
