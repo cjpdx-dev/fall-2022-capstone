@@ -15,8 +15,10 @@ class ExperienceData {
     
     func getExperiences() {
         guard let url = URL(string: "http://127.0.0.1:5000/experiences") else {fatalError("Missing URL")}
+//        let productionUrl: URL = URL(string: "https://fall-2023-capstone.wl.r.appspot.com/experiences/")!
         
         let urlRequest = URLRequest(url: url)
+//        let urlRequest = URLRequest(url: productionUrl)
         let dataTask = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
             if let error = error {
                 print("Request error: ", error)

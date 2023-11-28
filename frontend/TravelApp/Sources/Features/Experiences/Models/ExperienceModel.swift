@@ -9,17 +9,11 @@ import Foundation
 import SwiftUI
 import CoreLocation
 
-
-struct NewExperience: Codable {
-    // DONT FORGET TO ADD RATING, KEYWORDS, AND USERID
-    var title: String
-    var description: String
-    var state: String
-    var city: String
-    var rating: Int
-    var keywords: [String]
-    var date: Date
-    
+struct Location: Hashable, Codable {
+    var city: String = ""
+    var state: String = ""
+    var latitude: Double = 0
+    var longitude: Double = 0
 }
 
 struct Experience: Hashable, Codable, Identifiable{
@@ -30,9 +24,10 @@ struct Experience: Hashable, Codable, Identifiable{
     var rating: Int
     var keywords: [String]
     var date: Int
-    var city: String
-    var state: String
+    var location: Location
     var imageUrl: String
+    
+    
     
 //    var image: AsyncImage {
 //        AsyncImage(url: imageURL)

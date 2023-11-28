@@ -30,7 +30,7 @@ struct TripExperienceView: View {
                     .font(.headline)
                     .foregroundColor(.black)
                 
-                Text(experience.city)
+                Text(experience.location.city)
                     .font(.subheadline)
                     .foregroundColor(.black)
             }

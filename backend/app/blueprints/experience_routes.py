@@ -61,9 +61,6 @@ def get_experiences():
     else:
         return jsonify(experiences), 200
 
-    # Convert Image? 
-    # Get all experiences in the database to display  to the user
-    return {"hello": "world"}
 
 
 

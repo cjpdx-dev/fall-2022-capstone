@@ -13,14 +13,15 @@ struct CreateExperienceScreen: View {
     @Environment(\.dismiss) var dismiss
     @State private var title = ""
     @State private var description = ""
-    @State private var city = ""
-    @State private var state = ""
+//    @State private var city = ""
+//    @State private var state = ""
     @State private var rating = 4
     @State private var date: Date = Date()
     @State private var keywords: [String] = []
     @State private var photoPickerItem: PhotosPickerItem?
     @State private var experienceImage: UIImage?
     @State private var newExperience: NewExperience?
+    @State private var location: Location = Location()
     var api = ExperienceAPI()
     
     
@@ -31,8 +32,45 @@ struct CreateExperienceScreen: View {
                 // Inputs
                 CreateInputView(text: $title, placeholder: "Enter title name", label: "Title")
                 CreateInputView(text: $description, placeholder: "Enter description", label: "Description", isLongText: true)
-                CreateInputView(text: $city, placeholder: "Enter city", label: "City")
-                CreateInputView(text: $state, placeholder: "Enter state", label: "State")
+                NavigationLink {
+                    SearchView(location: $location)
+                } label: {
+                    HStack {
+                        Text("Search Location")
+                        Image(systemName: "magnifyingglass")
+                    }
+                }
+                VStack (alignment: .leading, spacing: 6) {
+                    Text("City")
+                        .foregroundStyle(Color(.black))
+                        .fontWeight(.semibold)
+                        .font(.subheadline)
+                    Text("\(location.city)")
+                        .padding(.horizontal, 4)
+                        .padding(.vertical, 7)
+                        .font(.system(size: 14))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .border(Color(.darkGray))
+                }
+                
+                VStack (alignment: .leading) {
+                    Text("State")
+                        .foregroundStyle(Color(.black))
+                        .fontWeight(.semibold)
+                        .font(.subheadline)
+                    Text("\(location.state)")
+                        .padding(.horizontal, 4)
+                        .padding(.vertical, 7)
+                        .font(.system(size: 14))
+                        .frame(maxWidth:.infinity, alignment: .leading)
+                        .border(Color(.darkGray))
+                }
+                    
+                
+                
+                
+//                CreateInputView(text: $city, placeholder: "Enter city", label: "City")
+//                CreateInputView(text: $state, placeholder: "Enter state", label: "State")
                 
                 // Date
                 DatePicker("Date", selection: $date, displayedComponents: .date)
@@ -79,7 +117,7 @@ struct CreateExperienceScreen: View {
                     // Save Button
                     Button {
                         self.createKeywords()
-                        newExperience = NewExperience(title: title, description: description, state: state, city: city, rating: rating, keywords: keywords, date: date)
+                        newExperience = NewExperience(title: title, description: description, location: location, rating: rating, keywords: keywords, date: date)
                         self.createExperience(objectName: "experience", object: newExperience!)
                         
                     } label: {
@@ -89,9 +127,9 @@ struct CreateExperienceScreen: View {
                     }
                     .foregroundColor(.white)
                     .frame(width: 100, height: 40)
-                    .background(title.isEmpty || description.isEmpty || city.isEmpty || state.isEmpty || (experienceImage == nil) ? Color.gray : Color.black)
+                    .background(title.isEmpty || description.isEmpty || location.city.isEmpty || location.state.isEmpty || (experienceImage == nil) ? Color.gray : Color.black)
                     .border(Color.white)
-                    .disabled(title.isEmpty || description.isEmpty || city.isEmpty || state.isEmpty || (experienceImage == nil))
+                    .disabled(title.isEmpty || description.isEmpty || location.city.isEmpty || location.state.isEmpty || (experienceImage == nil))
                 }
                 .padding(.vertical)
             }
@@ -123,8 +161,8 @@ struct CreateExperienceScreen: View {
             }
             DispatchQueue.main.async {
                 dismiss()
+                print(String(data: data!, encoding: .utf8 )!)
             }
-            print(String(data: data!, encoding: .utf8 )!)
         }.resume()
             
     }
