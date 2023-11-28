@@ -15,8 +15,6 @@ struct EditExperienceView: View {
     @State var title = ""
     @State var description = ""
     @State var location: Location = Location()
-//    @State var city = ""
-//    @State var state = ""
     @State var rating = 4
     @State var date: Date = Date()
     @State var keywords: [String] = []
@@ -136,8 +134,8 @@ struct EditExperienceView: View {
                     Button {
                         // id, title, description, state, city, rating, keywords, date
                         self.createKeywords()
-                        let updatedExperience = Experience(id: experience.id, title: title, description: description, rating: rating, keywords: keywords, date: Int(date.timeIntervalSinceReferenceDate), location:location,  imageUrl: experience.imageUrl)
-//                        let updatedExperience = Experience(id: experience.id, title: title, description: description, rating: rating, keywords: keywords, date: Int(date.timeIntervalSinceReferenceDate), location:location,  imageUrl: experience.imageUrl, userID: experience.userID)
+//                        let updatedExperience = Experience(id: experience.id, title: title, description: description, rating: rating, keywords: keywords, date: Int(date.timeIntervalSinceReferenceDate), location:location,  imageUrl: experience.imageUrl)
+                        let updatedExperience = Experience(id: experience.id, title: title, description: description, rating: rating, keywords: keywords, date: Int(date.timeIntervalSinceReferenceDate), location:location,  imageUrl: experience.imageUrl, userID: experience.userID)
                         self.updateExperience(objectName: "experience", object: updatedExperience)
                     } label: {
                         Text("Save")
@@ -167,8 +165,6 @@ struct EditExperienceView: View {
                 self.title = experience.title
                 self.description = experience.description
                 self.location = experience.location
-//                self.city = experience.city
-//                self.state = experience.state
                 self.rating = experience.rating
                 self.date = Date(timeIntervalSinceReferenceDate: TimeInterval(experience.date))
                 

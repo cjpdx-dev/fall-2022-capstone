@@ -26,7 +26,7 @@ struct Experience: Hashable, Codable, Identifiable{
     var date: Int
     var location: Location
     var imageUrl: String
-//    var userID: String
+    var userID: String
 }
 
 

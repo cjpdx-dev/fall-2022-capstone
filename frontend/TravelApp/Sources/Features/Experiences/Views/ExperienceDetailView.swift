@@ -9,16 +9,15 @@ import SwiftUI
 
 struct ExperienceDetailView: View {
     @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var userViewModel: UserViewModel
+    var userID: String {
+        userViewModel.getSessionData()?.userData.id ?? ""
+    }
     @State var experience: Experience
-//    var userID: String = SessionManager.getData().id
-//    var isUserExperience: Bool = userID == experience.userID
     var isUserExperience: Bool = true
     var body: some View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 12) {
-                    //Image
-                    //                experience.image
-                    //                    .resizable()
                     AsyncImage(url: URL(string: experience.imageUrl)) { phase in
                         
                         if let image = phase.image {
@@ -35,7 +34,7 @@ struct ExperienceDetailView: View {
                     }
                     .frame(width: .infinity, height: 250)
                     .overlay(alignment: .bottomTrailing) {
-                        if isUserExperience {
+                        if userID == experience.id {
                             NavigationLink {
                                 EditExperienceView(experience: $experience)
                                     .navigationTitle("Update Experience")
@@ -47,8 +46,6 @@ struct ExperienceDetailView: View {
                             }
                             .buttonStyle(.plain)
                         }
-                        
-                        
                     }
                     
                     VStack(alignment: .leading, spacing: 20) {
