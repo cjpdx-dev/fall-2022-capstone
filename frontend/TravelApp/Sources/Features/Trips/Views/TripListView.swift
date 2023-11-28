@@ -11,6 +11,16 @@ struct TripListView: View {
     @State private var searchText: String = ""
     @State private var trips: [Trip] = []
     
+    // This is the user session
+    @EnvironmentObject var userViewModel:  UserViewModel
+    // This is the user's data that is pulled from the user's session
+    // You could access the session token "token" by calling...
+    //      token = userData.token
+    private var userData: UserModel? {
+        userViewModel.getSessionData()?.userData
+        
+    }
+    
     var filteredResults: [Trip] {
         if searchText.isEmpty {
             return trips
