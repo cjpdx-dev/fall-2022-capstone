@@ -49,8 +49,8 @@ def get_user_profile_by_id(id):
 def update_user(id):
     user_data = request.json.get('userData')
     db = current_app.config['db']
+    
     updated_user = db_users.update_user(db, id, user_data)
-
     if updated_user is None:
         return jsonify({"message": "User not found"}), 404
     else: 

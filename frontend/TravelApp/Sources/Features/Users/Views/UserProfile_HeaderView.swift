@@ -23,16 +23,21 @@ struct UserProfile_HeaderView: View {
             VStack(alignment: .leading) {
                 Text(userData.displayName)
                     .font(.title)
-                Text(userData.userBio ?? "")
-                    .font(.subheadline)
-                
-                if userData.homeCity != "" {
-                    Text(userData.homeCity ?? "")
+                if let userBio = userData.userBio {
+                    Text(userBio)
                         .font(.subheadline)
                 }
-                if userData.homeCity != "" {
-                    Text(userData.homeState ?? "")
+                
+                if let userCity = userData.homeCity{
+                    Text(userCity)
+                        .font(.subheadline)
                 }
+                
+                if let userState = userData.homeState{
+                    Text(userState)
+                    .font(.subheadline)
+                }
+                    
             }
             
             Spacer()

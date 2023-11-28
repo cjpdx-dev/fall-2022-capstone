@@ -9,9 +9,13 @@ import SwiftUI
 
 struct TripScreen: View {
     
+    // This is the user session
+    @EnvironmentObject var userViewModel:  UserViewModel
+    
     var body: some View {
         NavigationView{
             TripListView()
+                .environmentObject(userViewModel)
         }
     }
 }

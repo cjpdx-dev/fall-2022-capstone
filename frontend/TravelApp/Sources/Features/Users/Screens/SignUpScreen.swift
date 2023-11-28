@@ -9,9 +9,8 @@ import SwiftUI
 
 struct SignUpScreen: View {
     @Environment(\.dismiss) var dismiss
-    @State private var isUserRegistered = false
     
-    @ObservedObject var userViewModel = UserViewModel()
+    @EnvironmentObject      var userViewModel:  UserViewModel
 
     @State      private var userEmail:                  String = ""
     @State      private var displayName:                String = ""
@@ -32,8 +31,8 @@ struct SignUpScreen: View {
     @FocusState private var passwordIsFocused:          Bool
     @FocusState private var confirmPasswordIsFocused:   Bool
     
-    
     var body: some View {
+
         VStack {
             Image(systemName: "map.circle")
                 .resizable()
@@ -51,6 +50,7 @@ struct SignUpScreen: View {
                     .font(.subheadline)
 
                 TextField("Email Address", text: $userEmail)
+                    .textInputAutocapitalization(.none)
                     .keyboardType(.emailAddress)
                     .font(.system(size: 14))
                     .focused($emailIsFocused)
@@ -77,6 +77,7 @@ struct SignUpScreen: View {
                     .font(.subheadline)
 
                 TextField("Display Name", text: $displayName)
+                    .textInputAutocapitalization(.none)
                     .keyboardType(.emailAddress)
                     .font(.system(size: 14))
                     .focused($displayNameIsFocused)
@@ -189,7 +190,6 @@ struct SignUpScreen: View {
             // Create Account Button
             Button {
                 handleCreateAccount()
-                UserProfileScreen()
             } label: {
                 HStack {
                     Text("Create Account")
@@ -204,6 +204,11 @@ struct SignUpScreen: View {
         }
         .padding(.horizontal)
         .padding(.top, 12)
+        .onChange(of: userViewModel.isLoggedIn) { isLoggedIn in
+            if isLoggedIn {
+                dismiss()
+            }
+        }
         
         Spacer()
         
@@ -225,10 +230,8 @@ struct SignUpScreen: View {
                                          displayName:   displayName,
                                          birthDate:     birthDate,
                                          userPassword:  userPassword)
-                
             }
         }
-        
     }
     
     func validateAllFields() -> Bool {
@@ -252,7 +255,7 @@ struct SignUpScreen: View {
             return true
         }
     }
-        
+    
     // Account Data Validation
     func validateEmail() {
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"

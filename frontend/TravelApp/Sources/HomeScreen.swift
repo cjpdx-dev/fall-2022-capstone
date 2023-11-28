@@ -9,27 +9,29 @@ import SwiftUI
 
 struct HomeScreen: View {
     var experiences: [Experience]
-    @State private var registrationComplete = false
-    @EnvironmentObject var userViewModel: UserViewModel
+    
+    @EnvironmentObject var userViewModel:  UserViewModel
+    
     var body: some View {
-        if registrationComplete {
-            
-        }
+
         TabView {
             ExperienceScreen(experiences: experiences)
                 .tabItem {
                     Label("Experiences", systemImage: "book.closed")
                 }
+                .environmentObject(userViewModel)
             
             TripScreen()
                 .tabItem {
                     Label("Trips", systemImage: "car")
                 }
+                .environmentObject(userViewModel)
             
             UserProfileScreen()
                 .tabItem {
                     Label("Profile", systemImage: "person.circle")
                 }
+                .environmentObject(userViewModel)
         }
     }
 }

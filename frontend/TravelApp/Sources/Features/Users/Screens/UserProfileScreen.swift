@@ -8,15 +8,21 @@
 import SwiftUI
 
 struct UserProfileScreen: View {
-    @EnvironmentObject var userViewModel:   UserViewModel
-    @State private  var userData =          SessionManager.shared.getSessionData()?.userData
-    @State private  var profileIsPublic:    Bool = false
-    @State private  var locationIsPublic:   Bool = false
+    
+    @EnvironmentObject var userViewModel:  UserViewModel
+    @State private var profileIsPublic:    Bool = false
+    @State private var locationIsPublic:   Bool = false
     @Environment(\.dismiss) var dismiss
+    
+    private var userData: UserModel? {
+        userViewModel.getSessionData()?.userData
+    }
+    
     var body: some View {
         
         VStack(spacing: 20) {
             if let userData = userData {
+                
                 UserProfile_HeaderView(userData: userData)
                 
                 UserProfile_InfoFieldView(
@@ -60,43 +66,38 @@ struct UserProfileScreen: View {
                     self.locationIsPublic = userData.locationIsPublic
                 }
                 
-                UserProfile_InfoFieldView(
-                    title: "Home City",
-                    placeholder: "Home City",
-                    value: userData.homeCity ?? ""
-                )
-                .padding(.horizontal)
+                if let userCity = userData.homeCity {
+                    UserProfile_InfoFieldView(
+                        title: "Home City",
+                        placeholder: "Home City",
+                        value: userCity
+                    )
+                    .padding(.horizontal)
+                }
                 
-                UserProfile_InfoFieldView(
-                    title: "Home State",
-                    placeholder: "Home State",
-                    value: userData.homeCity ?? ""
-                )
-                .padding(.horizontal)
+                if let userState = userData.homeState {
+                    UserProfile_InfoFieldView(
+                        title: "Home State",
+                        placeholder: "Home State",
+                        value: userState
+                    )
+                    .padding(.horizontal)
+                }
                 
                 Divider()
                 
                 Button {
-                    handleLogOut()
+                    userViewModel.clearSession()
+                    dismiss()
                 } label: {
                     HStack(spacing: 3) {
                         Text("Sign Out?")
                             .fontWeight(.bold)
                     }
                 }
-                
                 Divider()
-                
             }
             Spacer()
-
-        }
-    }
-    
-    func handleLogOut() {
-        DispatchQueue.main.async {
-            SessionManager.shared.clearSession()
-            dismiss()
         }
     }
 }

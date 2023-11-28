@@ -1,18 +1,27 @@
 
 
 
-def find_user_by_email(db, user_email):
-    print("1")
+def get_user_id_by_email(db, user_email):
+    print("Called db_users.get_user_id_by_email")
     user_ref = db.collection('users').where('userEmail', '==', user_email).get()
     if len(user_ref) == 0:
-        print("2")
-        return 0
+        return None
     else:
-        print("3")
-        return user_ref[0]
+        return user_ref[0].to_dict()['id']
+
+def get_user_by_email(db, user_email, include_password_hash=False):
+    print("Called db_users.find_user_by_email")
+    user_ref = db.collection('users').where('userEmail', '==', user_email).get()
+    if len(user_ref) == 0:
+        return None
+    else:
+        user = user_ref[0].to_dict()
+        if not include_password_hash:
+            user.pop('passwordHash', None)
+        return user
 
 def register_user(db, required_fields):
-
+    print("Called db_users.register_user")
     user_ref = db.collection('users').document()
 
     new_user = {
@@ -38,7 +47,6 @@ def register_user(db, required_fields):
     }
 
     user_ref.set(new_user)
-
     created_user = user_ref.get()
     if not created_user.exists:
         return None
@@ -46,20 +54,14 @@ def register_user(db, required_fields):
         # return the created user's id
         return created_user.to_dict()['id']
 
-def get_user_by_id(db, uid):
+def get_user_by_id(db, uid, include_private=False):
+    print("Called db_users.get_user_by_id")
     user_doc = db.collection('users').document(uid).get()
     if user_doc is None:
         return None
     else:
         user = user_doc.to_dict()
-        user.pop('passwordHash', None)
-        if user['homeState'] is None:
-            user.pop('homeState', None)
-        if user['homeCity'] is None:
-            user.pop('homeCity', None)
-        if user['userBio'] is None:
-            user.pop('userBio', None)
-        if user['profileImageURL'] is None:
-            user.pop('profileImageURL', None)
-        
+        if not include_private:
+            user.pop('passwordHash', None)
+            
         return user

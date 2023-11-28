@@ -9,14 +9,14 @@ import Foundation
 
 
 
+
 class UserAPI {
     
-    let baseURL = "http://127.0.0.1:5000"
-    
-    struct LoginResponse: Codable {
-        let user: UserModel
-        let token: String
+    struct ErrorResponse: Codable {
+        let message: String
     }
+    
+    let baseURL = "http://127.0.0.1:5000"
     
     func createUser(user: CreateUserModel, completion: @escaping (UserModel?) -> Void) {
         
@@ -42,11 +42,10 @@ class UserAPI {
                 completion(nil)
                 return
             }
-            print(data)
+            // print(data)
             if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 201 {
                 let loginResponse = try? JSONDecoder().decode(UserModel.self, from: data)
                 print("UsersAPI.swift: Create Accout Successful")
-                print("Login Response: \(loginResponse)")
                 completion(loginResponse)
             } else {
                 completion(nil)
@@ -56,17 +55,19 @@ class UserAPI {
         }.resume()
     }
     
-    
-    
     func loginUser(userEmail: String, userPassword: String, completion: @escaping (UserModel?) -> Void) {
-        guard let url = URL(string: "\(baseURL)/login") else {
+        
+        print(userEmail)
+        print(userPassword)
+        
+        guard let url = URL(string: "\(baseURL)/auth/login") else {
             completion(nil)
             return
         }
 
         let loginDetails = [
-            "email": userEmail,
-            "password": userPassword
+            "userEmail": userEmail,
+            "userPassword": userPassword
         ]
 
         guard let jsonData = try? JSONSerialization.data(withJSONObject: loginDetails, options: []) else {
@@ -75,20 +76,40 @@ class UserAPI {
         }
 
         var request = URLRequest(url: url)
-        request.httpMethod = "GET"
+        request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = jsonData
 
         URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data, error == nil else {
+            
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
                 completion(nil)
                 return
             }
-
-            if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
-                let loginResponse = try? JSONDecoder().decode(UserModel.self, from: data)
-                completion(loginResponse)
-            } else {
+            
+            guard let httpResponse = response as? HTTPURLResponse, let data = data else {
+                completion(nil)
+                return
+            }
+        
+            switch httpResponse.statusCode {
+            case 200:
+                do {
+                    let loginResponse = try JSONDecoder().decode(UserModel.self, from: data)
+                    completion(loginResponse)
+                } catch {
+                    print("Decoding error (200): \(error.localizedDescription)")
+                    completion(nil)
+                }
+                
+            default:
+                do {
+                    let errorResponse = try JSONDecoder().decode(ErrorResponse.self, from: data)
+                    print("Server Error: \(errorResponse.message)")
+                } catch {
+                    print("Decoding error (non 200): \(error.localizedDescription)")
+                }
                 completion(nil)
             }
         }.resume()

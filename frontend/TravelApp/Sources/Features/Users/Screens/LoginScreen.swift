@@ -8,8 +8,14 @@
 import SwiftUI
 
 struct LoginScreen: View {
-    @State private var email: String = ""
-    @State private var password: String = ""
+    
+    @EnvironmentObject      var userViewModel:  UserViewModel
+    
+    @State private var email:       String = ""
+    @State private var password:    String = ""
+    
+    @Environment(\.dismiss) var dismiss
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -29,7 +35,7 @@ struct LoginScreen: View {
                 
                 // sign in button
                 Button {
-                    print("Log user in")
+                    handleUserLogin()
                 } label: {
                     HStack {
                         Text("Log In")
@@ -46,10 +52,8 @@ struct LoginScreen: View {
             .padding(.horizontal)
             .padding(.top, 12)
             
-            
-            
-            
             Spacer()
+            
             NavigationLink {
                 SignUpScreen()
                     .navigationBarBackButtonHidden()
@@ -63,6 +67,18 @@ struct LoginScreen: View {
             
             
             
+        }
+        .onChange(of: userViewModel.isLoggedIn) { isLoggedIn in
+            if isLoggedIn {
+                dismiss()
+            }
+        }
+    }
+    
+    func handleUserLogin() {
+        DispatchQueue.main.async {
+            userViewModel.loginUser(userEmail:     email,
+                                    userPassword:  password)
         }
     }
 }

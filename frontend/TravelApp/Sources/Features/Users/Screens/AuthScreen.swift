@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AuthScreen: View {
     var body: some View {
+        
         VStack {
             VStack(spacing: 50) {
                 Text("Travel App")

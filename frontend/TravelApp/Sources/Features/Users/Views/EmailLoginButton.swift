@@ -10,7 +10,7 @@ import SwiftUI
 struct EmailLoginButton: View {
     var body: some View {
         Button {
-            // Show LoginScreen
+            SignUpScreen()
         } label: {
             Text("Sign Up With Email")
                 .frame(width: UIScreen.main.bounds.width - 50, height:45)

@@ -1,8 +1,7 @@
-from flask import request
 from firebase_admin import auth
 
-
 def verify_token(auth_header):
+    print("Called verify_token")
     if not auth_header:
         return None
     
