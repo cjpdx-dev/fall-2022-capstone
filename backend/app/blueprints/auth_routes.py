@@ -24,13 +24,15 @@ def register_user():
 
     for field in required_fields.keys():
         if required_fields[field] is None:
+            print("Missing required field: " + str(field))
             return jsonify({"message": f"{field} is required"}), 400
 
     db = current_app.config['db']
 
     # Confirm user does not already exist
-    found_user = db_users.find_user_by_email(db, required_fields['userEmail'])
-    if found_user != 0:
+    found_user = db_users.get_user_by_email(db, required_fields['userEmail'])
+    if found_user is not None:
+        print("User already exists")
         return jsonify({"message": "User already exists"}), 400
 
     # Hand and salt the password
