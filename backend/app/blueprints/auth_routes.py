@@ -47,31 +47,27 @@ def register_user():
         print("User already exists")
         return jsonify({"message": "User email already exists"}), 400
 
-    # Hand and salt the password
-    hash = hash_password(required_fields['userPassword'])
-    required_fields['hash'] = hash
+    # Hash and salt the password
+    required_fields['hash'] = hash_password(required_fields['hash'])
 
     # Register the user
-    new_user_id = db_users.register_user(db, required_fields)
+    created_user = db_users.register_user(db, required_fields)
 
     # Generate a JWT to establish a session for the user
-    session_token = generate_jwt(new_user_id)
+    session_token = generate_jwt(created_user['id'])
     
     # Confirm a session token was generated, then return the user object with the session token
     if session_token is None:
         return jsonify({"message": "User Session Token Could Not Be Created - Login Failed"}), 401
-    
-    user = db_users.get_private_user_by_uid(db, new_user_id)
-    user['token'] = session_token
-    
-    return jsonify(user), 201
+    else:
+        created_user['token'] = session_token
+        return jsonify(created_user), 201
 
 # -------------------------------------------------------------------------------------------------
 # auth/login
 # - - - - - - - - - - - - - -
 @auth_bp.route('/login', methods=["POST"])
 def login():
-
     # Define required fields
     required_fields = {'userEmail':     request.json.get('userEmail'), 
                        'userPassword':  request.json.get('userPassword') 
@@ -86,13 +82,14 @@ def login():
 
     # Validate user email and get user object
     db = current_app.config['db']
-    user = db_users.get_private_user_by_email(db, required_fields['userEmail'], include=True)
+    user = db_users.get_private_user_by_email(db, required_fields['userEmail'], include_creds_id=True)
     if user is None:
         return jsonify({"message": "Invalid Credentials"}), 404
     
+    print(user)
     # Get hashed credentials
     user_creds = db_users.get_user_creds(db, user['creds_id'])
-    
+    print(user_creds)
     # Confirm password is correct
     if not check_password(required_fields['userPassword'], user_creds['hash']):
         return jsonify({"message": "Invalid credentials"}), 404
@@ -119,7 +116,7 @@ def generate_jwt(uid):
         'exp': datetime.utcnow() + timedelta(days=7)
     }
 
-    session_token = jwt.encode(payload, os.environ.get('PRIVATE_KEY'), algorithm='RS256').decode('utf-8')
+    session_token = jwt.encode(payload, os.environ.get('PRIVATE_KEY'), algorithm='RS256')
     return session_token
 
 
