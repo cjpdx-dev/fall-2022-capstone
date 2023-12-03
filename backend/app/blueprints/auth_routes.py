@@ -15,7 +15,7 @@ from   db_modules       import db_users
 auth_bp = Blueprint('auth', __name__)
 
 # -------------------------------------------------------------------------------------------------
-# auth/register
+# auth/registerß
 # - - - - - - - - - - - - - -
 @auth_bp.route('/register', methods=['POST'])
 def register_user():
@@ -116,7 +116,8 @@ def generate_jwt(uid):
         'exp': datetime.utcnow() + timedelta(days=7)
     }
 
-    session_token = jwt.encode(payload, os.environ.get('PRIVATE_KEY'), algorithm='RS256')
+    private_key = os.environ.get('JWT_PRIVATE_KEY')
+    session_token = jwt.encode(payload, private_key, algorithm='RS256')
     return session_token
 
 

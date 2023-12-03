@@ -38,6 +38,8 @@ struct UserProfileScreen: View {
             
             if let userData = userData {
                 
+                Spacer()
+                
                 HStack {
                     
                     Image(systemName: "person.circle.fill")
@@ -45,10 +47,12 @@ struct UserProfileScreen: View {
                         .scaledToFit()
                         .frame(width: 50, height: 50)
                         .foregroundColor(Color.gray)
+                        .padding(.leading)
                     
                     VStack(alignment: .leading) {
                         
                         Text(userData.displayName)
+                            .font(.headline)
 
                         if let userBio = userData.userBio {
                         Text(userBio)
@@ -65,6 +69,7 @@ struct UserProfileScreen: View {
                             .font(.subheadline)
                         }
                     }
+                    .padding(.leading)
                     
                     Spacer()
                     
@@ -81,8 +86,11 @@ struct UserProfileScreen: View {
                             Image(systemName: "app.badge.checkmark")
                         }
                     }
+                    .padding(.trailing)
+                    
+                    
                 }
-                .padding(.horizontal)
+                .padding()
                 
                 Spacer()
                 
