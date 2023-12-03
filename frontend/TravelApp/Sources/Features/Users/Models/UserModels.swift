@@ -19,8 +19,7 @@ struct UserModel: Codable {
     var token:                  String
     
     var userEmail:              String
-    
-    
+
     var profileIsPublic:        Bool
     var displayName:            String
     var userBio:                String?

@@ -8,9 +8,12 @@
 import SwiftUI
 
 struct SignUpScreen: View {
-    @Environment(\.dismiss) var dismiss
     
-    @EnvironmentObject      var userViewModel:  UserViewModel
+    @Environment(\.dismiss)
+    var dismiss
+    
+    @EnvironmentObject      
+    var userViewModel:  UserViewModel
 
     @State      private var userEmail:                  String = ""
     @State      private var displayName:                String = ""

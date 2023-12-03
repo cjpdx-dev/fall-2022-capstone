@@ -1,30 +1,33 @@
 
 import jwt
 from flask import current_app
+import os
 
 def verify_token(auth_header):
 
     print("Called verify_token")
 
-    if not auth_header:
-        raise ValueError("Authorization header is expected")
+    if auth_header and auth_header.startswith('Bearer '):
+        auth_token = auth_header.split(' ')[1]
+    else:
+        raise ValueError("Missing token or invalid token header")
     
     try:
-        token = auth_header.headers.get('Authorization')
-        payload = jwt.decode(token, current_app.config['SECRET_KEY'], algorithms=["RS256"])
+        public_key = os.environ.get('JWT_PUBLIC_KEY')
+        payload = jwt.decode(auth_token, public_key, algorithms=["RS256"])
         return payload['sub']
     
     except jwt.ExpiredSignatureError:
         raise jwt.ExpiredSignatureError("Token expired. Please log in again.")
     
     except jwt.InvalidTokenError:
-        raise jwt.InvalidTokenError("Invalid token. Could not decode token.")
+        raise jwt.InvalidTokenError("InvalidTokenError")
     
     except ValueError:
-        raise ValueError("Invalid token. Could not decode token.")
+        raise ValueError("Could not decode token (value error)")
     
     except KeyError:
-        raise KeyError("Invalid token. Could not decode token.")
+        raise KeyError("Could not decode token (key error)")
     
     except Exception as e:
         print("FATAL: Uncaught Exception in services.verify_token(auth_header) \n \n " + str(e) + "\n Exiting.")

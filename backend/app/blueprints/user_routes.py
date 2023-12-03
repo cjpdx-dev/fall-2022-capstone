@@ -12,11 +12,13 @@ from app.services   import verify_token
 user_bp = Blueprint('user', __name__)
 
 
-@user_bp.route('/<int:id>/private', methods=['GET'])
-def get_user_with_token():
-
+@user_bp.route('/<string:id>/private', methods=['GET'])
+def get_user_with_token(id):
+    print("@user_bp.route('/<string:id>/private', methods=['GET'])")
+    print(request.headers)
     try:
         auth_header = request.headers.get('Authorization')
+        print(auth_header)
         user_id = verify_token(auth_header)
 
         if user_id is None:
@@ -39,7 +41,7 @@ def get_user_with_token():
         return jsonify(found_user), 200
     
 
-@user_bp.route('/<id>/public', methods=['GET'])
+@user_bp.route('/<string:id>/public', methods=['GET'])
 def get_public_user(id):
     db = current_app.config['db']
     found_user = db_users.get_public_user_by_uid(db, id)
@@ -50,7 +52,7 @@ def get_public_user(id):
         return jsonify(found_user), 200
 
 
-@user_bp.route('/<int:id>', methods=['PATCH'])
+@user_bp.route('/<string:id>', methods=['PATCH'])
 def update_user(id):
 
     user_data = request.json.get('userData')
@@ -62,6 +64,6 @@ def update_user(id):
         return jsonify(updated_user), 200
 
 
-@user_bp.route('/<int:id>', methods=['DELETE'])
+@user_bp.route('/<string:id>', methods=['DELETE'])
 def delete_user(id):
     pass
