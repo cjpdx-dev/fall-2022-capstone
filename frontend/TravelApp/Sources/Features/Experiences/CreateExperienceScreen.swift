@@ -21,8 +21,8 @@ struct CreateExperienceScreen: View {
     @State private var newExperience: NewExperience?
     @State private var location: Location = Location()
     @EnvironmentObject var userViewModel: UserViewModel
-    var userData: UserModel {
-        userViewModel.getSessionData()!.userData
+    var userID: String {
+        userViewModel.getSessionData()?.userData.id ?? ""
     }
     var api = ExperienceAPI()
     
@@ -113,8 +113,7 @@ struct CreateExperienceScreen: View {
                     // Save Button
                     Button {
                         self.createKeywords()
-//                        newExperience = NewExperience(title: title, description: description, location: location, rating: rating, keywords: keywords, date: date)
-                        newExperience = NewExperience(title: title, description: description, location: location, rating: rating, keywords: keywords, date: date, userID: userData.id)
+                        newExperience = NewExperience(title: title, description: description, location: location, rating: rating, keywords: keywords, date: date, userID: userID)
                         self.createExperience(objectName: "experience", object: newExperience!)
                         
                     } label: {
