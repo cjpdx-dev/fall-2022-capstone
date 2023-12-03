@@ -11,12 +11,14 @@ import PhotosUI
 struct EditExperienceView: View {
     // DONT FORGET TO ADD USERID TO THE NEWEXPERIENCE MODEL AND HERE AS WELL!!
     @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var userViewModel: UserViewModel
+    var userData: UserModel {
+        userViewModel.getSessionData()!.userData
+    }
     @Binding var experience: Experience
     @State var title = ""
     @State var description = ""
     @State var location: Location = Location()
-//    @State var city = ""
-//    @State var state = ""
     @State var rating = 4
     @State var date: Date = Date()
     @State var keywords: [String] = []
@@ -136,7 +138,8 @@ struct EditExperienceView: View {
                     Button {
                         // id, title, description, state, city, rating, keywords, date
                         self.createKeywords()
-                        let updatedExperience = Experience(id: experience.id, title: title, description: description, rating: rating, keywords: keywords, date: Int(date.timeIntervalSinceReferenceDate), location:location,  imageUrl: experience.imageUrl)
+//                        let updatedExperience = Experience(id: experience.id, title: title, description: description, rating: rating, keywords: keywords, date: Int(date.timeIntervalSinceReferenceDate), location:location,  imageUrl: experience.imageUrl)
+                        let updatedExperience = Experience(id: experience.id, title: title, description: description, rating: rating, keywords: keywords, date: Int(date.timeIntervalSinceReferenceDate), location:location,  imageUrl: experience.imageUrl, userID: experience.userID, ratings: experience.ratings, averageRating: experience.averageRating)
                         self.updateExperience(objectName: "experience", object: updatedExperience)
                     } label: {
                         Text("Save")
@@ -145,6 +148,7 @@ struct EditExperienceView: View {
                     }
                     .foregroundColor(.white)
                     .frame(width: 100, height: 40)
+                    
                     .background(title.isEmpty || description.isEmpty || location.city.isEmpty || location.state.isEmpty ? Color.gray : Color.black)
                     .border(Color.white)
                     .disabled(title.isEmpty || description.isEmpty || location.city.isEmpty || location.state.isEmpty)
@@ -166,8 +170,6 @@ struct EditExperienceView: View {
                 self.title = experience.title
                 self.description = experience.description
                 self.location = experience.location
-//                self.city = experience.city
-//                self.state = experience.state
                 self.rating = experience.rating
                 self.date = Date(timeIntervalSinceReferenceDate: TimeInterval(experience.date))
                 
@@ -180,7 +182,7 @@ struct EditExperienceView: View {
     // METHODS
     func updateExperience(objectName: String, object: Experience) {
         let requestBody = api.multipartFormDataBodyUpdateExperience(objectName, object, experienceImage)
-        let request = api.generateUpdateRequest(httpBody: requestBody, httpMethod: .post, id: experience.id)
+        let request = api.generateUpdateRequest(httpBody: requestBody, httpMethod: .post, id: experience.id, token: userData.token)
         
         URLSession.shared.dataTask(with: request) { data, resp, error in
             if let error = error {
@@ -219,4 +221,5 @@ struct EditExperienceView: View {
 
 #Preview {
     EditExperienceView(experience: .constant(experiences[0]))
+        .environmentObject(UserViewModel())
 }

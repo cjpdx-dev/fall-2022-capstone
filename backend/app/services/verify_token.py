@@ -1,30 +1,36 @@
-from firebase_admin import auth
+
+import jwt
+from flask import current_app
+import os
 
 def verify_token(auth_header):
+
     print("Called verify_token")
-    if not auth_header:
-        return None
-    
-    parts = auth_header.split()
 
-    if parts[0].lower() != 'bearer':
-        raise ValueError("Invalid token header. Must start with Bearer")
+    if auth_header and auth_header.startswith('Bearer '):
+        auth_token = auth_header.split(' ')[1]
+    else:
+        raise ValueError("Missing token or invalid token header")
     
-    elif len(parts) == 1:
-        raise ValueError("Token not found")
-    
-    elif len(parts) > 2:
-        raise ValueError("Auth header must be Bearer <token>")
-    
-    token = parts[1]
-
     try:
-        decoded_token = auth.verify_id_token(token, check_revoked=True)
-        return decoded_token['uid']
+        public_key = os.environ.get('JWT_PUBLIC_KEY')
+        payload = jwt.decode(auth_token, public_key, algorithms=["RS256"])
+        return payload['sub']
     
-    except auth.RevokedIdTokenError:
-        raise auth.RevokedIdTokenError("Revoked Token")
+    except jwt.ExpiredSignatureError:
+        raise jwt.ExpiredSignatureError("Token expired. Please log in again.")
     
-    except auth.InvalidIdTokenError:
-        raise auth.InvalidIdTokenError("Invalid Token")
+    except jwt.InvalidTokenError:
+        raise jwt.InvalidTokenError("InvalidTokenError")
+    
+    except ValueError:
+        raise ValueError("Could not decode token (value error)")
+    
+    except KeyError:
+        raise KeyError("Could not decode token (key error)")
+    
+    except Exception as e:
+        print("FATAL: Uncaught Exception in services.verify_token(auth_header) \n \n " + str(e) + "\n Exiting.")
+        exit(1)
+
     
