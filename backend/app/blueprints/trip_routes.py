@@ -12,8 +12,10 @@ def verify_user(request):
     """Verifies the user based on the 'Authorization' token in the
     request header."""
     auth_header = request.headers.get('Authorization')
+    print(f"auth_header: {auth_header}")
     try:
-        user_id = verify_token.verify_token(auth_header)
+        user_id = verify_token(auth_header)
+        print(f"user_id: {user_id}")
         if not user_id:
             raise ValueError("User not found")
         return user_id
@@ -42,13 +44,11 @@ def validate_trip_name(name):
 
 def validate_trip_dates(start_date_str, end_date_str):
     """Verifies that startDate and endDate of trip are valid."""
-    # Replace 'Z' with '+00:00' for UTC
-    start_date_str = start_date_str.replace('Z', '+00:00')
-    end_date_str = end_date_str.replace('Z', '+00:00')
-
     try:
-        start_date = datetime.fromisoformat(start_date_str)
-        end_date = datetime.fromisoformat(end_date_str)
+        start_date = datetime.fromisoformat(start_date_str).replace(
+            tzinfo=timezone.utc)
+        end_date = datetime.fromisoformat(end_date_str).replace(
+            tzinfo=timezone.utc)
     except ValueError:
         return "Invalid date format"
 
@@ -58,8 +58,10 @@ def validate_trip_dates(start_date_str, end_date_str):
         return "Trip duration cannot exceed 1 year"
 
     # Check that dates are not more than 50 years in past or future
-    past_limit = datetime.now(timezone.utc) - timedelta(days=365 * 50)
-    future_limit = datetime.now(timezone.utc) + timedelta(days=365 * 50)
+    now_utc = datetime.now(timezone.utc)
+    past_limit = now_utc - timedelta(days=365 * 50)
+    future_limit = now_utc + timedelta(days=365 * 50)
+
     if start_date < past_limit or end_date < past_limit:
         return "Dates cannot be more than 50 years in the past"
     if start_date > future_limit or end_date > future_limit:
@@ -110,10 +112,11 @@ def create_trip():
     # # Add user_id to 'user' property of trip
     # try:
     #     user_id = verify_user(request)
+    #     print(user_id)
     #     trip_data['user'] = user_id
     # except ValueError as e:
     #     return jsonify({"message": str(e)}), 401
-    trip_data['user'] = "fakeUserId"
+    trip_data['user'] = "fakeUser"
 
     # Check that required attributes are provided
     if 'name' not in trip_data or 'startDate' not in trip_data \

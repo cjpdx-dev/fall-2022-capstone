@@ -11,7 +11,6 @@ struct TripDetailView: View {
     @Binding var trip: Trip
     @State private var tripIsDeleted = false
     @State private var sortedExperiences = [Date: [Experience]]()
-    
     private func getAndSortExperiences() {
         let api = TripsAPI()
         var experiences = [Experience]()
@@ -42,8 +41,6 @@ struct TripDetailView: View {
                     Text(trip.name)
                         .font(.title).bold()
                     Spacer()
-                    // The following edit button should ONLY be visible
-                    // if the viewing user is the creator of the trip
                     NavigationLink(destination: TripEditView(trip: $trip, onTripUpdated: {
                     })) {
                         Image("edit")
@@ -86,15 +83,15 @@ struct TripDetailView: View {
             }.padding()
         }
         .onAppear {
-            getAndSortExperiences()
-        }
+                getAndSortExperiences()
+            }
     }
 }
 
-struct TripDetailView_Previews: PreviewProvider {
-    @State static var previewTrip = Trip(id: "1234", name: "Sample Trip", description: "Description", startDate: Date(), endDate: Date(), user: "Sample User", experiences: [])
-
-    static var previews: some View {
-        TripDetailView(trip: $previewTrip)
-    }
-}
+//struct TripDetailView_Previews: PreviewProvider {
+//    @State static var previewTrip = Trip(id: "1234", name: "Sample Trip", description: "Description", startDate: Date(), endDate: Date(), user: "Sample User", experiences: [])
+//
+//    static var previews: some View {
+//        TripDetailView(trip: $previewTrip)
+//    }
+//}

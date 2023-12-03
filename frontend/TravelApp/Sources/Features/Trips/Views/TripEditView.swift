@@ -7,50 +7,98 @@
 
 import SwiftUI
 
+enum ActiveAlert: Identifiable {
+    case experienceValidation, deleteConfirmation
+    var id: Self { self }
+}
+
 struct TripEditView: View {
     @Binding var trip: Trip
     @Environment(\.dismiss) var dismiss
     var onTripUpdated: () -> Void
     @State private var allExperiences: [Experience] = []
     @State private var selectedExperiences: Set<String> = []
+    @State private var tempStartDate: Date = Date()
+    @State private var tempEndDate: Date = Date()
+    @State private var alertMessage = ""
+    @State private var activeAlert: ActiveAlert?
+    @State private var showingAlert = false
+    @State private var showingDeleteConfirmation = false
+    @State private var deleteAction: () -> Void = {}
+    @EnvironmentObject var userViewModel: UserViewModel
+    private var userData: UserModel? {
+      userViewModel.getSessionData()?.userData
+    }
     var api = TripsAPI()
+    
+    private func validateExperiences() -> Bool {
+        for experienceId in selectedExperiences {
+            guard let experience = allExperiences.first(where: { $0.id == experienceId }) else { continue }
+            let experienceDate = Date(timeIntervalSinceReferenceDate: TimeInterval(experience.date))
+            if experienceDate < tempStartDate || experienceDate > tempEndDate {
+                print("Experience date is out of range")
+                activeAlert = .experienceValidation
+                alertMessage = "One or more selected experiences fall outside the trip's date range."
+                return false
+            }
+        }
+        print("All experiences are within the date range")
+        return true
+    }
+    
+    let dateFormatter: DateFormatter = {
+           let formatter = DateFormatter()
+           formatter.dateFormat = "yyyy-MM-dd"
+           formatter.timeZone = TimeZone(secondsFromGMT: 0)
+           return formatter
+        }()
         
     var body: some View {
             VStack {
-                Form {
-                    Section(header: Text("Trip Details")) {
-                        TextField("Trip Name", text: $trip.name)
-                            .padding(.horizontal, 5)
-
-                        ZStack(alignment: .topLeading) {
-                            if trip.description.isEmpty {
-                                Text("Describe your trip here...")
-                                    .foregroundColor(Color(UIColor.placeholderText))
-                                    .padding(.horizontal, 5)
-                                    .padding(.vertical, 8)
+                ZStack {
+                    Color.white.edgesIgnoringSafeArea(.all)
+                    Form {
+                        Section(header: Text("Trip Details")) {
+                            TextField("Trip Name", text: $trip.name)
+                                .padding(.horizontal, 5)
+                            
+                            ZStack(alignment: .topLeading) {
+                                if trip.description.isEmpty {
+                                    Text("Describe your trip here...")
+                                        .padding(.horizontal, 5)
+                                        .padding(.vertical, 8)
+                                }
+                                
+                                TextEditor(text: $trip.description)
+                                    .frame(minHeight: 100)
                             }
                             
-                            TextEditor(text: $trip.description)
-                                .frame(minHeight: 100)
+                            DatePicker(
+                                "Start Date",
+                                selection: $tempStartDate,
+                                displayedComponents: .date
+                            )
+                            .environment(\.timeZone, TimeZone(secondsFromGMT: 0)!)
+                            .padding(.horizontal, 5)
+                            
+                            DatePicker(
+                                "End Date",
+                                selection: $tempEndDate,
+                                displayedComponents: .date
+                            )
+                            .environment(\.timeZone, TimeZone(secondsFromGMT: 0)!)
+                            .padding(.horizontal, 5)
                         }
-
-                        DatePicker(
-                            "Start Date",
-                            selection: $trip.startDate,
-                            displayedComponents: .date
-                        )
-                        .padding(.horizontal, 5)
-                        
-                        DatePicker(
-                            "End Date",
-                            selection: $trip.endDate,
-                            displayedComponents: .date
-                        )
-                        .padding(.horizontal, 5)
-                    }
-                    Section(header: Text("Select Experiences")) {
-                        // Only display experiences that are within date range
-                        SelectExperiencesView(selectedExperiences: $selectedExperiences, allExperiences: allExperiences)
+                        Section(header: Text("Select Experiences")) {
+                            SelectExperiencesView(
+                                selectedExperiences: $selectedExperiences,
+                                allExperiences: allExperiences,
+                                tripStartDate: tempStartDate,
+                                tripEndDate: tempEndDate,
+                                alertMessage: $alertMessage,
+                                showingAlert: $showingAlert
+                            )
+                        }
                     }
                 }
                 .navigationBarTitle("Edit Trip", displayMode: .inline)
@@ -74,18 +122,35 @@ struct TripEditView: View {
                     .cornerRadius(10)
                     
                     Button(action: {
-                        trip.experiences = Array(selectedExperiences)
-                        api.updateTrip(trip: trip) { success in
-                            DispatchQueue.main.async {
-                                if success {
-                                    // Show an alert "Trip saved"
-                                    onTripUpdated()
-                                    dismiss()
-                                } else {
-                                    // Show an error message to user
-                                    print("Error - Failed to update trip")
+                        print("Save button pressed")
+                        if validateExperiences() {
+                            print("Experiences validated, proceeding with save")
+                            trip.startDate = dateFormatter.string(from: tempStartDate)
+                            trip.endDate = dateFormatter.string(from: tempEndDate)
+                            trip.experiences = Array(selectedExperiences)
+                            
+                            if let token = userData?.token {
+                                api.updateTrip(trip: trip, token: token) { result in
+                                    DispatchQueue.main.async {
+                                        switch result {
+                                        case .success:
+                                            onTripUpdated()
+                                            dismiss()
+                                        case .failure(let error):
+                                            switch error {
+                                            case .custom(let errorMessage):
+                                                alertMessage = errorMessage
+                                                showingAlert = true
+                                            }
+                                        }
+                                    }
                                 }
+                            } else {
+                                alertMessage = "User token not available"
+                                showingAlert = true
                             }
+                        } else {
+                            print("Experience validation failed")
                         }
                     }) {
                         Text("Save")
@@ -99,13 +164,18 @@ struct TripEditView: View {
                 .padding()
                 
                 Button(action: {
-                    api.deleteTrip(tripId: trip.id ?? "") { success in
-                        DispatchQueue.main.async {
-                            if success {
-                                // Take user back to TripScreen page
-                                dismiss()
-                            } else {
-                                print("Error - Failed to delete trip")
+                    activeAlert = .deleteConfirmation
+                    self.deleteAction = {
+                        if let token = userData?.token, let tripId = trip.id {
+                            api.deleteTrip(tripId: tripId, token: token) { success in
+                                DispatchQueue.main.async {
+                                    if success {
+                                        dismiss()
+                                    } else {
+                                        alertMessage = "Error - Failed to delete trip"
+                                        showingAlert = true
+                                    }
+                                }
                             }
                         }
                     }
@@ -123,8 +193,34 @@ struct TripEditView: View {
                         .stroke(Color.red, lineWidth: 2)
                 )
             }
-            .background(Color(UIColor.systemGroupedBackground))
-            .onAppear(perform: loadExperiences)
+            .alert(item: $activeAlert) { alertType in
+                    switch alertType {
+                    case .experienceValidation:
+                        return Alert(
+                            title: Text("Error"),
+                            message: Text(alertMessage),
+                            dismissButton: .default(Text("OK"))
+                        )
+                    case .deleteConfirmation:
+                        return Alert(
+                            title: Text("Delete Trip"),
+                            message: Text("Are you sure you want to delete this trip?"),
+                            primaryButton: .destructive(Text("Delete")) { self.deleteAction() },
+                            secondaryButton: .cancel()
+                        )
+                    }
+                }
+            .onAppear {
+                loadExperiences()
+                if let startDate = dateFormatter.date(from: trip.startDate),
+                   let endDate = dateFormatter.date(from: trip.endDate) {
+                    tempStartDate = startDate
+                    tempEndDate = endDate
+                } else {
+                    tempStartDate = Date()
+                    tempEndDate = Date()
+                }
+            }
         }
     private func loadExperiences() {
         api.getExperiences { experiences in
@@ -134,7 +230,6 @@ struct TripEditView: View {
             }
         }
     }
-
 }
 
 //#Preview {

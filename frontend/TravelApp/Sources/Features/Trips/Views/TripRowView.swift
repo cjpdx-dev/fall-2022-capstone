@@ -28,9 +28,9 @@ struct TripRowView: View {
     }
 }
 
-#Preview {
-    Group {
-        TripRowView(trip: Trip(id: "1234", name: "Sample Trip", description: "Description", startDate: Date(), endDate: Date(), user: "Sample User", experiences: []))
-    }
-   
-}
+//#Preview {
+//    Group {
+//        TripRowView(trip: Trip(id: "1234", name: "Sample Trip", description: "Description", startDate: Date(), endDate: Date(), user: "Sample User", experiences: []))
+//    }
+//   
+//}
