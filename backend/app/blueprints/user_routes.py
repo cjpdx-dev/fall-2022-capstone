@@ -39,13 +39,14 @@ def get_user_with_token():
         return jsonify(found_user), 200
     
 
-@user_bp.route('/<int:id>/public', methods=['GET'])
+@user_bp.route('/<id>/public', methods=['GET'])
 def get_public_user(id):
     db = current_app.config['db']
     found_user = db_users.get_public_user_by_uid(db, id)
     if found_user is None:
         return jsonify({"message": "User not found"}), 404
     else:
+        found_user["token"] = ""
         return jsonify(found_user), 200
 
 

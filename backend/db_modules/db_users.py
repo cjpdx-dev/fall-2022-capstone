@@ -110,9 +110,9 @@ def get_public_user_by_uid(db, uid):
         if user['profileIsPublic'] == False:
             return None
         
-        if user['locationsArePublic'] == False:
-            user.pop('homeState', None)
-            user.pop('homeCity', None)
+        # if user['locationsArePublic'] == False:
+        #     user.pop('homeState', None)
+        #     user.pop('homeCity', None)
             
         if user['experiencesArePublic'] == False:
             user.pop('experienceIDs', None)
