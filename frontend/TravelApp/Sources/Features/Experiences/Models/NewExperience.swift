@@ -17,4 +17,5 @@ struct NewExperience: Codable {
     var date: Date
     var userID: String
     var ratings: [String:Int] = [:]
+    var averageRating: Double = 0
 }

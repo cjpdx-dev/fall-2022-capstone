@@ -216,6 +216,22 @@ def getExperience(id):
 
 @experience_bp.route('/<id>/rate', methods=["POST"])
 def rateExperience(id):
-    print(id)
-    print(request.body)
-    pass
+    # Update the averageRating for the experience
+    updated_experience = request.get_json()
+    rating_sum = 0
+    for key in updated_experience["ratings"]:
+        rating_sum += updated_experience["ratings"][key]
+    average_rating = rating_sum / len(updated_experience["ratings"])
+    updated_experience["averageRating"] = average_rating
+    # Update Experience in the database
+    db = current_app.config['db']
+    
+    temp_id = updated_experience['id']
+    del updated_experience['id']
+    updated_experience = db_experiences.update_experience(db, temp_id, updated_experience)
+    if updated_experience:
+        print(updated_experience)
+        return updated_experience, 200
+    else:
+        print("Failed to rate the experience")
+        return jsonify({"message": "Experience not found"})

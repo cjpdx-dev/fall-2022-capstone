@@ -13,6 +13,9 @@ struct RateExperienceView: View {
     var userData: UserModel {
         userViewModel.getSessionData()!.userData
     }
+    var userID: String {
+        userViewModel.getSessionData()!.userData.id
+    }
     @Binding var experience: Experience
     @State private var rating: Int = 5
     var api = ExperienceAPI()
@@ -32,8 +35,8 @@ struct RateExperienceView: View {
             }
             // Save Button
             Button {
-                print("Rated Experience")
-                let updatedExperience = Experience(id: experience.id, title: experience.title, description: experience.description, rating: rating, keywords: experience.keywords, date: experience.date, location:experience.location,  imageUrl: experience.imageUrl, userID: experience.userID, ratings: experience.ratings)
+                self.experience = Experience(id: experience.id, title: experience.title, description: experience.description, rating: experience.rating, keywords: experience.keywords, date: experience.date, location:experience.location,  imageUrl: experience.imageUrl, userID: experience.userID, ratings: experience.ratings)
+                self.experience.ratings.updateValue(rating, forKey: userID)
                 self.rateExperience()
             } label: {
                 Text("Rate")
@@ -47,10 +50,12 @@ struct RateExperienceView: View {
             }
             .disabled(rating > 4)
         }
+        .padding()
         
     }
     
     func rateExperience() {
+        
         guard let url = URL(string: "\(api.developmentUrl)\(self.experience.id)/rate") else {fatalError("Missing URL")}
         let encoder = JSONEncoder()
         guard let bodyData = try? encoder.encode(self.experience) else {
@@ -60,6 +65,7 @@ struct RateExperienceView: View {
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = "POST"
         urlRequest.httpBody = bodyData
+        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         URLSession.shared.dataTask(with: urlRequest) { data, resp, error in
             if let error = error {
                 print(error)

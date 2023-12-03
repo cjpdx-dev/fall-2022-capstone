@@ -37,6 +37,7 @@ struct SearchView: View {
             .listStyle(.plain)
             .searchable(text: $searchText)
         }
+        .navigationTitle("Search Location")
     }
     func search(text: String) {
         let searchRequest = MKLocalSearch.Request()

@@ -23,7 +23,7 @@ struct UserProfileScreen: View {
         VStack(spacing: 20) {
             if let userData = userData {
                 
-                UserProfile_HeaderView(userData: userData)
+//                UserProfile_HeaderView(userData: userData)
                 
                 UserProfile_InfoFieldView(
                     title: "Email Address",
@@ -49,12 +49,12 @@ struct UserProfileScreen: View {
                 )
                 .padding(.horizontal)
                 
-                UserProfile_InfoFieldView(
-                    title: "Birth Date",
-                    placeholder: "Birth Date",
-                    value: userData.birthDate
-                )
-                .padding(.horizontal)
+//                UserProfile_InfoFieldView(
+//                    title: "Birth Date",
+//                    placeholder: "Birth Date",
+//                    value: userData.birthDate
+//                )
+//                .padding(.horizontal)
                 
                 HStack {
                     Text("Location Is Public")

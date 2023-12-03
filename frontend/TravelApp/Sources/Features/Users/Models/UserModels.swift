@@ -20,7 +20,6 @@ struct UserModel: Codable {
     
     var userEmail:              String
     
-    var birthDate:              String
     
     var profileIsPublic:        Bool
     var displayName:            String
