@@ -18,7 +18,7 @@ struct RateExperienceView: View {
     }
     @Binding var experience: Experience
     @State private var rating: Int = 5
-    var api = ExperienceAPI()
+    var experienceApi = ExperienceAPI()
     var body: some View {
         VStack(spacing: 40) {
             // Rating
@@ -56,7 +56,7 @@ struct RateExperienceView: View {
     
     func rateExperience() {
         
-        guard let url = URL(string: "\(api.productionUrl)\(self.experience.id)/rate") else {fatalError("Missing URL")}
+        guard let url = URL(string: "\(experienceApi.developmentUrl)\(self.experience.id)/rate") else {fatalError("Missing URL")}
         let encoder = JSONEncoder()
         guard let bodyData = try? encoder.encode(self.experience) else {
             print("Error")
