@@ -12,7 +12,13 @@
         "date": 720629580,
         "description": "I have always dreamed of going to Disney, and now all of my dreams came true! I have always dreamed of going to Disney, and now all of my dreams came true! I have always dreamed of going to Disney, and now all of my dreams came true! I have always dreamed of going to Disney, and now all of my dreams came true! I have always dreamed of going to Disney, and now all of my dreams came true! I have always dreamed of going to Disney, and now all of my dreams came true! I have always dreamed of going to Disney, and now all of my dreams came true! I have always dreamed of going to Disney, and now all of my dreams came true! I have always dreamed of going to Disney, and now all of my dreams came true! I have always dreamed of going to Disney, and now all of my dreams came true! I have always dreamed of going to Disney, and now all of my dreams came true! I have always dreamed of going to Disney, and now all of my dreams came true! I have always dreamed of going to Disney, and now all of my dreams came true! I have always dreamed of going to Disney, and now all of my dreams came true! I have always dreamed of going to Disney, and now all of my dreams came true! I have always dreamed of going to Disney, and now all of my dreams came true! I have always dreamed of going to Disney, and now all of my dreams came true!",
         "imageUrl": "https://storage.googleapis.com/fall-2023-capstone.appspot.com/2B5232FB.jpg",
-        "keywords": ["Disney", "California", "Fun"]
+        "keywords": ["Disney", "California", "Fun"],
+        "userID": "123456",
+        "ratings": {
+            "37438243": 4,
+            "534534": 2
+        },
+        "averageRating" : 3.33
     },
     {
         "title": "Grand Canyon",
@@ -27,6 +33,12 @@
         "date": 721235640,
         "description": "I had a very fun time going to the Grand Canyon today. It is so much more beautiful in person!",
         "imageUrl": "https://www.googleapis.com/storage/v1/b/fall-2023-capstone.appspot.com/o/B3F584F6.jpg",
-        "keywords": ["Canyon", "Arizona", "Grand"]
+        "keywords": ["Canyon", "Arizona", "Grand"],
+        "userID": "654321",
+        "ratings": {
+            "37438243": 1,
+            "534534": 2
+        },
+        "averageRating" : 1.5
     }
 ]

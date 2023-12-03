@@ -12,12 +12,12 @@ struct AuthScreen: View {
         
         VStack {
             VStack(spacing: 50) {
-                Text("Travel App")
+                Text("CrowdTrekk")
                     .font(.largeTitle)
                     .bold()
-                Image(systemName: "map.circle")
+                Image("travel-icon")
                     .resizable()
-                    .frame(width: 150, height: 150)
+                    .frame(width: 250, height: 250)
             }
             .padding(.top)
             

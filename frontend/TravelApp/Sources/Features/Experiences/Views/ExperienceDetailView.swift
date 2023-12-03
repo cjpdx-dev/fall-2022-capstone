@@ -10,11 +10,21 @@ import SwiftUI
 struct ExperienceDetailView: View {
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var userViewModel: UserViewModel
+    @State var experience: Experience
+    var averageRatingStr: String {
+        if experience.ratings.count > 0 {
+            return String(format: "%.2f", (experience.averageRating + 1))
+        }
+        return "No Public Ratings"
+    }
     var userID: String {
         userViewModel.getSessionData()?.userData.id ?? ""
     }
-    @State var experience: Experience
+    var userName: String {
+        userViewModel.getSessionData()?.userData.displayName ?? "John Cena"
+    }
     var isUserExperience: Bool = true
+    
     var body: some View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 12) {
@@ -58,9 +68,11 @@ struct ExperienceDetailView: View {
                             HStack{
                                 Image(systemName: "star.fill")
                                     .symbolRenderingMode(.multicolor)
-                                Text("\(experience.rating + 1)/5")
+                                Text("\(averageRatingStr)")
+                                    .fontWeight(.semibold)
                             }
                         }
+                        
                         
                         HStack {
                             // Location
@@ -74,6 +86,28 @@ struct ExperienceDetailView: View {
                                     .fontWeight(.semibold)
                             }
                         }
+                        HStack {
+                            Text("\(userName)'s Rating")
+                                .fontWeight(.semibold)
+                            Spacer()
+                            HStack{
+                                Image(systemName: "star.fill")
+                                    .symbolRenderingMode(.multicolor)
+                                Text("\(experience.rating + 1)")
+                            }
+                        }
+                        NavigationLink {
+                            RateExperienceView(experience: $experience)
+                        } label: {
+                            Text("Rate Experience")
+                                .frame(width: UIScreen.main.bounds.width - 50, height:45)
+                                .foregroundColor(.white)
+                                .background(Color(.black))
+                                .cornerRadius(12)
+                                .shadow(color: .gray, radius: 2, x: 0, y: 2)
+                        }
+                        
+                        
                         Divider()
                         
                         
@@ -122,5 +156,6 @@ struct ExperienceDetailView: View {
 
 #Preview {
     ExperienceDetailView(experience: experiences[0])
+        .environmentObject(UserViewModel())
 }
 

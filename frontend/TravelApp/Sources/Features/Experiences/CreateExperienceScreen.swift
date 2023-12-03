@@ -20,7 +20,10 @@ struct CreateExperienceScreen: View {
     @State private var experienceImage: UIImage?
     @State private var newExperience: NewExperience?
     @State private var location: Location = Location()
-    @EnvironmentObject var userData: UserViewModel
+    @EnvironmentObject var userViewModel: UserViewModel
+    var userData: UserModel {
+        userViewModel.getSessionData()!.userData
+    }
     var api = ExperienceAPI()
     
     
@@ -111,7 +114,7 @@ struct CreateExperienceScreen: View {
                     Button {
                         self.createKeywords()
 //                        newExperience = NewExperience(title: title, description: description, location: location, rating: rating, keywords: keywords, date: date)
-                        newExperience = NewExperience(userID: (userData.getSessionData()?.userData.id)!, title: title, description: description, location: location, rating: rating, keywords: keywords, date: date)
+                        newExperience = NewExperience(title: title, description: description, location: location, rating: rating, keywords: keywords, date: date, userID: userData.id)
                         self.createExperience(objectName: "experience", object: newExperience!)
                         
                     } label: {
@@ -146,7 +149,7 @@ struct CreateExperienceScreen: View {
     // METHODS
     func createExperience(objectName: String, object: NewExperience) {
         let requestBody = api.multipartFormDataBodyNewExperience(objectName, object, experienceImage!)
-        let request = api.generateCreateRequest(httpBody: requestBody, httpMethod: .post)
+        let request = api.generateCreateRequest(httpBody: requestBody, httpMethod: .post, token: "")
         
         URLSession.shared.dataTask(with: request) { data, resp, error in
             if let error = error {

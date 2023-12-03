@@ -18,23 +18,25 @@ enum HTTPMethod: String {
 class ExperienceAPI {
     
     public let boundary: String = "Boundary-\(UUID().uuidString)"
-    private let developmentUrl: URL = URL(string: "http://127.0.0.1:5000/experiences/")!
-    private var productionUrl: URL = URL(string: "https://fall-2023-capstone.wl.r.appspot.com/experiences/")!
+     let developmentUrl: URL = URL(string: "http://127.0.0.1:5000/experiences/")!
+     var productionUrl: URL = URL(string: "https://fall-2023-capstone.wl.r.appspot.com/experiences/")!
     
-    public func generateCreateRequest(httpBody: Data, httpMethod: HTTPMethod) -> URLRequest {
+    public func generateCreateRequest(httpBody: Data, httpMethod: HTTPMethod, token: String) -> URLRequest {
         var request = URLRequest(url: self.developmentUrl)
         request.httpMethod = httpMethod.rawValue
         request.httpBody = httpBody
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         request.setValue("multipart/form-data; boundary=" + self.boundary, forHTTPHeaderField: "Content-Type")
         return request
     }
     
-    public func generateUpdateRequest(httpBody: Data, httpMethod: HTTPMethod, id: String) -> URLRequest {
+    public func generateUpdateRequest(httpBody: Data, httpMethod: HTTPMethod, id: String, token: String) -> URLRequest {
         let urlString = "http://127.0.0.1:5000/experiences/\(id)"
         let updateUrl = URL(string: urlString)
         var request = URLRequest(url: updateUrl!)
         request.httpMethod = httpMethod.rawValue
         request.httpBody = httpBody
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         request.setValue("multipart/form-data; boundary=" + self.boundary, forHTTPHeaderField: "Content-Type")
         return request
     }
@@ -104,11 +106,12 @@ class ExperienceAPI {
         return body
     }
     
-    func deleteExperience(id: String) {
+    func deleteExperience(id: String, token: String) {
         guard let url = URL(string: "\(self.developmentUrl)\(id)") else {fatalError("Missing URL")}
         
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = "DELETE"
+        urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         let dataTask = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
             if let error = error {
                 print("Request error: ", error)
@@ -125,12 +128,6 @@ class ExperienceAPI {
         }
         dataTask.resume()
     }
-    
-//    func updateExperience(id: String, experience: Experience) {
-//        guard let url = URL(string: "\(self.developmentUrl)\(id)") else {fatalError("Missing URL")}
-//        
-//        var urlRequest =
-//    }
     
     
 }

@@ -27,6 +27,8 @@ struct Experience: Hashable, Codable, Identifiable{
     var location: Location
     var imageUrl: String
     var userID: String
+    var ratings: [String:Int]
+    var averageRating: Double = 0
 }
 
 
