@@ -5,6 +5,7 @@ def register_user(db, required_fields):
     # Create new user document, init user fields, then store the user
     user_ref = db.collection('users').document()
     new_user = {
+        'id':                   user_ref.id,    
         'creds_id':             None,
         'userEmail':            required_fields['userEmail'],
         'profileIsPublic':      True,
@@ -22,47 +23,57 @@ def register_user(db, required_fields):
         'tripsArePublic':       True,
         'tripIDs':              []
     }
-    user_ref.set(new_user)
 
-    created_user = user_ref.get()
-    if not created_user.exists:                                 # Confirm user was created
+    creds_id = store_user_creds(db, required_fields['hash'], required_fields['birthDate']) 
+    if creds_id is None:
         return None
     else:
-        # Store user credentials
-        creds_id = store_user_creds(db, required_fields['hash'], required_fields['birthDate']) 
-        
-        if creds_id is None:                                    
-            user_ref.delete()                                   # Abort the user creation and delete the user object
-        else:                                                   # Update the user object with the credentials id, 
-                                                                # then return the user id
-            created_user_dict = created_user.to_dict()
-            created_user_dict['creds_id'] = creds_id
-            
-            user_ref.set(created_user_dict)
+        new_user['creds_id'] = creds_id
+        user_ref.set(new_user)
 
-            return created_user_dict['id']                  
+    # Confirm user creation. If failed: delete the credentials that were created
+    created_user = user_ref.get()
+    if not created_user.exists:
+        delete_user_creds(db, creds_id)                                 
+        return None
+    else:
+        created_user = created_user.to_dict()
+        created_user.pop('creds_id', None)
+        return created_user
+           
 
-
-def store_user_creds(db, user_birthdate, hash):
-
+def store_user_creds(db, hash, user_birthdate):
     credentials_ref = db.collection('credentials').document()
     
-    user_creds = {'hash': hash, 'birthdate': user_birthdate}
-    credentials_ref.set(user_creds)
+    cred_data = {'hash': hash, 'birthdate': user_birthdate}
+    credentials_ref.set(cred_data)
 
     created_creds = credentials_ref.get()
     if not created_creds.exists:
         return None
-    
     else:
-        return created_creds.to_dict()['id']
+        print("Credentials ID: " + str(credentials_ref.id))
+        return credentials_ref.id
     
+
 def get_user_creds(db, creds_id):
     creds_ref = db.collection('credentials').document(creds_id).get()
     if not creds_ref.exists:
         return None
     else:
-        return creds_ref.to_dict()
+        user_creds = creds_ref.to_dict()
+        return user_creds
+
+
+def delete_user_creds(db, creds_id):
+    creds_ref = db.collection('credentials').document(creds_id)
+    creds_ref.delete()
+    
+    deleted_creds = creds_ref.get()
+    if deleted_creds.exists:
+        return None
+    else:
+        return True
     
 
 def get_private_user_by_email(db, user_email, include_creds_id=False):

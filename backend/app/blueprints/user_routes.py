@@ -1,15 +1,13 @@
 
-# Flask Imports
+# flask Imports
 from flask          import Blueprint, jsonify, current_app, request
 
-# Python Imports
+# python Imports
 from jwt           import ExpiredSignatureError, InvalidTokenError
 
-
+# project imports
 from db_modules     import db_users
 from app.services   import verify_token
-
-
 
 user_bp = Blueprint('user', __name__)
 
