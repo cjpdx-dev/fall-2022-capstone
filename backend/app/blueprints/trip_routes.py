@@ -12,10 +12,8 @@ def verify_user(request):
     """Verifies the user based on the 'Authorization' token in the
     request header."""
     auth_header = request.headers.get('Authorization')
-    print(f"auth_header: {auth_header}")
     try:
         user_id = verify_token(auth_header)
-        print(f"user_id: {user_id}")
         if not user_id:
             raise ValueError("User not found")
         return user_id
@@ -109,14 +107,12 @@ def create_trip():
     db = current_app.config['db']
     trip_data = request.json
 
-    # # Add user_id to 'user' property of trip
-    # try:
-    #     user_id = verify_user(request)
-    #     print(user_id)
-    #     trip_data['user'] = user_id
-    # except ValueError as e:
-    #     return jsonify({"message": str(e)}), 401
-    trip_data['user'] = "fakeUser"
+    # Add user_id to 'user' property of trip
+    try:
+        user_id = verify_user(request)
+        trip_data['user'] = user_id
+    except ValueError as e:
+        return jsonify({"message": str(e)}), 401
 
     # Check that required attributes are provided
     if 'name' not in trip_data or 'startDate' not in trip_data \
@@ -157,12 +153,12 @@ def update_trip(id):
     db = current_app.config['db']
     trip_data = request.json
 
-    # # Verify user
-    # try:
-    #     user_id = verify_user(request)
-    #     verify_trip_ownership(user_id, id, db)
-    # except ValueError as e:
-    #     return jsonify({"message": str(e)}), 401
+    # Verify user
+    try:
+        user_id = verify_user(request)
+        verify_trip_ownership(user_id, id, db)
+    except ValueError as e:
+        return jsonify({"message": str(e)}), 401
 
     # Retrieve existing trip data and initialize dates for validation
     existing_trip = db_trips.get_trip_by_id(db, id)
@@ -205,12 +201,12 @@ def delete_trip(id):
     """Handle DELETE request to remove a trip with given id."""
     db = current_app.config['db']
 
-    # # Verify user
-    # try:
-    #     user_id = verify_user(request)
-    #     verify_trip_ownership(user_id, id, db)
-    # except ValueError as e:
-    #     return jsonify({"message": str(e)}), 401
+    # Verify user
+    try:
+        user_id = verify_user(request)
+        verify_trip_ownership(user_id, id, db)
+    except ValueError as e:
+        return jsonify({"message": str(e)}), 401
 
     # Delete trip
     result = db_trips.delete_trip(db, id)

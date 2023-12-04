@@ -21,7 +21,7 @@ struct CreateTripScreen: View {
     @State private var alertMessage = ""
     @EnvironmentObject var userViewModel: UserViewModel
     private var userData: UserModel? {
-      userViewModel.getSessionData()?.userData
+        userViewModel.getSessionData()?.userData
     }
     var api = TripsAPI()
     
@@ -118,7 +118,7 @@ struct CreateTripScreen: View {
                                 description: tripDescription,
                                 startDate: formattedStartDate,
                                 endDate: formattedEndDate,
-                                user: userData?.id,
+                                user: userData?.id ?? "",
                                 experiences: Array(selectedExperiences)
                             )
                             
@@ -168,7 +168,7 @@ struct CreateTripScreen: View {
             }
         }
     }
-    }
+}
 
 #Preview {
     CreateTripScreen()

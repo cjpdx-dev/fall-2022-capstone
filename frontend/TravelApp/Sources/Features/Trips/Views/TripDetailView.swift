@@ -8,9 +8,18 @@
 import SwiftUI
 
 struct TripDetailView: View {
-    @Binding var trip: Trip
+    @State var trip: Trip
+    @EnvironmentObject var userViewModel: UserViewModel
     @State private var tripIsDeleted = false
     @State private var sortedExperiences = [Date: [Experience]]()
+    @State var tripCreatorUsername: String = ""
+    var userApi = UserAPI()
+    var userID: String {
+        userViewModel.getSessionData()?.userData.id ?? ""
+    }
+    var token: String {
+        userViewModel.getSessionData()?.userData.token ?? ""
+    }
     private func getAndSortExperiences() {
         let api = TripsAPI()
         var experiences = [Experience]()
@@ -41,18 +50,20 @@ struct TripDetailView: View {
                     Text(trip.name)
                         .font(.title).bold()
                     Spacer()
-                    NavigationLink(destination: TripEditView(trip: $trip, onTripUpdated: {
-                    })) {
-                        Image("edit")
-                            .resizable()
-                            .frame(width: 24, height: 24)
+                    if userID == trip.user {
+                        NavigationLink(destination: TripEditView(trip: $trip, onTripUpdated: {
+                        })) {
+                            Image("edit")
+                                .resizable()
+                                .frame(width: 24, height: 24)
+                        }
                     }
                 }
                 HStack {
                     Image("user")
                         .resizable()
                         .frame(width: 15, height:15)
-                    Text(trip.user ?? "Unknown user")
+                    Text(tripCreatorUsername)
                         .font(.footnote)
                 }
                 Text(trip.formattedDateRange)
@@ -84,7 +95,41 @@ struct TripDetailView: View {
         }
         .onAppear {
                 getAndSortExperiences()
+                if let tripUserId = trip.user {
+                    getUsernameOfTripCreator(tripUserId: tripUserId)
+                } else {
+                    print("No user ID for this Trip")
+                }
             }
+    }
+    
+    func getUsernameOfTripCreator(tripUserId: String) {
+        guard let url = URL(string: "\(userApi.baseURL)/users/\(tripUserId)/public") else { fatalError("Missing URL") }
+        var urlRequest = URLRequest(url: url)
+        urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        urlRequest.httpMethod = "GET"
+
+        let dataTask = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+            if let error = error {
+                print("Request error: ", error)
+                return
+            }
+            guard let response = response as? HTTPURLResponse else { return }
+            
+            if response.statusCode == 200 {
+                guard let data = data else { return }
+                DispatchQueue.main.async {
+                    do {
+                        let decoder = JSONDecoder()
+                        let decodedUser = try decoder.decode(UserModel.self, from: data)
+                        tripCreatorUsername = decodedUser.displayName
+                    } catch let error {
+                        print("Error decoding: ", error)
+                    }
+                }
+            }
+        }
+        dataTask.resume()
     }
 }
 

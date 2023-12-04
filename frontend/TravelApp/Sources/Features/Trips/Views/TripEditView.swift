@@ -16,33 +16,31 @@ struct TripEditView: View {
     @Binding var trip: Trip
     @Environment(\.dismiss) var dismiss
     var onTripUpdated: () -> Void
-    @State private var allExperiences: [Experience] = []
-    @State private var selectedExperiences: Set<String> = []
-    @State private var tempStartDate: Date = Date()
-    @State private var tempEndDate: Date = Date()
-    @State private var alertMessage = ""
-    @State private var activeAlert: ActiveAlert?
-    @State private var showingAlert = false
-    @State private var showingDeleteConfirmation = false
-    @State private var deleteAction: () -> Void = {}
+    @State var allExperiences: [Experience] = []
+    @State var selectedExperiences: Set<String> = []
+    @State var tempStartDate: Date = Date()
+    @State var tempEndDate: Date = Date()
+    @State var alertMessage = ""
+    @State var activeAlert: ActiveAlert?
+    @State var showingAlert = false
+    @State var showingDeleteConfirmation = false
+    @State var deleteAction: () -> Void = {}
     @EnvironmentObject var userViewModel: UserViewModel
-    private var userData: UserModel? {
+    var userData: UserModel? {
       userViewModel.getSessionData()?.userData
     }
     var api = TripsAPI()
     
-    private func validateExperiences() -> Bool {
+    func validateExperiences() -> Bool {
         for experienceId in selectedExperiences {
             guard let experience = allExperiences.first(where: { $0.id == experienceId }) else { continue }
             let experienceDate = Date(timeIntervalSinceReferenceDate: TimeInterval(experience.date))
-            if experienceDate < tempStartDate || experienceDate > tempEndDate {
-                print("Experience date is out of range")
+            if experienceDate < tempStartDate || experienceDate > tempEndDate.addingTimeInterval(24*60*60 - 1) {
                 activeAlert = .experienceValidation
                 alertMessage = "One or more selected experiences fall outside the trip's date range."
                 return false
             }
         }
-        print("All experiences are within the date range")
         return true
     }
     
@@ -122,9 +120,8 @@ struct TripEditView: View {
                     .cornerRadius(10)
                     
                     Button(action: {
-                        print("Save button pressed")
+                        
                         if validateExperiences() {
-                            print("Experiences validated, proceeding with save")
                             trip.startDate = dateFormatter.string(from: tempStartDate)
                             trip.endDate = dateFormatter.string(from: tempEndDate)
                             trip.experiences = Array(selectedExperiences)
@@ -222,7 +219,8 @@ struct TripEditView: View {
                 }
             }
         }
-    private func loadExperiences() {
+
+    func loadExperiences() {
         api.getExperiences { experiences in
             DispatchQueue.main.async {
                 self.allExperiences = experiences

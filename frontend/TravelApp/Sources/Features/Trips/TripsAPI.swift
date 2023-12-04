@@ -9,8 +9,8 @@ import Foundation
 
 class TripsAPI {
 
-    private let baseURL = "https://fall-2023-capstone.wl.r.appspot.com/trips"
-//    private let baseURL = "http://127.0.0.1:5000/trips"
+//    private let baseURL = "https://fall-2023-capstone.wl.r.appspot.com/trips"
+    private let baseURL = "http://127.0.0.1:5000/trips"
     
     // JSON Decoder and Encoder for handling Date
         private let decoder: JSONDecoder = {
@@ -145,8 +145,8 @@ class TripsAPI {
     
     // GET Experience
     func getExperience(experienceId: String, completion: @escaping (Experience?) -> Void) {
-        let url = URL(string: "https://fall-2023-capstone.wl.r.appspot.com/experiences/\(experienceId)")!
-//        let url = URL(string: "http://127.0.0.1:5000/experiences/\(experienceId)")!
+//        let url = URL(string: "https://fall-2023-capstone.wl.r.appspot.com/experiences/\(experienceId)")!
+        let url = URL(string: "http://127.0.0.1:5000/experiences/\(experienceId)")!
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
             
@@ -175,8 +175,8 @@ class TripsAPI {
     
     // GET Experiences for a user
     func getExperiences(completion: @escaping ([Experience]) -> Void) {
-        let url = URL(string: "https://fall-2023-capstone.wl.r.appspot.com/experiences/")!
-//        let url = URL(string: "http://127.0.0.1:5000/experiences/")!
+//        let url = URL(string: "https://fall-2023-capstone.wl.r.appspot.com/experiences/")!
+        let url = URL(string: "http://127.0.0.1:5000/experiences/")!
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         
