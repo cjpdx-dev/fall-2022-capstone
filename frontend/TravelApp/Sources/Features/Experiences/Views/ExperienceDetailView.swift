@@ -154,7 +154,7 @@ struct ExperienceDetailView: View {
                             .padding(.vertical, 10)
                             .foregroundColor(.white)
                             .background(
-                                Color.gray
+                                Color.black
                             )
                             .clipShape(Circle())
                     }

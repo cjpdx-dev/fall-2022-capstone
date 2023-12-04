@@ -14,7 +14,7 @@ class ExperienceData {
 
     
     func getExperiences(token: String) {
-        guard let url = URL(string: "http://127.0.0.1:5000/experiences/") else {fatalError("Missing URL")}
+        guard let url = URL(string: "https://fall-2023-capstone.wl.r.appspot.com/experiences/") else {fatalError("Missing URL")}
 //        let productionUrl: URL = URL(string: "https://fall-2023-capstone.wl.r.appspot.com/experiences/")!
         
         var urlRequest = URLRequest(url: url)

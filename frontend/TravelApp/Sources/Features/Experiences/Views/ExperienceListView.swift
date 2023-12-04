@@ -25,10 +25,10 @@ struct ExperienceListView: View {
             return experienceData.experiences
         } else {
             return experienceData.experiences.filter {
-                $0.title.contains(searchText) ||
-                $0.location.state.contains(searchText) ||
-                $0.location.city.contains(searchText) ||
-                $0.keywords.contains(searchText)
+                $0.title.lowercased().contains(searchText.lowercased()) ||
+                $0.location.state.lowercased().contains(searchText.lowercased()) ||
+                $0.location.city.lowercased().contains(searchText.lowercased()) ||
+                $0.keywords.contains(searchText.lowercased())
             }
         }
     }

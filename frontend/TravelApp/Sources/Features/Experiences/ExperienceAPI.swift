@@ -18,11 +18,11 @@ enum HTTPMethod: String {
 class ExperienceAPI {
     
     public let boundary: String = "Boundary-\(UUID().uuidString)"
-     let developmentUrl: URL = URL(string: "http://127.0.0.1:5000/experiences/")!
-//     var productionUrl: URL = URL(string: "https://fall-2023-capstone.wl.r.appspot.com/experiences/")!
+//     let developmentUrl: URL = URL(string: "http://127.0.0.1:5000/experiences/")!
+     var productionUrl: URL = URL(string: "https://fall-2023-capstone.wl.r.appspot.com/experiences/")!
     
     public func generateCreateRequest(httpBody: Data, httpMethod: HTTPMethod, token: String) -> URLRequest {
-        var request = URLRequest(url: self.developmentUrl)
+        var request = URLRequest(url: self.productionUrl)
         request.httpMethod = httpMethod.rawValue
         request.httpBody = httpBody
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
@@ -107,7 +107,7 @@ class ExperienceAPI {
     }
     
     func deleteExperience(id: String, token: String) {
-        guard let url = URL(string: "\(self.developmentUrl)\(id)") else {fatalError("Missing URL")}
+        guard let url = URL(string: "\(self.productionUrl)\(id)") else {fatalError("Missing URL")}
         
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = "DELETE"
