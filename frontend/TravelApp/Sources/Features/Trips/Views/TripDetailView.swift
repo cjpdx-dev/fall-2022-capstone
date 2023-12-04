@@ -10,6 +10,7 @@ import SwiftUI
 struct TripDetailView: View {
     @State var trip: Trip
     @EnvironmentObject var userViewModel: UserViewModel
+    @Environment(\.dismiss) var dismiss
     @State private var tripIsDeleted = false
     @State private var sortedExperiences = [Date: [Experience]]()
     @State var tripCreatorUsername: String = ""
@@ -33,7 +34,6 @@ struct TripDetailView: View {
                 group.leave()
             }
         }
-        
         group.notify(queue: .main) {
             sortedExperiences = [:]
             for experience in experiences {
@@ -51,8 +51,7 @@ struct TripDetailView: View {
                         .font(.title).bold()
                     Spacer()
                     if userID == trip.user {
-                        NavigationLink(destination: TripEditView(trip: $trip, onTripUpdated: {
-                        })) {
+                        NavigationLink(destination: TripEditView(trip: $trip, tripIsDeleted: $tripIsDeleted)) {
                             Image("edit")
                                 .resizable()
                                 .frame(width: 24, height: 24)
@@ -79,11 +78,13 @@ struct TripDetailView: View {
                 }
                 Divider()
                 
+                Text("Experiences")
+                    .font(.title3).bold()
                 ForEach(Array(sortedExperiences.keys.sorted()), id: \.self) { date in
                     VStack(alignment: .leading) {
                         Text(date, style: .date)
                             .font(.headline)
-                            .padding(.vertical, 2)
+                            .padding(.vertical, 4)
                         ForEach(sortedExperiences[date] ?? [], id: \.id) { experience in
                             NavigationLink(destination: ExperienceDetailView(experience: experience)) {
                                 TripExperienceView(experience: experience)
@@ -94,6 +95,11 @@ struct TripDetailView: View {
             }.padding()
         }
         .onAppear {
+            if tripIsDeleted {
+                DispatchQueue.main.async {
+                    dismiss()
+                }
+            } else {
                 getAndSortExperiences()
                 if let tripUserId = trip.user {
                     getUsernameOfTripCreator(tripUserId: tripUserId)
@@ -101,6 +107,7 @@ struct TripDetailView: View {
                     print("No user ID for this Trip")
                 }
             }
+        }
     }
     
     func getUsernameOfTripCreator(tripUserId: String) {
@@ -132,11 +139,3 @@ struct TripDetailView: View {
         dataTask.resume()
     }
 }
-
-//struct TripDetailView_Previews: PreviewProvider {
-//    @State static var previewTrip = Trip(id: "1234", name: "Sample Trip", description: "Description", startDate: Date(), endDate: Date(), user: "Sample User", experiences: [])
-//
-//    static var previews: some View {
-//        TripDetailView(trip: $previewTrip)
-//    }
-//}

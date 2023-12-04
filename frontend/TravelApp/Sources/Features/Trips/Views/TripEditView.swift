@@ -14,8 +14,8 @@ enum ActiveAlert: Identifiable {
 
 struct TripEditView: View {
     @Binding var trip: Trip
+    @Binding var tripIsDeleted: Bool
     @Environment(\.dismiss) var dismiss
-    var onTripUpdated: () -> Void
     @State var allExperiences: [Experience] = []
     @State var selectedExperiences: Set<String> = []
     @State var tempStartDate: Date = Date()
@@ -131,7 +131,6 @@ struct TripEditView: View {
                                     DispatchQueue.main.async {
                                         switch result {
                                         case .success:
-                                            onTripUpdated()
                                             dismiss()
                                         case .failure(let error):
                                             switch error {
@@ -167,6 +166,7 @@ struct TripEditView: View {
                             api.deleteTrip(tripId: tripId, token: token) { success in
                                 DispatchQueue.main.async {
                                     if success {
+                                        self.tripIsDeleted = true
                                         dismiss()
                                     } else {
                                         alertMessage = "Error - Failed to delete trip"
@@ -229,7 +229,3 @@ struct TripEditView: View {
         }
     }
 }
-
-//#Preview {
-//    TripEditView(trip: .constant(Trip(id: "1234", name: "Sample Trip", description: "This is a sample description", startDate: DateComponents(calendar: .current, year: 2023, month: 1, day: 15).date!, endDate: DateComponents(calendar: .current, year: 2023, month: 1, day: 22).date!, user: "Sample User", experiences: [])), onTripUpdated: { })
-//}

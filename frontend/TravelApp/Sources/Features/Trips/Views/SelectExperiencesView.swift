@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 struct SelectExperiencesView: View {
     @Binding var selectedExperiences: Set<String>
     @EnvironmentObject var userViewModel: UserViewModel
