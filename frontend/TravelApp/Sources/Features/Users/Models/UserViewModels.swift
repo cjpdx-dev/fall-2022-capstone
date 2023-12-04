@@ -15,10 +15,14 @@ struct SessionData: Codable {
 }
 
 class UserViewModel: ObservableObject {
-    private let api =       UserAPI()
+    private let api       = UserAPI()
     private let keychain  = KeychainSwift()
-    @Published var isLoggedIn: Bool = false
-    @Environment(\.dismiss) var dismiss
+    
+    @Published
+    var isLoggedIn: Bool  = false
+    
+    @Environment(\.dismiss) 
+    var dismiss
     
     // ----------------------------------------------------------------------------------
     // User Session Functions
@@ -31,7 +35,7 @@ class UserViewModel: ObservableObject {
         if let sessionData = try? JSONEncoder().encode(sessionData){
             keychain.set(sessionData, forKey: "userSession")
         }
-        if getSessionData() != nil { isLoggedIn = true } else { isLoggedIn = false }
+        if getSessionData() != nil { self.isLoggedIn = true } else { self.isLoggedIn = false }
     }
     
     
@@ -42,11 +46,10 @@ class UserViewModel: ObservableObject {
         return try? JSONDecoder().decode(SessionData.self, from: sessionData)
     }
     
-    
     // Delete A User Session
     func clearSession() {
         keychain.delete("userSession")
-        isLoggedIn = false
+        self.isLoggedIn = false
     }
     
     // ----------------------------------------------------------------------------------

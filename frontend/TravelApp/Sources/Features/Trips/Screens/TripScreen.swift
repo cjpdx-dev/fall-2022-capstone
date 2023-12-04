@@ -20,6 +20,7 @@ struct TripScreen: View {
     }
 }
 
-#Preview {
-    TripScreen()
-}
+//#Preview {
+//    TripScreen()
+//        .environmentObject(UserViewModel())
+//}

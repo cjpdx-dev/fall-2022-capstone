@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:/Users/rachelpratt/Desktop/fall-2023-capstone/frontend/TravelApp/Sources/Features/Experiences/Models/Place.swift">
+   </FileRef>
+   <FileRef
       location = "group:TravelApp.xcodeproj">
    </FileRef>
    <FileRef

@@ -16,8 +16,8 @@ struct ExperienceListView: View {
     // This is the user's data that is pulled from the user's session
     // You could access the session token "token" by calling...
     //      token = userData.token
-    private var userData: UserModel? {
-        userViewModel.getSessionData()?.userData
+    var token: String {
+        userViewModel.getSessionData()?.userData.token ?? ""
     }
     
     var filteredResults: [Experience] {
@@ -63,7 +63,7 @@ struct ExperienceListView: View {
             })
             .searchable(text: $searchText)
             .onAppear {
-                experienceData.getExperiences()
+                experienceData.getExperiences(token: token)
             }
         }
     }
@@ -71,4 +71,5 @@ struct ExperienceListView: View {
 
 #Preview {
     ExperienceListView(experiences: experiences)
+        .environmentObject(UserViewModel())
 }

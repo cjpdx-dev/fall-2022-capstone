@@ -13,8 +13,6 @@ struct CreateExperienceScreen: View {
     @Environment(\.dismiss) var dismiss
     @State private var title = ""
     @State private var description = ""
-//    @State private var city = ""
-//    @State private var state = ""
     @State private var rating = 4
     @State private var date: Date = Date()
     @State private var keywords: [String] = []
@@ -22,7 +20,11 @@ struct CreateExperienceScreen: View {
     @State private var experienceImage: UIImage?
     @State private var newExperience: NewExperience?
     @State private var location: Location = Location()
-    var api = ExperienceAPI()
+    @EnvironmentObject var userViewModel: UserViewModel
+    var userID: String {
+        userViewModel.getSessionData()?.userData.id ?? ""
+    }
+    var experienceApi = ExperienceAPI()
     
     
     var body: some View {
@@ -65,12 +67,6 @@ struct CreateExperienceScreen: View {
                         .frame(maxWidth:.infinity, alignment: .leading)
                         .border(Color(.darkGray))
                 }
-                    
-                
-                
-                
-//                CreateInputView(text: $city, placeholder: "Enter city", label: "City")
-//                CreateInputView(text: $state, placeholder: "Enter state", label: "State")
                 
                 // Date
                 DatePicker("Date", selection: $date, displayedComponents: .date)
@@ -117,7 +113,7 @@ struct CreateExperienceScreen: View {
                     // Save Button
                     Button {
                         self.createKeywords()
-                        newExperience = NewExperience(title: title, description: description, location: location, rating: rating, keywords: keywords, date: date)
+                        newExperience = NewExperience(title: title, description: description, location: location, rating: rating, keywords: keywords, date: date, userID: userID)
                         self.createExperience(objectName: "experience", object: newExperience!)
                         
                     } label: {
@@ -151,8 +147,8 @@ struct CreateExperienceScreen: View {
     }
     // METHODS
     func createExperience(objectName: String, object: NewExperience) {
-        let requestBody = api.multipartFormDataBodyNewExperience(objectName, object, experienceImage!)
-        let request = api.generateCreateRequest(httpBody: requestBody, httpMethod: .post)
+        let requestBody = experienceApi.multipartFormDataBodyNewExperience(objectName, object, experienceImage!)
+        let request = experienceApi.generateCreateRequest(httpBody: requestBody, httpMethod: .post, token: "")
         
         URLSession.shared.dataTask(with: request) { data, resp, error in
             if let error = error {

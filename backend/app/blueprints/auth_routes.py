@@ -1,104 +1,134 @@
+
+# flask imports
 from flask              import Blueprint, jsonify, current_app, request
 
+# python imports
+import os
 import jwt
+import bcrypt
 from   datetime         import datetime, timedelta
 
+# project imports
 from   db_modules       import db_users
-from   app.services     import hash_password, check_password
 
-import os
-
+# init blueprint
 auth_bp = Blueprint('auth', __name__)
 
+# -------------------------------------------------------------------------------------------------
+# auth/registerß
+# - - - - - - - - - - - - - -
 @auth_bp.route('/register', methods=['POST'])
 def register_user():
-    print("Called auth_routes.register_user")
 
-    print("Register User Request:")
-    print(request.json)
+    # print("auth/register request")
+    # print("----------------------")
+    # print(request.json)
+    # print("----------------------")
 
     required_fields = {'userEmail':     request.json.get('userEmail'), 
                        'displayName':   request.json.get('displayName'), 
                        'birthDate':     request.json.get('birthDate'), 
-                       'userPassword':  request.json.get('userPassword') }
+                       'hash':          request.json.get('userPassword') 
+    }
 
+    # Confirm all required fields are present
     for field in required_fields.keys():
         if required_fields[field] is None:
             print("Missing required field: " + str(field))
             return jsonify({"message": f"{field} is required"}), 400
 
-    db = current_app.config['db']
+    # TODO: Add additional validation for email/password format, request format/size, etc
 
     # Confirm user does not already exist
-    found_user = db_users.get_user_by_email(db, required_fields['userEmail'])
+    db = current_app.config['db']
+    
+    found_user = db_users.get_private_user_by_email(db, required_fields['userEmail'])
     if found_user is not None:
         print("User already exists")
-        return jsonify({"message": "User already exists"}), 400
+        return jsonify({"message": "User email already exists"}), 400
 
-    # Hand and salt the password
-    hashed_password = hash_password(required_fields['userPassword'])
-    required_fields['userPassword'] = hashed_password
+    # Hash and salt the password
+    required_fields['hash'] = hash_password(required_fields['hash'])
 
     # Register the user
-    new_user_id = db_users.register_user(db, required_fields)
+    created_user = db_users.register_user(db, required_fields)
 
     # Generate a JWT to establish a session for the user
-    session_token = generate_jwt(new_user_id)
+    session_token = generate_jwt(created_user['id'])
+    
+    # Confirm a session token was generated, then return the user object with the session token
     if session_token is None:
         return jsonify({"message": "User Session Token Could Not Be Created - Login Failed"}), 401
     else:
-        user = db_users.get_user_by_id(db, new_user_id)
-        user['token'] = session_token
-        print(user)
-        return jsonify(user), 201
+        created_user['token'] = session_token
+        return jsonify(created_user), 201
 
-
+# -------------------------------------------------------------------------------------------------
+# auth/login
+# - - - - - - - - - - - - - -
 @auth_bp.route('/login', methods=["POST"])
 def login():
-    print("Called auth_routes.login")
-
+    # Define required fields
     required_fields = {'userEmail':     request.json.get('userEmail'), 
-                       'userPassword':  request.json.get('userPassword') }
+                       'userPassword':  request.json.get('userPassword') 
+    }
 
+    # Confirm all required fields are present
     for field in required_fields.keys():
         if required_fields[field] is None:
             return jsonify({"message": f"{field} is required"}), 400
-    
+
+    # TODO: Add additional validation for email/password format, request format/size, etc
+
+    # Validate user email and get user object
     db = current_app.config['db']
-        
-    # Confirm user exists
-    user = db_users.get_user_by_email(db, required_fields['userEmail'], include_password_hash=True)
+    user = db_users.get_private_user_by_email(db, required_fields['userEmail'], include_creds_id=True)
     if user is None:
-        print("user not found")
         return jsonify({"message": "Invalid Credentials"}), 404
     
+    print(user)
+    # Get hashed credentials
+    user_creds = db_users.get_user_creds(db, user['creds_id'])
+    print(user_creds)
     # Confirm password is correct
-    if not check_password(required_fields['userPassword'], user['passwordHash']):
-        print("password incorrect")
+    if not check_password(required_fields['userPassword'], user_creds['hash']):
         return jsonify({"message": "Invalid credentials"}), 404
     else:
-        user.pop('passwordHash')
+        user.pop('creds_id', None)
 
-    # Generate a JWT to establish a session for the user
+    # Generate a JWT to establish a session for the user,
     session_token = generate_jwt(user['id'])
     if session_token is None:
         return jsonify({"message": "login failed. session token could not be generated"}), 401
-    else:
-        user['token'] = session_token
-        print("Returning user: " + str(user))
-        return jsonify(user), 200
+    
+    # Attach session token to user and return user object
+    user['token'] = session_token
+    return jsonify(user), 200
 
+# -------------------------------------------------------------------------------------------------
+# JWT and Passwored Functions
+# - - - - - - - - - - - - - -
 def generate_jwt(uid):
 
     payload = {
         'sub': uid,
         'iat': datetime.utcnow(),
-        'exp': datetime.utcnow() + timedelta(days=30)
+        'exp': datetime.utcnow() + timedelta(days=7)
     }
-    print("hello")
-    session_token = jwt.encode(payload, os.environ.get('PRIVATE_KEY'), algorithm='RS256')
-    print("goodbye")
+
+    private_key = os.environ.get('JWT_PRIVATE_KEY')
+    session_token = jwt.encode(payload, private_key, algorithm='RS256')
     return session_token
+
+
+def hash_password(password):
+    return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+
+
+def check_password(password, hashed_password):
+    return  bcrypt.checkpw(password.encode('utf-8'), hashed_password)
+
+
     
 
     
