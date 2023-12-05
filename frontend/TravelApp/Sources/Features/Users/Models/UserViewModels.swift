@@ -21,7 +21,7 @@ class UserViewModel: ObservableObject {
     @Published
     var isLoggedIn: Bool  = false
     
-    @Environment(\.dismiss) 
+    @Environment(\.dismiss)
     var dismiss
     
     // ----------------------------------------------------------------------------------
@@ -95,6 +95,52 @@ class UserViewModel: ObservableObject {
             }
         }
     }
+    
+
+    // Update User Profile
+    func updateUserProfile(displayName: String, 
+                           bio: String, 
+                           homeCity:String,
+                           homeState: String,
+                           profileVisibility: Bool,
+                           expVisibility: Bool,
+                           tripsVisibility: Bool,
+                           locationVisibility: Bool,
+                           completion: @escaping (Bool) -> Void) {
+        
+        guard var sessionData = getSessionData() else {
+            completion(false)
+            return
+        }
+        
+        var updatedUserData = sessionData.userData
+
+        updatedUserData.displayName             = displayName
+        updatedUserData.userBio                 = bio
+        updatedUserData.homeCity                = homeCity
+        updatedUserData.homeState               = homeState
+        updatedUserData.profileIsPublic         = profileVisibility
+        updatedUserData.experiencesArePublic    = expVisibility
+        updatedUserData.tripsArePublic          = tripsVisibility
+        updatedUserData.locationIsPublic        = locationVisibility
+
+
+        self.api.updateUserProfile(userData: updatedUserData) { updatedUser in
+            DispatchQueue.main.async {
+                if let updatedUser = updatedUser {
+                    self.saveSession(userData: updatedUserData)
+                    completion(true)
+                    print("Update successful")
+                    
+                } else {
+                    print("API failed to update user profile")
+                    completion(false)
+                }
+            }
+        }
+        return
+    }
+    
 }
 
  

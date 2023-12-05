@@ -1,207 +1,216 @@
-//
-//  PrivateProfileView.swift
-//  TravelApp
-//
-//  Created by Chris Jacobs on 10/25/23.
-//
-
 import SwiftUI
+
 
 struct UserProfileScreen: View {
     
-    @EnvironmentObject 
-    var userViewModel: UserViewModel
+    @EnvironmentObject var userViewModel: UserViewModel
+    @Environment(\.dismiss) var dismiss
     
-    @State private var profileIsPublic:         Bool = false
-    @State private var locationIsPublic:        Bool = false
-    @State private var experiencesArePublic:    Bool = false
-    @State private var tripsArePublic:          Bool = false
+    @State private var profileIsPublic = false
+    @State private var locationIsPublic = false
+    @State private var experiencesArePublic = false
+    @State private var tripsArePublic = false
     
-    @State private var editableHomeState    = ""
-    @State private var editableHomeCity     = ""
-    @State private var editableBio          = ""
-    @State private var editableDisplayName  = ""
+    @State private var editableHomeState = ""
+    @State private var editableHomeCity = ""
+    @State private var editableBio = ""
+    @State private var editableDisplayName = ""
     
     @State private var fieldsAreEditable = false
-    
-    
-    @Environment(\.dismiss)
-    var dismiss
+    @State private var fieldsHaveBeenEdited = false
     
     private var userData: UserModel? {
         userViewModel.getSessionData()?.userData
     }
     
     var body: some View {
-        
-        VStack(spacing: 20) {
-            
-            if let userData = userData {
-                
-                Spacer()
-                
-                HStack {
-                    
-                    Image(systemName: "person.circle.fill")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 50, height: 50)
-                        .foregroundColor(Color.gray)
-                        .padding(.leading)
-                    
-                    VStack(alignment: .leading) {
-                        
-                        Text(userData.displayName)
-                            .font(.headline)
-
-                        if let userBio = userData.userBio {
-                        Text(userBio)
-                            .font(.subheadline)
-                        }
-                        
-                        if let userCity = userData.homeCity{
-                            Text(userCity)
-                                .font(.subheadline)
-                        }
-                        
-                        if let userState = userData.homeState{
-                            Text(userState)
-                            .font(.subheadline)
-                        }
-                    }
-                    .padding(.leading)
-                    
-                    Spacer()
-                    
-                    Button(action:  {
-                        fieldsAreEditable = !fieldsAreEditable
-                    }) {
-                        if !fieldsAreEditable {
-                            Image(systemName: "square.and.pencil")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 30, height: 30)
-                        }
-                        if fieldsAreEditable {
-                            Image(systemName: "app.badge.checkmark")
-                        }
-                    }
-                    .padding(.trailing)
-                    
-                    
+        ScrollView {
+            VStack(spacing: 10) {
+                if let userData = userData {
+                    userInfoHeader(userData: userData)
+                    toggleFields(userData: userData)
+                    signOutButton
+                    deleteAccountButton
                 }
-                .padding()
-                
-                Spacer()
-                
-                UserProfile_InfoFieldView(title: "Display Name", placeholder: "Display Name", value: userData.displayName)
-                .padding(.horizontal)
-                .disabled(!fieldsAreEditable)
-
-                HStack {
-                    Text("Profile Is Public")
-                    Spacer()
-                    Toggle("", isOn: $profileIsPublic).toggleStyle(SwitchToggleStyle())
-                }
-                .onAppear {
-                    profileIsPublic = userData.profileIsPublic
-                }
-                .padding(.horizontal)
-                .disabled(!fieldsAreEditable)
-                
-                if let userBio = userData.userBio {
-                    UserProfile_InfoFieldView(title: "Bio", placeholder: "Bio", value: userBio)
-                    .padding(.horizontal)
-                    .disabled(!fieldsAreEditable)
-                    
-                } else {
-                    UserProfile_InfoFieldView(title: "Bio", placeholder: "Bio", value: editableBio)
-                    .padding(.horizontal)
-                    .disabled(!fieldsAreEditable)
-                }
-                
-                HStack {
-                    Text("Experiences Are Public")
-                    Spacer()
-                    Toggle("", isOn: $locationIsPublic).toggleStyle(SwitchToggleStyle())
-                }
-                .onAppear {
-                    experiencesArePublic = userData.experiencesArePublic
-                }
-                .padding(.horizontal)
-                .disabled(!fieldsAreEditable)
-                
-                HStack {
-                    Text("Trips Are Public")
-                    Spacer()
-                    Toggle("", isOn: $locationIsPublic).toggleStyle(SwitchToggleStyle())
-                }
-                .onAppear {
-                    tripsArePublic = userData.tripsArePublic
-                }
-                .padding(.horizontal)
-                .disabled(!fieldsAreEditable)
-                
-                
-                HStack {
-                    Text("Location Is Public")
-                    Spacer()
-                    Toggle("", isOn: $locationIsPublic).toggleStyle(SwitchToggleStyle())
-                }
-                .onAppear {
-                    locationIsPublic = userData.locationIsPublic
-                }
-                .padding(.horizontal)
-                .disabled(!fieldsAreEditable)
-                
-                
-                if let userCity = userData.homeCity {
-                    UserProfile_InfoFieldView(title: "Home City", placeholder: "Home City", value: userCity)
-                    .padding(.horizontal)
-                    .disabled(!fieldsAreEditable)
-                    
-                } else {
-                    UserProfile_InfoFieldView(title: "Home City", placeholder: "Home City", value: editableHomeCity)
-                    .padding(.horizontal)
-                    .disabled(!fieldsAreEditable)
-                }
-                
-                
-                if let userState = userData.homeState {
-                    UserProfile_InfoFieldView(title: "Home State", placeholder: "Home State", value: userState)
-                    .padding(.horizontal)
-                    .disabled(!fieldsAreEditable)
-                    
-                } else {
-                    UserProfile_InfoFieldView(title: "Home State", placeholder: "Home State", value: editableHomeState)
-                    .padding(.horizontal)
-                    .disabled(!fieldsAreEditable)
-                }
-                
-                UserProfile_InfoFieldView(title: "Email Address", placeholder: "Email Address", value: userData.userEmail)
-                .padding(.horizontal)
-                .disabled(!fieldsAreEditable)
-                
-                Divider()
-                
-                Button {
-                    userViewModel.clearSession()
-                    dismiss()
-                } label: {
-                    HStack(spacing: 3) {
-                        Text("Sign Out?")
-                            .fontWeight(.bold)
-                    }
-                }
-                Divider()
             }
-            Spacer()
+            .padding()
         }
+        .navigationTitle("User Profile")
+        .navigationBarTitleDisplayMode(.inline)
+    }
+    
+    @ViewBuilder
+    private func userInfoHeader(userData: UserModel) -> some View {
+        HStack {
+            Image(systemName: "person.circle.fill")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 48, height: 48)
+                .foregroundColor(.gray)
+            
+            VStack(alignment: .leading, spacing: 2) {
+                Group {
+                    if fieldsAreEditable {
+                        TextField("Display Name", text: $editableDisplayName)
+                            .onChange(of: editableHomeCity) {
+                                if !fieldsHaveBeenEdited {
+                                    fieldsHaveBeenEdited.toggle()
+                                }
+                            }
+                        
+                    } else {
+                        Text(editableDisplayName.isEmpty ? userData.displayName : editableDisplayName)
+                    }
+                }
+                .font(.headline)
+                
+                Group {
+                    if fieldsAreEditable {
+                        HStack {
+                            TextField("City", text: $editableHomeCity)
+                                .onChange(of: editableHomeCity) {
+                                    
+                                    if !fieldsHaveBeenEdited {
+                                        fieldsHaveBeenEdited.toggle()
+                                    }
+                                }
+                            
+                            TextField("State", text: $editableHomeState)
+                                .onChange(of: editableHomeState) {
+                                    if !fieldsHaveBeenEdited {
+                                        fieldsHaveBeenEdited.toggle()
+                                    }
+                                }
+                        }
+                        
+                    } else {
+                        Text(editableHomeCity.isEmpty ? (userData.homeCity ?? "Your Location") : editableHomeCity)
+                    }
+                }
+                .font(.subheadline)
+                
+                Group {
+                    if fieldsAreEditable {
+                        TextField("Bio", text: $editableBio)
+                            .onChange(of: editableBio) {
+                                if !fieldsHaveBeenEdited {
+                                    fieldsHaveBeenEdited.toggle()
+                                }
+                            }
+                    } else {
+                        Text(editableBio.isEmpty ? (userData.userBio ?? "No bio provided") : editableBio)
+                    }
+                }
+                .font(.subheadline)
+            }
+            
+            Spacer()
+            
+            Button(action: {
+                withAnimation {
+                    fieldsAreEditable.toggle()
+                    if !fieldsAreEditable && fieldsHaveBeenEdited {
+                        
+                        userViewModel.updateUserProfile(
+                            displayName: editableDisplayName,
+                            bio: editableBio,
+                            homeCity: editableHomeCity,
+                            homeState: editableHomeState,
+                            profileVisibility: profileIsPublic,
+                            expVisibility: experiencesArePublic,
+                            tripsVisibility: tripsArePublic,
+                            locationVisibility: locationIsPublic
+                            
+                        ) { success in
+                            if success {
+                                fieldsHaveBeenEdited.toggle()
+                            }
+                            else {
+                                print("Update Failed")
+                            }
+                        }
+                    }
+                }
+            }) {
+                Image(systemName: fieldsAreEditable ? "checkmark.square" : "pencil")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 28, height: 28)
+            }
+            .padding(.horizontal)
+        }
+    }
+    
+    @ViewBuilder
+    private func toggleFields(userData: UserModel) -> some View {
+        Group {
+            toggleField(title: "Profile Is Public", isOn: $profileIsPublic, initialValue: userData.profileIsPublic)
+                .onChange(of: profileIsPublic) {newValue in
+                    if !fieldsHaveBeenEdited { fieldsHaveBeenEdited.toggle() }
+                }
+            toggleField(title: "Experiences Are Public", isOn: $experiencesArePublic, initialValue: userData.experiencesArePublic)
+                .onChange(of: experiencesArePublic) {newValue in
+                    if !fieldsHaveBeenEdited { fieldsHaveBeenEdited.toggle() }
+                }
+            toggleField(title: "Trips Are Public", isOn: $tripsArePublic, initialValue: userData.tripsArePublic)
+                .onChange(of: tripsArePublic) {newValue in
+                    if !fieldsHaveBeenEdited { fieldsHaveBeenEdited.toggle() }
+                }
+            toggleField(title: "Location Is Public", isOn: $locationIsPublic, initialValue: userData.locationIsPublic)
+                .onChange(of: locationIsPublic) {newValue in
+                    if !fieldsHaveBeenEdited { fieldsHaveBeenEdited.toggle() }
+                }
+        }
+        .padding(.horizontal, 10)
+        .disabled(!fieldsAreEditable)
+    }
+    
+    private func toggleField(title: String, isOn: Binding<Bool>, initialValue: Bool) -> some View {
+        Toggle(isOn: isOn) {
+            Text(title)
+                .font(.body)
+        }
+        .padding(.vertical, 8)
+        .onAppear {
+            isOn.wrappedValue = initialValue
+        }
+    }
+    
+    private var signOutButton: some View {
+        Button(action: {
+            userViewModel.clearSession()
+            dismiss()
+        }) {
+            Text("Sign Out")
+                .bold()
+                .frame(maxWidth: .infinity)
+                .padding()
+                .background(Color.blue)
+                .foregroundColor(.white)
+                .cornerRadius(8)
+        }
+        .padding(.top, 10)
+    }
+    
+    private var deleteAccountButton: some View {
+        Button(action: {
+            userViewModel.clearSession()
+            dismiss()
+        }) {
+            Text("Delete Account")
+                .bold()
+                .frame(maxWidth: .infinity)
+                .padding()
+                .background(Color.red)
+                .foregroundColor(.white)
+                .cornerRadius(8)
+        }
+        .padding(.top, 10)
     }
 }
 
-
-
-#Preview {
-    UserProfileScreen()
+struct UserProfileScreen_Previews: PreviewProvider {
+    static var previews: some View {
+        UserProfileScreen().environmentObject(UserViewModel())
+    }
 }

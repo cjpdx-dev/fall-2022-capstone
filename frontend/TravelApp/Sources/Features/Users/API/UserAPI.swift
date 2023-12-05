@@ -114,5 +114,55 @@ class UserAPI {
             }
         }.resume()
     }
-    // Additional methods for auth user and fetch user
+    
+    // Update User Profile
+    func updateUserProfile(userData: UserModel, completion: @escaping (UserModel?) -> Void) {
+            
+            guard let url = URL(string: "\(baseURL)/users/\(userData.id)") else {
+                print("Invalid URL")
+                completion(nil)
+                return
+            }
+
+            var request = URLRequest(url: url)
+            request.httpMethod = "PUT" //
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            var auth_token = "Bearer " + userData.token
+            request.addValue(auth_token, forHTTPHeaderField: "Authorization")
+        
+            do {
+                let jsonData = try JSONEncoder().encode(userData)
+                request.httpBody = jsonData
+            } catch {
+                print("Error encoding user data: \(error)")
+                completion(nil)
+                return
+            }
+
+            URLSession.shared.dataTask(with: request) { data, response, error in
+                if let error = error {
+                    print("Network error: \(error.localizedDescription)")
+                    completion(nil)
+                    return
+                }
+
+                guard let httpResponse = response as? HTTPURLResponse, let data = data else {
+                    completion(nil)
+                    return
+                }
+
+                if httpResponse.statusCode == 200 {
+                    do {
+                        let updatedUser = try JSONDecoder().decode(UserModel.self, from: data)
+                        completion(updatedUser)
+                    } catch {
+                        print("Error decoding updated user: \(error)")
+                        completion(nil)
+                    }
+                } else {
+                    print("Server responded with status code: \(httpResponse.statusCode)")
+                    completion(nil)
+                }
+            }.resume()
+        }
 }

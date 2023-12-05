@@ -61,6 +61,8 @@ def register_user():
         return jsonify({"message": "User Session Token Could Not Be Created - Login Failed"}), 401
     else:
         created_user['token'] = session_token
+        print("/register(): created_user")
+        print(created_user)
         return jsonify(created_user), 201
 
 # -------------------------------------------------------------------------------------------------
@@ -103,6 +105,8 @@ def login():
     
     # Attach session token to user and return user object
     user['token'] = session_token
+    print("\n/login(): user\n")
+    print(user)
     return jsonify(user), 200
 
 # -------------------------------------------------------------------------------------------------

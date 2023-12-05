@@ -9,6 +9,7 @@ import Foundation
 
 class TripsAPI {
     private let baseURL = "https://fall-2023-capstone.wl.r.appspot.com/trips"
+    // private let baseURL = "http://192.0.0.1:5000/trips"
 
     // JSON Decoder and Encoder for handling Date
         private let decoder: JSONDecoder = {

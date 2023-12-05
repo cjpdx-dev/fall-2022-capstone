@@ -121,3 +121,41 @@ def get_public_user_by_uid(db, uid):
             user.pop('tripIDs', None)
 
         return user
+    
+def update_user(db, uid, required_fields):
+    user_ref = db.collection('users').document(uid)
+    user_to_update = user_ref.get()
+    
+    if user_to_update is None:
+        return None
+    else:
+        user_to_update = user_to_update.to_dict()
+        
+        for field in required_fields.keys():
+            if required_fields[field] is not None:
+                user_to_update[field] = required_fields[field]
+            else:
+                return None
+        
+        user_ref.set(user_to_update)
+        updated_user = user_ref.get()
+        if updated_user.exists:
+            return updated_user.to_dict()
+        else:
+            return None
+
+    
+def delete_user(db, uid):
+    user_ref = db.collection('users').document(uid)
+
+    user_to_delete = user_ref.get()
+    if user_to_delete is None:
+        return None
+    else:
+        user_ref.delete()
+    
+    deleted_user = user_ref.get()
+    if deleted_user.exists:
+        return True
+    else:
+        return False
