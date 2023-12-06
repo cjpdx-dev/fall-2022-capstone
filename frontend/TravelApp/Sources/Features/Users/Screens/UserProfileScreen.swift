@@ -194,8 +194,13 @@ struct UserProfileScreen: View {
     
     private var deleteAccountButton: some View {
         Button(action: {
-            userViewModel.clearSession()
-            dismiss()
+            userViewModel.deleteUser() { success in
+                if success {
+                    userViewModel.clearSession()
+                    dismiss()
+                }
+            }
+            
         }) {
             Text("Delete Account")
                 .bold()

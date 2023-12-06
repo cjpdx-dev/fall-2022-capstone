@@ -64,9 +64,11 @@ struct LoginScreen: View {
                         .fontWeight(.bold)
                 }
             }
-            
-            
-            
+        }
+        .alert("Login Failed", isPresented: $userViewModel.loginErrorShown) {
+            Button("OK", role: .cancel) {userViewModel.loginErrorShown = false}
+        } message: {
+            Text(userViewModel.loginErrorMessage ?? "An unknown error occurred.")
         }
         .onChange(of: userViewModel.isLoggedIn) { isLoggedIn in
             if isLoggedIn {

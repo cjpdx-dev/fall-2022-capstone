@@ -21,6 +21,12 @@ class UserViewModel: ObservableObject {
     @Published
     var isLoggedIn: Bool  = false
     
+    @Published
+    var loginErrorMessage: String? = nil
+    
+    @Published
+    var loginErrorShown: Bool = false
+    
     @Environment(\.dismiss)
     var dismiss
     
@@ -89,7 +95,8 @@ class UserViewModel: ObservableObject {
                 if let loginResponse = loginResponse {
                     self.saveSession(userData: loginResponse)
                 } else {
-                    print("Login Failed")
+                    self.loginErrorMessage = "Login failed. Please check your credentials."
+                    self.loginErrorShown = true
                     return
                 }
             }
@@ -139,6 +146,25 @@ class UserViewModel: ObservableObject {
             }
         }
         return
+    }
+    
+    func deleteUser(completion: @escaping (Bool) -> Void) {
+        guard let userData = getSessionData()?.userData else {
+            completion(false)
+            return
+        }
+        
+        api.deleteUser(userID: userData.id, userToken: userData.token) { success, error in
+            DispatchQueue.main.async {
+                if success {
+                    self.clearSession() // Clear session if delete is successful
+                    completion(true)
+                } else {
+                    print("Error deleting user: \(error?.localizedDescription ?? "Unknown error")")
+                    completion(false)
+                }
+            }
+        }
     }
     
 }

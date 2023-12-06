@@ -149,13 +149,14 @@ def delete_user(db, uid):
     user_ref = db.collection('users').document(uid)
 
     user_to_delete = user_ref.get()
-    if user_to_delete is None:
+    
+    if not user_to_delete.exists:
         return None
     else:
-        user_ref.delete()
-    
-    deleted_user = user_ref.get()
-    if deleted_user.exists:
-        return True
-    else:
-        return False
+        # Delete user's credentials, then delete user
+        creds_id = user_to_delete.to_dict()['creds_id']
+        if delete_user_creds(db, creds_id):
+            user_ref.delete()
+            return True
+        else:
+            return False

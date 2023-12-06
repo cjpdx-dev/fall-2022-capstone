@@ -57,29 +57,26 @@ class UserAPI {
     
     func loginUser(userEmail: String, userPassword: String, completion: @escaping (UserModel?) -> Void) {
         
-        print(userEmail)
-        print(userPassword)
-        
         guard let url = URL(string: "\(baseURL)/auth/login") else {
             completion(nil)
             return
         }
-
+        
         let loginDetails = [
             "userEmail": userEmail,
             "userPassword": userPassword
         ]
-
+        
         guard let jsonData = try? JSONSerialization.data(withJSONObject: loginDetails, options: []) else {
             completion(nil)
             return
         }
-
+        
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = jsonData
-
+        
         URLSession.shared.dataTask(with: request) { data, response, error in
             
             if let error = error {
@@ -92,7 +89,7 @@ class UserAPI {
                 completion(nil)
                 return
             }
-        
+            
             switch httpResponse.statusCode {
             case 200:
                 do {
@@ -117,52 +114,81 @@ class UserAPI {
     
     // Update User Profile
     func updateUserProfile(userData: UserModel, completion: @escaping (UserModel?) -> Void) {
-            
-            guard let url = URL(string: "\(baseURL)/users/\(userData.id)") else {
-                print("Invalid URL")
-                completion(nil)
-                return
-            }
-
-            var request = URLRequest(url: url)
-            request.httpMethod = "PUT" //
-            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-            var auth_token = "Bearer " + userData.token
-            request.addValue(auth_token, forHTTPHeaderField: "Authorization")
         
-            do {
-                let jsonData = try JSONEncoder().encode(userData)
-                request.httpBody = jsonData
-            } catch {
-                print("Error encoding user data: \(error)")
+        guard let url = URL(string: "\(baseURL)/users/\(userData.id)") else {
+            print("Invalid URL")
+            completion(nil)
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "PUT" //
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        var auth_token = "Bearer " + userData.token
+        request.addValue(auth_token, forHTTPHeaderField: "Authorization")
+        
+        do {
+            let jsonData = try JSONEncoder().encode(userData)
+            request.httpBody = jsonData
+        } catch {
+            print("Error encoding user data: \(error)")
+            completion(nil)
+            return
+        }
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Network error: \(error.localizedDescription)")
                 completion(nil)
                 return
             }
-
-            URLSession.shared.dataTask(with: request) { data, response, error in
-                if let error = error {
-                    print("Network error: \(error.localizedDescription)")
-                    completion(nil)
-                    return
-                }
-
-                guard let httpResponse = response as? HTTPURLResponse, let data = data else {
-                    completion(nil)
-                    return
-                }
-
-                if httpResponse.statusCode == 200 {
-                    do {
-                        let updatedUser = try JSONDecoder().decode(UserModel.self, from: data)
-                        completion(updatedUser)
-                    } catch {
-                        print("Error decoding updated user: \(error)")
-                        completion(nil)
-                    }
-                } else {
-                    print("Server responded with status code: \(httpResponse.statusCode)")
+            
+            guard let httpResponse = response as? HTTPURLResponse, let data = data else {
+                completion(nil)
+                return
+            }
+            
+            if httpResponse.statusCode == 200 {
+                do {
+                    let updatedUser = try JSONDecoder().decode(UserModel.self, from: data)
+                    completion(updatedUser)
+                } catch {
+                    print("Error decoding updated user: \(error)")
                     completion(nil)
                 }
-            }.resume()
+            } else {
+                print("Server responded with status code: \(httpResponse.statusCode)")
+                completion(nil)
+            }
+        }.resume()
+    }
+    
+    func deleteUser(userID: String, userToken: String, completion: @escaping(Bool, Error?) -> Void) {
+        
+        guard let url = URL(string: "\(baseURL)/users/\(userID)") else {
+            print("Invalid URL")
+            completion(false, nil)
+            return
         }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "DELETE"
+        request.addValue("Bearer \(userToken)", forHTTPHeaderField: "Authorization")
+        
+        URLSession.shared.dataTask(with: request) { _, response, error in
+            if let error = error {
+                completion(false, error)
+                return
+            }
+            
+            if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 204 {
+                completion(true, nil)
+            } else {
+                completion(false, nil)
+            }
+        }.resume()
+    }
+    
+        
+    
 }

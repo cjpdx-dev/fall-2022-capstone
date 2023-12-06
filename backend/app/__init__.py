@@ -42,11 +42,13 @@ def create_app():
     
     with open(private_key_path, 'r')  as private_key_file:
         os.environ['JWT_PRIVATE_KEY'] = private_key_file.read()
-    print(os.environ.get('JWT_PRIVATE_KEY'))
-   
+        
     with open(public_key_path, 'r') as public_key_file:
         os.environ['JWT_PUBLIC_KEY'] = public_key_file.read()
-    print(os.environ.get('JWT_PUBLIC_KEY'))
+
+    if os.environ.get('JWT_PRIVATE_KEY') is None or os.environ.get('JWT_PUBLIC_KEY') is None:
+        print("JWT_PRIVATE_KEY not found")
+        exit(1)
     
 
 

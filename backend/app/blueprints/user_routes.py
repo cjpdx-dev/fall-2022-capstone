@@ -96,16 +96,12 @@ def update_user(id):
         updated_user['token'] = auth_header.split(' ')[1]
         return jsonify(updated_user), 200
 
-
 @user_bp.route('/<string:id>', methods=['DELETE'])
 def delete_user(id):
     print("@user_bp.route('/<string:id>', methods=['DELETE'])")
-    print(request.headers)
     try:
         auth_header = request.headers.get('Authorization')
-        print(auth_header)
         user_id = verify_token(auth_header)
-
         if user_id is None:
             return jsonify({"message": "User not found"}), 404 
         if user_id != id:
@@ -125,4 +121,3 @@ def delete_user(id):
         return jsonify({}), 204
     else:
         return jsonify({"message": "User could not be deleted"}), 500
-        
