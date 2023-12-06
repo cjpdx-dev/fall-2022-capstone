@@ -56,6 +56,7 @@ def get_public_user(id):
     if found_user is None:
         return jsonify({"message": "User not found"}), 404
     else:
+        found_user["token"] = ""
         return jsonify(found_user), 200
 
 

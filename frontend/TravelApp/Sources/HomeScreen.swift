@@ -10,7 +10,6 @@ import SwiftUI
 struct HomeScreen: View {
     var experiences: [Experience]
     
-    @EnvironmentObject var userViewModel:  UserViewModel
     
     var body: some View {
 
@@ -19,23 +18,21 @@ struct HomeScreen: View {
                 .tabItem {
                     Label("Experiences", systemImage: "book.closed")
                 }
-                .environmentObject(userViewModel)
             
             TripScreen()
                 .tabItem {
                     Label("Trips", systemImage: "car")
                 }
-                .environmentObject(userViewModel)
             
             UserProfileScreen()
                 .tabItem {
                     Label("Profile", systemImage: "person.circle")
                 }
-                .environmentObject(userViewModel)
         }
     }
 }
 
 #Preview {
     HomeScreen(experiences: experiences)
+        .environmentObject(UserViewModel())
 }

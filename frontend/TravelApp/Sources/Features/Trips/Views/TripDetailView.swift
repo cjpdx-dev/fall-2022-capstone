@@ -8,10 +8,19 @@
 import SwiftUI
 
 struct TripDetailView: View {
-    @Binding var trip: Trip
+    @State var trip: Trip
+    @EnvironmentObject var userViewModel: UserViewModel
+    @Environment(\.dismiss) var dismiss
     @State private var tripIsDeleted = false
     @State private var sortedExperiences = [Date: [Experience]]()
-    
+    @State var tripCreatorUsername: String = ""
+    var userApi = UserAPI()
+    var userID: String {
+        userViewModel.getSessionData()?.userData.id ?? ""
+    }
+    var token: String {
+        userViewModel.getSessionData()?.userData.token ?? ""
+    }
     private func getAndSortExperiences() {
         let api = TripsAPI()
         var experiences = [Experience]()
@@ -25,7 +34,6 @@ struct TripDetailView: View {
                 group.leave()
             }
         }
-        
         group.notify(queue: .main) {
             sortedExperiences = [:]
             for experience in experiences {
@@ -42,20 +50,19 @@ struct TripDetailView: View {
                     Text(trip.name)
                         .font(.title).bold()
                     Spacer()
-                    // The following edit button should ONLY be visible
-                    // if the viewing user is the creator of the trip
-                    NavigationLink(destination: TripEditView(trip: $trip, onTripUpdated: {
-                    })) {
-                        Image("edit")
-                            .resizable()
-                            .frame(width: 24, height: 24)
+                    if userID == trip.user {
+                        NavigationLink(destination: TripEditView(trip: $trip, tripIsDeleted: $tripIsDeleted)) {
+                            Image("edit")
+                                .resizable()
+                                .frame(width: 24, height: 24)
+                        }
                     }
                 }
                 HStack {
                     Image("user")
                         .resizable()
                         .frame(width: 15, height:15)
-                    Text(trip.user ?? "Unknown user")
+                    Text(tripCreatorUsername)
                         .font(.footnote)
                 }
                 Text(trip.formattedDateRange)
@@ -71,11 +78,13 @@ struct TripDetailView: View {
                 }
                 Divider()
                 
+                Text("Experiences")
+                    .font(.title3).bold()
                 ForEach(Array(sortedExperiences.keys.sorted()), id: \.self) { date in
                     VStack(alignment: .leading) {
                         Text(date, style: .date)
                             .font(.headline)
-                            .padding(.vertical, 2)
+                            .padding(.vertical, 4)
                         ForEach(sortedExperiences[date] ?? [], id: \.id) { experience in
                             NavigationLink(destination: ExperienceDetailView(experience: experience)) {
                                 TripExperienceView(experience: experience)
@@ -86,15 +95,47 @@ struct TripDetailView: View {
             }.padding()
         }
         .onAppear {
-            getAndSortExperiences()
+            if tripIsDeleted {
+                DispatchQueue.main.async {
+                    dismiss()
+                }
+            } else {
+                getAndSortExperiences()
+                if let tripUserId = trip.user {
+                    getUsernameOfTripCreator(tripUserId: tripUserId)
+                } else {
+                    print("No user ID for this Trip")
+                }
+            }
         }
     }
-}
+    
+    func getUsernameOfTripCreator(tripUserId: String) {
+        guard let url = URL(string: "\(userApi.baseURL)/users/\(tripUserId)/public") else { fatalError("Missing URL") }
+        var urlRequest = URLRequest(url: url)
+        urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        urlRequest.httpMethod = "GET"
 
-struct TripDetailView_Previews: PreviewProvider {
-    @State static var previewTrip = Trip(id: "1234", name: "Sample Trip", description: "Description", startDate: Date(), endDate: Date(), user: "Sample User", experiences: [])
-
-    static var previews: some View {
-        TripDetailView(trip: $previewTrip)
+        let dataTask = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+            if let error = error {
+                print("Request error: ", error)
+                return
+            }
+            guard let response = response as? HTTPURLResponse else { return }
+            
+            if response.statusCode == 200 {
+                guard let data = data else { return }
+                DispatchQueue.main.async {
+                    do {
+                        let decoder = JSONDecoder()
+                        let decodedUser = try decoder.decode(UserModel.self, from: data)
+                        tripCreatorUsername = decodedUser.displayName
+                    } catch let error {
+                        print("Error decoding: ", error)
+                    }
+                }
+            }
+        }
+        dataTask.resume()
     }
 }

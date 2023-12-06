@@ -8,24 +8,25 @@
 import Foundation
 import SwiftUI
 
-//struct DatedExperience: Hashable, Codable {
-//    var experience: String
-//    var date: Date
-//}
-
 struct Trip: Hashable, Codable, Identifiable {
     
     var id: String?
     var name: String
     var description: String
-    var startDate: Date
-    var endDate: Date
+    var startDate: String
+    var endDate: String
     var user: String?
     var experiences: [String]
     
     var formattedDateRange: String {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        return "\(formatter.string(from: startDate)) - \(formatter.string(from: endDate))"
+        let inputFormatter = DateFormatter()
+        inputFormatter.dateFormat = "yyyy-MM-dd"
+        inputFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+        let outputFormatter = DateFormatter()
+        outputFormatter.dateStyle = .medium
+        outputFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+        let startDateDate = inputFormatter.date(from: startDate) ?? Date()
+        let endDateDate = inputFormatter.date(from: endDate) ?? Date()
+        return "\(outputFormatter.string(from: startDateDate)) - \(outputFormatter.string(from: endDateDate))"
     }
 }

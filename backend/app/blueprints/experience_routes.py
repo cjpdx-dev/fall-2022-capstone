@@ -9,6 +9,20 @@ experience_bp = Blueprint('experience', __name__)
 @experience_bp.route('/', methods=["POST"])
 def createExperience():
     # Authenticate User ----- TODO --------------
+    auth_header = request.headers.get('Authorization')
+    try:
+        user_id = verify_token(auth_header)
+        if user_id is None:
+            return jsonify({"message": "User not found"}), 404 
+        
+    except ValueError as e:
+        return jsonify({"message": str(e)}), 401
+    
+    except RevokedIdTokenError as e:
+        return jsonify({"message": str(e)}), 401
+    
+    except InvalidIdTokenError as e:
+        return jsonify({"message": str(e)}), 401
 
     # Store image in the cloud bucket
     imageFile = request.files['image']
@@ -31,28 +45,26 @@ def createExperience():
     # Add experience to the database
     db = current_app.config['db']
     createdExperience = db_experiences.create_experience(db, experience)
-    print(createdExperience)
-    return experience
+    return createdExperience
 
 
 @experience_bp.route('/', methods=["GET"])
 def get_experiences():
     # Authenticate User ----- TODO --------------
-    # auth_header = request.headers.get('Authorization')
-
-    # try:
-    #     user_id = verify_token(auth_header)
-    #     if user_id is None:
-    #         return jsonify({"message": "User not found"}), 404 
+    auth_header = request.headers.get('Authorization')
+    try:
+        user_id = verify_token(auth_header)
+        if user_id is None:
+            return jsonify({"message": "User not found"}), 404 
         
-    # except ValueError as e:
-    #     return jsonify({"message": str(e)}), 401
+    except ValueError as e:
+        return jsonify({"message": str(e)}), 401
     
-    # except RevokedIdTokenError as e:
-    #     return jsonify({"message": str(e)}), 401
+    except RevokedIdTokenError as e:
+        return jsonify({"message": str(e)}), 401
     
-    # except InvalidIdTokenError as e:
-    #     return jsonify({"message": str(e)}), 401
+    except InvalidIdTokenError as e:
+        return jsonify({"message": str(e)}), 401
 
     db = current_app.config['db']
     experiences = db_experiences.get_experiences(db)
@@ -67,6 +79,21 @@ def get_experiences():
 @experience_bp.route('/<id>', methods=["POST"])
 def updateExperience(id):
      # Authenticate User ----- TODO --------------
+    auth_header = request.headers.get('Authorization')
+    try:
+        user_id = verify_token(auth_header)
+        if user_id is None:
+            return jsonify({"message": "User not found"}), 404 
+        
+    except ValueError as e:
+        return jsonify({"message": str(e)}), 401
+    
+    except RevokedIdTokenError as e:
+        return jsonify({"message": str(e)}), 401
+    
+    except InvalidIdTokenError as e:
+        return jsonify({"message": str(e)}), 401
+    
     db = current_app.config['db']
     # Make sure that the Experience exists
     old_experience = db_experiences.get_experience_by_id(db, id)
@@ -122,6 +149,23 @@ def updateExperience(id):
 
 @experience_bp.route('/<id>', methods=["DELETE"])
 def deleteExperience(id):
+
+    # Authenticate User ----- TODO --------------
+    auth_header = request.headers.get('Authorization')
+    try:
+        user_id = verify_token(auth_header)
+        if user_id is None:
+            return jsonify({"message": "User not found"}), 404 
+        
+    except ValueError as e:
+        return jsonify({"message": str(e)}), 401
+    
+    except RevokedIdTokenError as e:
+        return jsonify({"message": str(e)}), 401
+    
+    except InvalidIdTokenError as e:
+        return jsonify({"message": str(e)}), 401
+    
     db = current_app.config['db']
     
     # Verify that the Experience exists
@@ -164,3 +208,41 @@ def getExperience(id):
         return jsonify(experience), 200
     else:
         return jsonify({"message": "Experience not found"}), 404
+
+@experience_bp.route('/<id>/rate', methods=["POST"])
+def rateExperience(id):
+    # Authenticate User ----- TODO --------------
+    auth_header = request.headers.get('Authorization')
+    try:
+        user_id = verify_token(auth_header)
+        if user_id is None:
+            return jsonify({"message": "User not found"}), 404 
+        
+    except ValueError as e:
+        return jsonify({"message": str(e)}), 401
+    
+    except RevokedIdTokenError as e:
+        return jsonify({"message": str(e)}), 401
+    
+    except InvalidIdTokenError as e:
+        return jsonify({"message": str(e)}), 401
+    
+    # Update the averageRating for the experience
+    updated_experience = request.get_json()
+    rating_sum = 0
+    for key in updated_experience["ratings"]:
+        rating_sum += updated_experience["ratings"][key]
+    average_rating = rating_sum / len(updated_experience["ratings"])
+    updated_experience["averageRating"] = average_rating
+    # Update Experience in the database
+    db = current_app.config['db']
+    
+    temp_id = updated_experience['id']
+    del updated_experience['id']
+    updated_experience = db_experiences.update_experience(db, temp_id, updated_experience)
+    if updated_experience:
+        print(updated_experience)
+        return updated_experience, 200
+    else:
+        print("Failed to rate the experience")
+        return jsonify({"message": "Experience not found"})

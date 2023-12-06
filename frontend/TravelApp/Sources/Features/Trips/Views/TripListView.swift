@@ -10,12 +10,7 @@ import SwiftUI
 struct TripListView: View {
     @State private var searchText: String = ""
     @State private var trips: [Trip] = []
-    
-    // This is the user session
     @EnvironmentObject var userViewModel:  UserViewModel
-    // This is the user's data that is pulled from the user's session
-    // You could access the session token "token" by calling...
-    //      token = userData.token
     private var userData: UserModel? {
         userViewModel.getSessionData()?.userData
         
@@ -34,14 +29,11 @@ struct TripListView: View {
     var body: some View {
         NavigationStack {
             List {
-                ForEach(filteredResults, id: \.id) { filteredTrip in
-                    if let index = trips.firstIndex(where: { $0.id == filteredTrip.id }) {
-                        let bindingTrip = $trips[index]
-                        NavigationLink {
-                            TripDetailView(trip: bindingTrip)
-                        } label: {
-                            TripRowView(trip: bindingTrip.wrappedValue)
-                        }
+                ForEach(filteredResults, id: \.id) { trip in
+                    NavigationLink {
+                        TripDetailView(trip: trip)
+                    } label: {
+                        TripRowView(trip: trip)
                     }
                 }
             }

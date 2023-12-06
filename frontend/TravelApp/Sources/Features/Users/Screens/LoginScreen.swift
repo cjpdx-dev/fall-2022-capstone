@@ -19,7 +19,7 @@ struct LoginScreen: View {
     var body: some View {
         NavigationStack {
             VStack {
-                Image(systemName: "map.circle")
+                Image("travel-icon")
                     .resizable()
                     .frame(width: 150, height: 150)
             }
@@ -87,4 +87,5 @@ struct LoginScreen: View {
 
 #Preview {
     LoginScreen()
+        .environmentObject(UserViewModel())
 }

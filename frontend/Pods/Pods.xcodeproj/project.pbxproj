@@ -7,19 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0CBFBBC52B77AEDD220B219AFA55B4F6 /* KeychainSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4F6FC730B87B16A7F7A0A92CF2EB13 /* KeychainSwift.swift */; };
-		37EC024F54023B0D698A37C47122C953 /* KeychainSwift-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E9CF1441562AF1808C78D1B0BB5941B /* KeychainSwift-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6BFE78FBD7BD0761E896C73058892D03 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
-		6C133193471A0A93B4CE45491148072A /* TegKeychainConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA3466BDF1C63EE297562FE8F1823FD /* TegKeychainConstants.swift */; };
-		7DC747D324EE56ECBF212094021684A0 /* Pods-TravelApp-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 251BE3A14D97BC2C4AAF2419C825640D /* Pods-TravelApp-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		828089E3252987AEEFFB9272406F88B2 /* Pods-TravelApp-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A8187DC38438DE35B0994DD1BC049EBF /* Pods-TravelApp-dummy.m */; };
-		B39BF720A3E471DC10CDC6CC3986D2A9 /* KeychainSwift-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C0A8EBB8429A13FD79B471B95E12020 /* KeychainSwift-dummy.m */; };
-		C543B2A5CF83423F50EF2DFA3A7F1141 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
-		FAA9422DBF165F89AA81D94DB2DBF457 /* KeychainSwiftAccessOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8CDCCBA5A8118998F805DDE346BFA6 /* KeychainSwiftAccessOptions.swift */; };
+		30528E9F78AD793A9A7CEB6C6A8A054F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		320E018022758AFD782991C7D8854DB1 /* TegKeychainConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA3466BDF1C63EE297562FE8F1823FD /* TegKeychainConstants.swift */; };
+		33273EC58D616F4386D584ABF69000ED /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		33D137FE17CDCACC430EBB4027EB8343 /* Pods-TravelApp-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A8187DC38438DE35B0994DD1BC049EBF /* Pods-TravelApp-dummy.m */; };
+		485A776035D4B1EF97E8AE0E95A66502 /* KeychainSwiftAccessOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8CDCCBA5A8118998F805DDE346BFA6 /* KeychainSwiftAccessOptions.swift */; };
+		4B255EB0716A1BB473E696C20812C697 /* KeychainSwift-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C0A8EBB8429A13FD79B471B95E12020 /* KeychainSwift-dummy.m */; };
+		4DC6C132AEF3E02BDD5ABC89333233B3 /* KeychainSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4F6FC730B87B16A7F7A0A92CF2EB13 /* KeychainSwift.swift */; };
+		72808D455DE3EE63DF961BEDF67BF610 /* Pods-TravelApp-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 251BE3A14D97BC2C4AAF2419C825640D /* Pods-TravelApp-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C3905037CE8620D38EF4DA0AB90C106C /* KeychainSwift-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E9CF1441562AF1808C78D1B0BB5941B /* KeychainSwift-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		67DB6109593C11A98CB7DA513227D7DF /* PBXContainerItemProxy */ = {
+		9A59437E03FFB18A31AEA4876978C960 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
@@ -33,7 +33,7 @@
 		17456078214F01FDA3C509F1DFB5475F /* KeychainSwift-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "KeychainSwift-prefix.pch"; sourceTree = "<group>"; };
 		1E9CF1441562AF1808C78D1B0BB5941B /* KeychainSwift-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "KeychainSwift-umbrella.h"; sourceTree = "<group>"; };
 		251BE3A14D97BC2C4AAF2419C825640D /* Pods-TravelApp-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-TravelApp-umbrella.h"; sourceTree = "<group>"; };
-		291F47E044C08594DFBE4A7263D4B4E4 /* Pods-TravelApp */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-TravelApp"; path = Pods_TravelApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		291F47E044C08594DFBE4A7263D4B4E4 /* Pods_TravelApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_TravelApp.framework; path = "Pods-TravelApp.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C0A8EBB8429A13FD79B471B95E12020 /* KeychainSwift-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "KeychainSwift-dummy.m"; sourceTree = "<group>"; };
 		2E588381779A46F6780ABA00951AE77A /* Pods-TravelApp-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-TravelApp-acknowledgements.plist"; sourceTree = "<group>"; };
 		35967B1AB77758CBB4F923E2590354E4 /* Pods-TravelApp-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-TravelApp-frameworks.sh"; sourceTree = "<group>"; };
@@ -55,26 +55,26 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		73F36D3EABA2382C30BB5853DF5AC8D3 /* Frameworks */ = {
+		4A2A9F195399A771D5E644536E9F6CF4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6BFE78FBD7BD0761E896C73058892D03 /* Foundation.framework in Frameworks */,
+				30528E9F78AD793A9A7CEB6C6A8A054F /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8F5E1096151C1DC75B67489352719863 /* Frameworks */ = {
+		89A01EB2B921BEA60A25AB67DD645314 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C543B2A5CF83423F50EF2DFA3A7F1141 /* Foundation.framework in Frameworks */,
+				33273EC58D616F4386D584ABF69000ED /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0D954493605137BF7D3C4CAC62546188 /* Products */ = {
+		15C12AAF741FF68EA6E90FC86C0FC70E /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				9E0FD012ADC3C7179C684035672383E5 /* KeychainSwift */,
@@ -140,7 +140,7 @@
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
 				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
 				6914C866BAE31BFBA9841BEDCD93C6A6 /* Pods */,
-				0D954493605137BF7D3C4CAC62546188 /* Products */,
+				15C12AAF741FF68EA6E90FC86C0FC70E /* Products */,
 				7860222075D59891D230754683C772A2 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
@@ -173,19 +173,19 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		1380B9994192F420D8BC0308CC7B1B0D /* Headers */ = {
+		13D886A74BBF61128EB651077B516C42 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				37EC024F54023B0D698A37C47122C953 /* KeychainSwift-umbrella.h in Headers */,
+				72808D455DE3EE63DF961BEDF67BF610 /* Pods-TravelApp-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		18A41B8F889D01732FE6D6373B731F85 /* Headers */ = {
+		97BD77ADDCAB6FA6CF7529B5308B0918 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7DC747D324EE56ECBF212094021684A0 /* Pods-TravelApp-umbrella.h in Headers */,
+				C3905037CE8620D38EF4DA0AB90C106C /* KeychainSwift-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,12 +194,12 @@
 /* Begin PBXNativeTarget section */
 		07E54A78BCF82272E99319D7F7F5E8C1 /* KeychainSwift */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 997BF8AEF73E04BE3F0E828FF63C51E6 /* Build configuration list for PBXNativeTarget "KeychainSwift" */;
+			buildConfigurationList = B6B334E2C50C2C0C66D96CADAEE2EA01 /* Build configuration list for PBXNativeTarget "KeychainSwift" */;
 			buildPhases = (
-				1380B9994192F420D8BC0308CC7B1B0D /* Headers */,
-				27429ECFAA0B46393CF2868590187F44 /* Sources */,
-				8F5E1096151C1DC75B67489352719863 /* Frameworks */,
-				417F0B4D46DB5C4EC5381D3770D462EC /* Resources */,
+				97BD77ADDCAB6FA6CF7529B5308B0918 /* Headers */,
+				E3B35C6F6E358284C831471583BD04CD /* Sources */,
+				4A2A9F195399A771D5E644536E9F6CF4 /* Frameworks */,
+				29186A7FC9690C20BDE41949C4FFD3AC /* Resources */,
 			);
 			buildRules = (
 			);
@@ -212,21 +212,21 @@
 		};
 		A6E100DEDFF2B895105EB36C356CDFAF /* Pods-TravelApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D463D7053320287F139AE7F878F4A0B1 /* Build configuration list for PBXNativeTarget "Pods-TravelApp" */;
+			buildConfigurationList = 0B0F7F602AC78BD21FE236278833292A /* Build configuration list for PBXNativeTarget "Pods-TravelApp" */;
 			buildPhases = (
-				18A41B8F889D01732FE6D6373B731F85 /* Headers */,
-				14C819EE6FE742737C48053B994A2525 /* Sources */,
-				73F36D3EABA2382C30BB5853DF5AC8D3 /* Frameworks */,
-				3A11724986F7D83030D3716145009065 /* Resources */,
+				13D886A74BBF61128EB651077B516C42 /* Headers */,
+				FB4650344D8D4CDC2AA212653E7DBAF3 /* Sources */,
+				89A01EB2B921BEA60A25AB67DD645314 /* Frameworks */,
+				2CA69C6180355E34CE340DE3B413735F /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				444A1CF82203F4D409E4BB32B0C2E444 /* PBXTargetDependency */,
+				8287C7FA8F0EF7B1C2D86C0BC5FF7994 /* PBXTargetDependency */,
 			);
 			name = "Pods-TravelApp";
-			productName = Pods_TravelApp;
-			productReference = 291F47E044C08594DFBE4A7263D4B4E4 /* Pods-TravelApp */;
+			productName = "Pods-TravelApp";
+			productReference = 291F47E044C08594DFBE4A7263D4B4E4 /* Pods_TravelApp.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -243,11 +243,11 @@
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				Base,
 				en,
+				Base,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
-			productRefGroup = 0D954493605137BF7D3C4CAC62546188 /* Products */;
+			productRefGroup = 15C12AAF741FF68EA6E90FC86C0FC70E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -258,14 +258,14 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		3A11724986F7D83030D3716145009065 /* Resources */ = {
+		29186A7FC9690C20BDE41949C4FFD3AC /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		417F0B4D46DB5C4EC5381D3770D462EC /* Resources */ = {
+		2CA69C6180355E34CE340DE3B413735F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -275,74 +275,37 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		14C819EE6FE742737C48053B994A2525 /* Sources */ = {
+		E3B35C6F6E358284C831471583BD04CD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				828089E3252987AEEFFB9272406F88B2 /* Pods-TravelApp-dummy.m in Sources */,
+				4DC6C132AEF3E02BDD5ABC89333233B3 /* KeychainSwift.swift in Sources */,
+				4B255EB0716A1BB473E696C20812C697 /* KeychainSwift-dummy.m in Sources */,
+				485A776035D4B1EF97E8AE0E95A66502 /* KeychainSwiftAccessOptions.swift in Sources */,
+				320E018022758AFD782991C7D8854DB1 /* TegKeychainConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		27429ECFAA0B46393CF2868590187F44 /* Sources */ = {
+		FB4650344D8D4CDC2AA212653E7DBAF3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0CBFBBC52B77AEDD220B219AFA55B4F6 /* KeychainSwift.swift in Sources */,
-				B39BF720A3E471DC10CDC6CC3986D2A9 /* KeychainSwift-dummy.m in Sources */,
-				FAA9422DBF165F89AA81D94DB2DBF457 /* KeychainSwiftAccessOptions.swift in Sources */,
-				6C133193471A0A93B4CE45491148072A /* TegKeychainConstants.swift in Sources */,
+				33D137FE17CDCACC430EBB4027EB8343 /* Pods-TravelApp-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		444A1CF82203F4D409E4BB32B0C2E444 /* PBXTargetDependency */ = {
+		8287C7FA8F0EF7B1C2D86C0BC5FF7994 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = KeychainSwift;
 			target = 07E54A78BCF82272E99319D7F7F5E8C1 /* KeychainSwift */;
-			targetProxy = 67DB6109593C11A98CB7DA513227D7DF /* PBXContainerItemProxy */;
+			targetProxy = 9A59437E03FFB18A31AEA4876978C960 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		4F30F9FD2CEE6227EC5B43BC90F38A4A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5DE74B7B76D98F87EEBA0D0538B02199 /* Pods-TravelApp.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-TravelApp/Pods-TravelApp-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-TravelApp/Pods-TravelApp.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 		6A5C026ED62BBFE3380CD257EEFAEB20 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -409,7 +372,7 @@
 			};
 			name = Debug;
 		};
-		717BF11508A479CC048B39007DBFA655 /* Release */ = {
+		778635BBE59381FB0404EF48095C36AA /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B6DBDC187520AEA2149B702813C781D4 /* KeychainSwift.release.xcconfig */;
 			buildSettings = {
@@ -444,7 +407,7 @@
 			};
 			name = Release;
 		};
-		C99C0C7242CE7579BB56EFC0B68C0FB5 /* Release */ = {
+		8CBFB475B0F7EC8B12D4434CDE2ECB39 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 80F1EB73AA0B61F4F58B33A39E0FCB51 /* Pods-TravelApp.release.xcconfig */;
 			buildSettings = {
@@ -482,7 +445,7 @@
 			};
 			name = Release;
 		};
-		D2F78367C06F341A16DEF595FE4BB14C /* Debug */ = {
+		9B8F0A6B8786467F80620112F8BCAFB3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D3FC93B8FF581D37B8347BB2004879E9 /* KeychainSwift.debug.xcconfig */;
 			buildSettings = {
@@ -510,6 +473,43 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		AA953FED06A013251178D1BEB38CAA53 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5DE74B7B76D98F87EEBA0D0538B02199 /* Pods-TravelApp.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-TravelApp/Pods-TravelApp-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-TravelApp/Pods-TravelApp.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -581,6 +581,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0B0F7F602AC78BD21FE236278833292A /* Build configuration list for PBXNativeTarget "Pods-TravelApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA953FED06A013251178D1BEB38CAA53 /* Debug */,
+				8CBFB475B0F7EC8B12D4434CDE2ECB39 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -590,20 +599,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		997BF8AEF73E04BE3F0E828FF63C51E6 /* Build configuration list for PBXNativeTarget "KeychainSwift" */ = {
+		B6B334E2C50C2C0C66D96CADAEE2EA01 /* Build configuration list for PBXNativeTarget "KeychainSwift" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D2F78367C06F341A16DEF595FE4BB14C /* Debug */,
-				717BF11508A479CC048B39007DBFA655 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D463D7053320287F139AE7F878F4A0B1 /* Build configuration list for PBXNativeTarget "Pods-TravelApp" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				4F30F9FD2CEE6227EC5B43BC90F38A4A /* Debug */,
-				C99C0C7242CE7579BB56EFC0B68C0FB5 /* Release */,
+				9B8F0A6B8786467F80620112F8BCAFB3 /* Debug */,
+				778635BBE59381FB0404EF48095C36AA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

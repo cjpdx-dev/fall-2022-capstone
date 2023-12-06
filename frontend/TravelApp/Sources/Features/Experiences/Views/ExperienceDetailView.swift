@@ -9,14 +9,29 @@ import SwiftUI
 
 struct ExperienceDetailView: View {
     @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var userViewModel: UserViewModel
     @State var experience: Experience
-    var isUserExperience: Bool = true
+    @State var userOfExperience: String = ""
+    var userApi = UserAPI()
+    var averageRatingStr: String {
+        if experience.ratings.count > 0 {
+            return String(format: "%.2f", (experience.averageRating + 1))
+        }
+        return "No Public Ratings"
+    }
+    var userID: String {
+        userViewModel.getSessionData()?.userData.id ?? ""
+    }
+    var userName: String {
+        userViewModel.getSessionData()?.userData.displayName ?? ""
+    }
+    var token: String {
+        userViewModel.getSessionData()?.userData.token ?? ""
+    }
+    
     var body: some View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 12) {
-                    //Image
-                    //                experience.image
-                    //                    .resizable()
                     AsyncImage(url: URL(string: experience.imageUrl)) { phase in
                         
                         if let image = phase.image {
@@ -33,7 +48,7 @@ struct ExperienceDetailView: View {
                     }
                     .frame(width: .infinity, height: 250)
                     .overlay(alignment: .bottomTrailing) {
-                        if isUserExperience {
+                        if userID == experience.userID {
                             NavigationLink {
                                 EditExperienceView(experience: $experience)
                                     .navigationTitle("Update Experience")
@@ -45,8 +60,6 @@ struct ExperienceDetailView: View {
                             }
                             .buttonStyle(.plain)
                         }
-                        
-                        
                     }
                     
                     VStack(alignment: .leading, spacing: 20) {
@@ -59,9 +72,11 @@ struct ExperienceDetailView: View {
                             HStack{
                                 Image(systemName: "star.fill")
                                     .symbolRenderingMode(.multicolor)
-                                Text("\(experience.rating + 1)/5")
+                                Text("\(averageRatingStr)")
+                                    .fontWeight(.semibold)
                             }
                         }
+                        
                         
                         HStack {
                             // Location
@@ -73,6 +88,35 @@ struct ExperienceDetailView: View {
                                 Image(systemName: "calendar")
                                 Text(Date(timeIntervalSinceReferenceDate: TimeInterval(experience.date)), style: .date)
                                     .fontWeight(.semibold)
+                            }
+                        }
+                        HStack {
+                            if userOfExperience != "" {
+                                Text("\(userOfExperience)'s Rating")
+                                    .fontWeight(.semibold)
+                            }
+                            else {
+                                Text("User's Rating")
+                                    .fontWeight(.semibold)
+                            }
+                            
+                            Spacer()
+                            HStack{
+                                Image(systemName: "star.fill")
+                                    .symbolRenderingMode(.multicolor)
+                                Text("\(experience.rating + 1)")
+                            }
+                        }
+                        if userID != experience.userID {
+                            NavigationLink {
+                                RateExperienceView(experience: $experience)
+                            } label: {
+                                Text("Rate Experience")
+                                    .frame(width: UIScreen.main.bounds.width - 50, height:45)
+                                    .foregroundColor(.white)
+                                    .background(Color(.black))
+                                    .cornerRadius(12)
+                                    .shadow(color: .gray, radius: 2, x: 0, y: 2)
                             }
                         }
                         Divider()
@@ -97,7 +141,7 @@ struct ExperienceDetailView: View {
                 Spacer()
             }
             .onAppear {
-                
+                self.getUserOfExperience()
             }
             .ignoresSafeArea(.all, edges: .top)
             .toolbar{
@@ -110,7 +154,7 @@ struct ExperienceDetailView: View {
                             .padding(.vertical, 10)
                             .foregroundColor(.white)
                             .background(
-                                Color.gray
+                                Color.black
                             )
                             .clipShape(Circle())
                     }
@@ -118,10 +162,38 @@ struct ExperienceDetailView: View {
             }
             
         }
-    
+    func getUserOfExperience() {
+        guard let url = URL(string: "\(userApi.baseURL)/users/\(experience.userID)/public") else {fatalError("Missing URL")}
+        var urlRequest = URLRequest(url: url)
+//        let urlRequest = URLRequest(url: productionUrl)
+        urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        urlRequest.httpMethod = "GET"
+        let dataTask = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+            if let error = error {
+                print("Request error: ", error)
+                return
+            }
+            guard let response = response as? HTTPURLResponse else {return}
+            
+            if response.statusCode == 200 {
+                guard let data = data else {return}
+                DispatchQueue.main.async {
+                    do {
+                        let decoder = JSONDecoder()
+                        let decodedUser = try decoder.decode(UserModel.self, from: data)
+                        userOfExperience = decodedUser.displayName
+                    } catch let error {
+                        print("Error decoding: ", error)
+                    }
+                }
+            }
+        }
+        dataTask.resume()
+    }
 }
 
 #Preview {
     ExperienceDetailView(experience: experiences[0])
+        .environmentObject(UserViewModel())
 }
 

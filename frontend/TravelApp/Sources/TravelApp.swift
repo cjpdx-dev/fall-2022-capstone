@@ -26,4 +26,5 @@ struct TravelAppApp: App {
 
 #Preview {
     HomeScreen(experiences:experiences)
+        .environmentObject(UserViewModel())
 }
