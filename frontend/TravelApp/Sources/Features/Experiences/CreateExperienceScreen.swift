@@ -24,6 +24,9 @@ struct CreateExperienceScreen: View {
     var userID: String {
         userViewModel.getSessionData()?.userData.id ?? ""
     }
+    var token: String {
+        userViewModel.getSessionData()?.userData.token ?? ""
+    }
     var experienceApi = ExperienceAPI()
     
     
@@ -148,7 +151,7 @@ struct CreateExperienceScreen: View {
     // METHODS
     func createExperience(objectName: String, object: NewExperience) {
         let requestBody = experienceApi.multipartFormDataBodyNewExperience(objectName, object, experienceImage!)
-        let request = experienceApi.generateCreateRequest(httpBody: requestBody, httpMethod: .post, token: "")
+        let request = experienceApi.generateCreateRequest(httpBody: requestBody, httpMethod: .post, token: token)
         
         URLSession.shared.dataTask(with: request) { data, resp, error in
             if let error = error {
@@ -164,8 +167,8 @@ struct CreateExperienceScreen: View {
     }
     
     func createKeywords() {
-        keywords += title.components(separatedBy: " ")
-        keywords += description.components(separatedBy: " ")
+        keywords += title.lowercased().components(separatedBy: " ")
+        keywords += description.lowercased().components(separatedBy: " ")
     }
 }
 

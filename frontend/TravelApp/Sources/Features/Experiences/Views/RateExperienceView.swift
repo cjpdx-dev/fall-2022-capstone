@@ -10,17 +10,26 @@ import SwiftUI
 struct RateExperienceView: View {
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var userViewModel: UserViewModel
+    @Binding var experience: Experience
+    @State private var rating: Int = 5
     var userData: UserModel {
         userViewModel.getSessionData()!.userData
     }
     var userID: String {
-        userViewModel.getSessionData()!.userData.id
+        userViewModel.getSessionData()?.userData.id ?? ""
     }
-    @Binding var experience: Experience
-    @State private var rating: Int = 5
+    var token: String {
+        userViewModel.getSessionData()?.userData.token ?? ""
+    }
     var experienceApi = ExperienceAPI()
     var body: some View {
         VStack(spacing: 40) {
+            //User's Previous Rating
+            if experience.ratings[userID] != nil {
+                Text("Previous Rating: \(experience.ratings[userID]! + 1)")
+            } else {
+                Text("Previous Rating: N/A")
+            }
             // Rating
             HStack {
                 Text("Rating")
@@ -56,13 +65,14 @@ struct RateExperienceView: View {
     
     func rateExperience() {
         
-        guard let url = URL(string: "\(experienceApi.developmentUrl)\(self.experience.id)/rate") else {fatalError("Missing URL")}
+        guard let url = URL(string: "\(experienceApi.productionUrl)\(self.experience.id)/rate") else {fatalError("Missing URL")}
         let encoder = JSONEncoder()
         guard let bodyData = try? encoder.encode(self.experience) else {
             print("Error")
             return
         }
         var urlRequest = URLRequest(url: url)
+        urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         urlRequest.httpMethod = "POST"
         urlRequest.httpBody = bodyData
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -96,4 +106,5 @@ struct RateExperienceView: View {
 
 #Preview {
     RateExperienceView(experience: .constant(experiences[0]))
+        .environmentObject(UserViewModel())
 }

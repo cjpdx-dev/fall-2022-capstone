@@ -24,7 +24,7 @@ struct EditExperienceView: View {
     @State var keywords: [String] = []
     @State var photoPickerItem: PhotosPickerItem?
     @State var experienceImage: UIImage?
-    var api = ExperienceAPI()
+    var experienceApi = ExperienceAPI()
     
     
     
@@ -138,7 +138,6 @@ struct EditExperienceView: View {
                     Button {
                         // id, title, description, state, city, rating, keywords, date
                         self.createKeywords()
-//                        let updatedExperience = Experience(id: experience.id, title: title, description: description, rating: rating, keywords: keywords, date: Int(date.timeIntervalSinceReferenceDate), location:location,  imageUrl: experience.imageUrl)
                         let updatedExperience = Experience(id: experience.id, title: title, description: description, rating: rating, keywords: keywords, date: Int(date.timeIntervalSinceReferenceDate), location:location,  imageUrl: experience.imageUrl, userID: experience.userID, ratings: experience.ratings, averageRating: experience.averageRating)
                         self.updateExperience(objectName: "experience", object: updatedExperience)
                     } label: {
@@ -181,8 +180,8 @@ struct EditExperienceView: View {
     }
     // METHODS
     func updateExperience(objectName: String, object: Experience) {
-        let requestBody = api.multipartFormDataBodyUpdateExperience(objectName, object, experienceImage)
-        let request = api.generateUpdateRequest(httpBody: requestBody, httpMethod: .post, id: experience.id, token: userData.token)
+        let requestBody = experienceApi.multipartFormDataBodyUpdateExperience(objectName, object, experienceImage)
+        let request = experienceApi.generateUpdateRequest(httpBody: requestBody, httpMethod: .post, id: experience.id, token: userData.token)
         
         URLSession.shared.dataTask(with: request) { data, resp, error in
             if let error = error {
@@ -214,8 +213,8 @@ struct EditExperienceView: View {
     }
     
     func createKeywords() {
-        keywords += title.components(separatedBy: " ")
-        keywords += description.components(separatedBy: " ")
+        keywords += title.lowercased().components(separatedBy: " ")
+        keywords += description.lowercased().components(separatedBy: " ")
     }
 }
 

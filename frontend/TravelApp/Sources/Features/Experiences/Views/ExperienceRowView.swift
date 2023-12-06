@@ -84,7 +84,9 @@ struct ExperienceRowView: View {
 #Preview {
     Group {
         ExperienceRowView(experience: experiences[0])
+            .environmentObject(UserViewModel())
         ExperienceRowView(experience: experiences[1])
+            .environmentObject(UserViewModel())
     }
    
 }
