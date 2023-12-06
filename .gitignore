@@ -4,6 +4,9 @@
 # Key files
 *private_key.pem
 
+# Ignore Pods
+Pods/
+
 TravelApp/Sources/.DS_Store
 */.DS_Store
 *.DS_Store
@@ -363,6 +366,7 @@ TravelApp.xcodeproj/
 !*.xcworkspace/contents.xcworkspacedata
 /*.gcno
 **/xcshareddata/WorkspaceSettings.xcsettings
+TravelApp.xcworkspace/
 
 # End of https://www.toptal.com/developers/gitignore/api/xcode,swift,flask,python
 

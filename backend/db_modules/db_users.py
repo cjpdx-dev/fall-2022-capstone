@@ -25,6 +25,7 @@ def register_user(db, required_fields):
     }
 
     creds_id = store_user_creds(db, required_fields['hash'], required_fields['birthDate']) 
+    
     if creds_id is None:
         return None
     else:
@@ -52,7 +53,6 @@ def store_user_creds(db, hash, user_birthdate):
     if not created_creds.exists:
         return None
     else:
-        print("Credentials ID: " + str(credentials_ref.id))
         return credentials_ref.id
     
 
@@ -101,48 +101,51 @@ def get_private_user_by_uid(db, uid, include_creds_id=False):
 
 
 def get_public_user_by_uid(db, uid):
+    
     user_ref = db.collection('users').document(uid).get()
     if user_ref is None:
         return None
-    else:
-        user = user_ref.to_dict()
 
-        if user['profileIsPublic'] == False:
-            return None
-        
-        if user['locationsArePublic'] == False:
-            user.pop('homeState', None)
-            user.pop('homeCity', None)
-            
-        if user['experiencesArePublic'] == False:
-            user.pop('experienceIDs', None)
-        
-        if user['tripsArePublic'] == False:
-            user.pop('tripIDs', None)
+    user = user_ref.to_dict()
 
-        return user
+    if user['profileIsPublic'] == False:
+        return None
     
+    if user['locationsArePublic'] == False:
+        user.pop('homeState', None)
+        user.pop('homeCity', None)
+        
+    if user['experiencesArePublic'] == False:
+        user.pop('experienceIDs', None)
+    
+    if user['tripsArePublic'] == False:
+        user.pop('tripIDs', None)
+
+    return user
+    
+
 def update_user(db, uid, required_fields):
+
     user_ref = db.collection('users').document(uid)
     user_to_update = user_ref.get()
     
     if user_to_update is None:
         return None
-    else:
-        user_to_update = user_to_update.to_dict()
-        
-        for field in required_fields.keys():
-            if required_fields[field] is not None:
-                user_to_update[field] = required_fields[field]
-            else:
-                return None
-        
-        user_ref.set(user_to_update)
-        updated_user = user_ref.get()
-        if updated_user.exists:
-            return updated_user.to_dict()
+    
+    user_to_update = user_to_update.to_dict()
+    for field in required_fields.keys():
+        if required_fields[field] is not None:
+            user_to_update[field] = required_fields[field]
         else:
             return None
+        
+    user_ref.set(user_to_update)
+    updated_user = user_ref.get()
+
+    if updated_user.exists:
+        return updated_user.to_dict()
+    else:
+        return None
 
     
 def delete_user(db, uid):

@@ -19,21 +19,29 @@ def create_app():
     app = Flask(__name__)
 
     # Initialize Firebase
+    print("Initializing Application Credentials...")
     abs_cred_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'firestore_sa.json')
     cred = credentials.Certificate(abs_cred_path)
     initialize_app(cred)
+    print("[Success]\n")
 
     # Initialize db client and GCS storage client
+    print("Initializing Database and Storage Clients...")
     db = firestore.client()
     storage_client = storage.Client()
     app.config['db'] = db
     app.config['storage'] = storage_client
+    print("[Success]\n")
+
 
     # Open the firetore_sa.json as a json object and set the app's secret key
+    print("Creating app secrets...")
     app_creds = json.load(open(abs_cred_path))
     os.environ['PRIVATE_KEY'] = app_creds['private_key']
     os.environ['PRIVATE_KEY_ID'] = app_creds['private_key_id']
-
+    print("[Success]\n")
+    # Old code for static importing of rsa key pair
+    #
     # private_key_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'private_key.pem')
     # with open(private_key_path, 'r')  as private_key_file:
     #     os.environ['JWT_PRIVATE_KEY'] = private_key_file.read()
@@ -46,9 +54,9 @@ def create_app():
     #     exit(1)
     
     private_key_pem, public_key_pem = generate_rsa_key_pair()
-
-    os.environ['JWT_PRIVATE_KEY'] = private_key_pem
-    os.environ['JWT_PUBLIC_KEY'] = public_key_pem
+    os.environ['JWT_PRIVATE_KEY']   = private_key_pem
+    os.environ['JWT_PUBLIC_KEY']    = public_key_pem
+    print("[Success]\n")
 
     # Register blueprints
     app.register_blueprint(user_bp, url_prefix='/users')
@@ -57,7 +65,3 @@ def create_app():
     app.register_blueprint(auth_bp, url_prefix='/auth')
 
     return app
-
-
-
-

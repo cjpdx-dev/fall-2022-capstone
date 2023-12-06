@@ -7,16 +7,13 @@
 
 import Foundation
 
-
-
-
 class UserAPI {
     
     struct ErrorResponse: Codable {
         let message: String
     }
     
-    let baseURL = "http://127.0.0.1:5000"
+    private let baseURL = "https://fall-2023-capstone.wl.r.appspot.com"
     
     func createUser(user: CreateUserModel, completion: @escaping (UserModel?) -> Void) {
         
@@ -89,7 +86,7 @@ class UserAPI {
                 completion(nil)
                 return
             }
-            
+        
             switch httpResponse.statusCode {
             case 200:
                 do {
@@ -99,7 +96,6 @@ class UserAPI {
                     print("Decoding error (200): \(error.localizedDescription)")
                     completion(nil)
                 }
-                
             default:
                 do {
                     let errorResponse = try JSONDecoder().decode(ErrorResponse.self, from: data)
@@ -122,9 +118,9 @@ class UserAPI {
         }
         
         var request = URLRequest(url: url)
-        request.httpMethod = "PUT" //
+        request.httpMethod = "PUT"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        var auth_token = "Bearer " + userData.token
+        let auth_token = "Bearer " + userData.token
         request.addValue(auth_token, forHTTPHeaderField: "Authorization")
         
         do {
