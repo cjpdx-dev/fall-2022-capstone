@@ -368,6 +368,12 @@ TravelApp.xcodeproj/
 **/xcshareddata/WorkspaceSettings.xcsettings
 TravelApp.xcworkspace/
 
+# Ignore frontend/Pods
+Pods/
+
+
 # End of https://www.toptal.com/developers/gitignore/api/xcode,swift,flask,python
 
 firestore_sa.json
+
+
