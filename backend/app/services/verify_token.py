@@ -1,11 +1,10 @@
 
-import jwt
-from flask import current_app
-import os
+from    flask import current_app
+
+import  jwt
+import  os
 
 def verify_token(auth_header):
-
-    print("Called verify_token")
 
     if auth_header and auth_header.startswith('Bearer '):
         auth_token = auth_header.split(' ')[1]
@@ -20,7 +19,7 @@ def verify_token(auth_header):
     except jwt.ExpiredSignatureError:
         raise jwt.ExpiredSignatureError("Token expired. Please log in again.")
     
-    except jwt.InvalidTokenError:
+    except  jwt.InvalidTokenError:
         raise jwt.InvalidTokenError("InvalidTokenError")
     
     except ValueError:
@@ -28,9 +27,4 @@ def verify_token(auth_header):
     
     except KeyError:
         raise KeyError("Could not decode token (key error)")
-    
-    except Exception as e:
-        print("FATAL: Uncaught Exception in services.verify_token(auth_header) \n \n " + str(e) + "\n Exiting.")
-        exit(1)
-
     

@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct TravelAppApp: App {
-    @StateObject private var userViewModel = UserViewModel()
+    @ObservedObject private var userViewModel = UserViewModel()
     var body: some Scene {
         WindowGroup {
             if userViewModel.isLoggedIn {

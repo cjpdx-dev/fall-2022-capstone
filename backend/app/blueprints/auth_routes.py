@@ -11,19 +11,13 @@ from   datetime         import datetime, timedelta
 # project imports
 from   db_modules       import db_users
 
+
 # init blueprint
 auth_bp = Blueprint('auth', __name__)
 
-# -------------------------------------------------------------------------------------------------
-# auth/registerß
-# - - - - - - - - - - - - - -
+
 @auth_bp.route('/register', methods=['POST'])
 def register_user():
-
-    # print("auth/register request")
-    # print("----------------------")
-    # print(request.json)
-    # print("----------------------")
 
     required_fields = {'userEmail':     request.json.get('userEmail'), 
                        'displayName':   request.json.get('displayName'), 
@@ -34,17 +28,14 @@ def register_user():
     # Confirm all required fields are present
     for field in required_fields.keys():
         if required_fields[field] is None:
-            print("Missing required field: " + str(field))
             return jsonify({"message": f"{field} is required"}), 400
 
     # TODO: Add additional validation for email/password format, request format/size, etc
 
     # Confirm user does not already exist
     db = current_app.config['db']
-    
     found_user = db_users.get_private_user_by_email(db, required_fields['userEmail'])
     if found_user is not None:
-        print("User already exists")
         return jsonify({"message": "User email already exists"}), 400
 
     # Hash and salt the password
@@ -63,11 +54,10 @@ def register_user():
         created_user['token'] = session_token
         return jsonify(created_user), 201
 
-# -------------------------------------------------------------------------------------------------
-# auth/login
-# - - - - - - - - - - - - - -
+
 @auth_bp.route('/login', methods=["POST"])
 def login():
+
     # Define required fields
     required_fields = {'userEmail':     request.json.get('userEmail'), 
                        'userPassword':  request.json.get('userPassword') 
@@ -86,10 +76,9 @@ def login():
     if user is None:
         return jsonify({"message": "Invalid Credentials"}), 404
     
-    print(user)
     # Get hashed credentials
     user_creds = db_users.get_user_creds(db, user['creds_id'])
-    print(user_creds)
+
     # Confirm password is correct
     if not check_password(required_fields['userPassword'], user_creds['hash']):
         return jsonify({"message": "Invalid credentials"}), 404
@@ -105,9 +94,7 @@ def login():
     user['token'] = session_token
     return jsonify(user), 200
 
-# -------------------------------------------------------------------------------------------------
-# JWT and Passwored Functions
-# - - - - - - - - - - - - - -
+
 def generate_jwt(uid):
 
     payload = {
