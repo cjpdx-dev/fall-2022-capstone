@@ -13,7 +13,7 @@ class UserAPI {
         let message: String
     }
     
-    private let baseURL = "https://fall-2023-capstone.wl.r.appspot.com"
+    let baseURL = "https://fall-2023-capstone.wl.r.appspot.com"
     
     func createUser(user: CreateUserModel, completion: @escaping (UserModel?) -> Void) {
         
